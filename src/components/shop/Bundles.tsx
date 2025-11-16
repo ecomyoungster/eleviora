@@ -18,7 +18,20 @@ export const Bundles = () => {
           p.node.title.toLowerCase().includes('paket') ||
           p.node.title.toLowerCase().includes('komplettsystem')
         );
-        setProducts(bundles);
+        
+        // Sort bundles: Schönheit von Innen first, then Gelenk & Beweglichkeit, then rest
+        const sortedBundles = bundles.sort((a, b) => {
+          const handleA = a.node.handle;
+          const handleB = b.node.handle;
+          
+          if (handleA.includes('schonheit-von-innen')) return -1;
+          if (handleB.includes('schonheit-von-innen')) return 1;
+          if (handleA.includes('gelenk-beweglichkeit')) return -1;
+          if (handleB.includes('gelenk-beweglichkeit')) return 1;
+          return 0;
+        });
+        
+        setProducts(sortedBundles);
       } catch (error) {
         console.error("Failed to fetch bundles:", error);
       } finally {
