@@ -125,6 +125,14 @@ export const Header = () => {
                     {t('bundles')}
                   </button>
 
+                  <Link
+                    to="/about"
+                    onClick={() => setIsOpen(false)}
+                    className="flex w-full items-center justify-between py-3 text-sm font-medium uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    Über uns
+                  </Link>
+
                   <Collapsible open={languageOpen} onOpenChange={setLanguageOpen}>
                     <CollapsibleTrigger className="flex w-full items-center justify-between py-3 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors border-t mt-4 pt-4">
                       <div className="flex items-center gap-3">
@@ -192,6 +200,13 @@ export const Header = () => {
           >
             Bundles
           </button>
+
+          <Link
+            to="/about"
+            className="text-sm font-medium hover:text-primary transition-colors hidden md:block"
+          >
+            Über uns
+          </Link>
           </div>
 
           <div className="absolute left-1/2 -translate-x-1/2">
