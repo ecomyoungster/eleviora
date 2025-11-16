@@ -57,7 +57,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow relative">
       {discount && (
-        <Badge className="absolute top-4 right-4 z-10 bg-accent text-accent-foreground text-sm font-bold px-3 py-1 shadow-lg">
+        <Badge className="absolute top-4 right-4 z-10 bg-primary text-primary-foreground text-sm font-bold px-3 py-1 shadow-lg">
           {discount}
         </Badge>
       )}
