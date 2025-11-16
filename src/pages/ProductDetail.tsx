@@ -103,7 +103,7 @@ const ProductDetail = () => {
               {node.title}
             </h1>
             <p className="text-3xl font-bold text-foreground">
-              {price.toFixed(2)} {node.priceRange.minVariantPrice.currencyCode}
+              €{price.toFixed(2)}
             </p>
             {node.description && (
               <div className="prose prose-lg text-muted-foreground">

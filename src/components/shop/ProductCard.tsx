@@ -89,7 +89,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         )}
         <div className="flex items-center justify-between">
           <span className="text-2xl font-bold text-foreground">
-            {price.toFixed(2)} {node.priceRange.minVariantPrice.currencyCode}
+            €{price.toFixed(2)}
           </span>
           <Button 
             onClick={handleAddToCart}
