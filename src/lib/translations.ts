@@ -87,43 +87,43 @@ export const productTranslations: Record<string, Record<Locale, { title: string;
   },
   'bundle-gelenk-beweglichkeit-komplettsystem': {
     'de-DE': {
-      title: 'Bundle: Gelenk & Beweglichkeit Komplettsystem',
+      title: 'Gelenk & Beweglichkeit Komplettsystem',
       description: 'Das ultimative Gelenk-Paket für maximale Beweglichkeit! Enthält Glucosamin + Chondroitin + MSM Pulver. Perfekt aufeinander abgestimmte Wirkstoffe für optimale Gelenkgesundheit. Sparen Sie 20% gegenüber dem Einzelkauf!'
     },
     'de-AT': {
-      title: 'Bundle: Gelenk & Beweglichkeit Komplettsystem',
+      title: 'Gelenk & Beweglichkeit Komplettsystem',
       description: 'Das ultimative Gelenk-Paket für maximale Beweglichkeit! Enthält Glucosamin + Chondroitin + MSM Pulver. Perfekt aufeinander abgestimmte Wirkstoffe für optimale Gelenkgesundheit. Sparen Sie 20% gegenüber dem Einzelkauf!'
     },
     'en-US': {
-      title: 'Bundle: Joint & Mobility Complete System',
+      title: 'Joint & Mobility Complete System',
       description: 'The ultimate joint package for maximum mobility! Contains Glucosamine + Chondroitin + MSM Powder. Perfectly coordinated ingredients for optimal joint health. Save 20% compared to individual purchase!'
     }
   },
   'bundle-schonheit-von-innen-anti-aging-bestseller': {
     'de-DE': {
-      title: 'Bundle: Schönheit von Innen (Anti-Aging Bestseller)',
+      title: 'Schönheit von Innen (Anti-Aging Bestseller)',
       description: 'Der Beauty-Boost für strahlende Haut und starke Abwehrkräfte! Enthält Kollagen Hydrolysat + Vitamin C + Zink + Elderberry Gummies. Die perfekte Kombination für jugendliches Aussehen und Wohlbefinden. 18% Rabatt!'
     },
     'de-AT': {
-      title: 'Bundle: Schönheit von Innen (Anti-Aging Bestseller)',
+      title: 'Schönheit von Innen (Anti-Aging Bestseller)',
       description: 'Der Beauty-Boost für strahlende Haut und starke Abwehrkräfte! Enthält Kollagen Hydrolysat + Vitamin C + Zink + Elderberry Gummies. Die perfekte Kombination für jugendliches Aussehen und Wohlbefinden. 18% Rabatt!'
     },
     'en-US': {
-      title: 'Bundle: Beauty from Within (Anti-Aging Bestseller)',
+      title: 'Beauty from Within (Anti-Aging Bestseller)',
       description: 'The beauty boost for radiant skin and strong defenses! Contains Collagen Hydrolysate + Vitamin C + Zinc + Elderberry Gummies. The perfect combination for youthful appearance and well-being. 18% discount!'
     }
   },
   'bundle-ganzkorper-vital-paket': {
     'de-DE': {
-      title: 'Bundle: Ganzkörper Vital Paket',
+      title: 'Ganzkörper Vital Paket',
       description: 'Rundum-Versorgung für Körper und Geist! Enthält MSM + Omega-3 + Vitamin C + Zink + Elderberry Gummies. Die ideale Kombination für ganzheitliche Gesundheit und Vitalität. Sparen Sie 20% beim Bundle-Kauf!'
     },
     'de-AT': {
-      title: 'Bundle: Ganzkörper Vital Paket',
+      title: 'Ganzkörper Vital Paket',
       description: 'Rundum-Versorgung für Körper und Geist! Enthält MSM + Omega-3 + Vitamin C + Zink + Elderberry Gummies. Die ideale Kombination für ganzheitliche Gesundheit und Vitalität. Sparen Sie 20% beim Bundle-Kauf!'
     },
     'en-US': {
-      title: 'Bundle: Full Body Vital Package',
+      title: 'Full Body Vital Package',
       description: 'Complete care for body and mind! Contains MSM + Omega-3 + Vitamin C + Zinc + Elderberry Gummies. The ideal combination for holistic health and vitality. Save 20% with bundle purchase!'
     }
   }
