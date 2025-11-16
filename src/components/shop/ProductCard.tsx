@@ -66,7 +66,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow relative flex flex-col h-full">
-      <div className="absolute top-4 right-4 z-10 flex flex-col gap-2">
+      <div className="absolute top-4 right-4 z-10 flex flex-row gap-2">
         {isBestseller && (
           <Badge className="bg-amber-500 hover:bg-amber-500 text-white text-sm font-semibold px-4 py-1.5 shadow-lg rounded-full">
             {locale === 'en-US' ? 'Bestseller' : 'Bestseller'}
