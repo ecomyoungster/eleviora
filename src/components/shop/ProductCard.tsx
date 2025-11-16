@@ -69,7 +69,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       <div className="absolute top-4 right-4 z-10 flex flex-row gap-2">
         {isBestseller && (
           <Badge className="bg-amber-500 hover:bg-amber-500 text-white text-sm font-semibold px-4 py-1.5 shadow-lg rounded-full">
-            {locale === 'en-US' ? 'Bestseller' : 'Bestseller'}
+            {locale === 'en-US' ? 'Bundle Bestseller' : 'Bundle Bestseller'}
           </Badge>
         )}
         {discount && (
