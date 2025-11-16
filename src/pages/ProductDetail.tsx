@@ -235,9 +235,9 @@ const ProductDetail = () => {
                   </div>
                 </div>
 
-                {node.description && (
+                {translated.description && (
                   <div className="prose prose-lg text-muted-foreground">
-                    <p>{node.description}</p>
+                    <p>{translated.description}</p>
                   </div>
                 )}
               </>
@@ -246,9 +246,9 @@ const ProductDetail = () => {
                 <p className="text-3xl font-bold text-foreground">
                   €{basePrice.toFixed(2)}
                 </p>
-                {node.description && (
+                {translated.description && (
                   <div className="prose prose-lg text-muted-foreground">
-                    <p>{node.description}</p>
+                    <p>{translated.description}</p>
                   </div>
                 )}
               </>
