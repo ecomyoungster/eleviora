@@ -25,8 +25,8 @@ export const TrustBar = () => {
 
           {/* PayPal */}
           <div className="flex items-center gap-2 whitespace-nowrap">
-            <img src={paypalLogo} alt="PayPal" className="h-5" />
-            <span className="text-sm text-foreground">Bezahle in 30 Tagen</span>
+            <img src={paypalLogo} alt="PayPal" className="h-6" />
+            <span className="text-base text-foreground">Bezahle in 30 Tagen</span>
           </div>
 
           {/* Klarna */}
