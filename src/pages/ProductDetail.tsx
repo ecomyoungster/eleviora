@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
+import { useTranslation, useLocaleStore } from "@/stores/localeStore";
+import { getTranslatedProduct } from "@/lib/translations";
 
 const ProductDetail = () => {
   const { handle } = useParams();
@@ -14,6 +16,8 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(true);
   const [selectedQuantity, setSelectedQuantity] = useState<1 | 3 | 6>(1);
   const addItem = useCartStore(state => state.addItem);
+  const t = useTranslation();
+  const locale = useLocaleStore(state => state.locale);
 
   useEffect(() => {
     const loadProduct = async () => {
@@ -48,9 +52,9 @@ const ProductDetail = () => {
       <div className="min-h-screen bg-background">
         <Header />
         <div className="container mx-auto px-4 py-20 text-center">
-          <h1 className="font-serif text-4xl font-bold mb-4">Produkt nicht gefunden</h1>
+          <h1 className="font-serif text-4xl font-bold mb-4">{t('productNotFound')}</h1>
           <Button onClick={() => window.location.href = '/'}>
-            Zurück zur Startseite
+            {t('backToHome')}
           </Button>
         </div>
         <Footer />
@@ -59,6 +63,7 @@ const ProductDetail = () => {
   }
 
   const { node } = product;
+  const translated = getTranslatedProduct(node.handle, locale, node.title, node.description);
   const variant = node.variants.edges[0]?.node;
   const basePrice = parseFloat(node.priceRange.minVariantPrice.amount);
   const imageUrl = node.images.edges[0]?.node.url;
@@ -90,7 +95,7 @@ const ProductDetail = () => {
     };
     
     addItem(cartItem);
-    toast.success(`${selectedQuantity} Stück zum Warenkorb hinzugefügt`, {
+    toast.success(t('addedToCart').replace('{quantity}', selectedQuantity.toString()), {
       position: "top-center"
     });
   };
@@ -104,25 +109,25 @@ const ProductDetail = () => {
             {imageUrl ? (
               <img 
                 src={imageUrl} 
-                alt={node.title}
+                alt={translated.title}
                 className="w-full h-full object-cover"
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-                Kein Bild verfügbar
+                {t('noImage')}
               </div>
             )}
           </div>
           <div className="space-y-6">
             <h1 className="font-serif text-4xl font-bold text-foreground">
-              {node.title}
+              {translated.title}
             </h1>
             
             {!isBundle ? (
               <>
                 <div className="space-y-4">
                   <div>
-                    <h3 className="text-lg font-semibold mb-3">Menge:</h3>
+                    <h3 className="text-lg font-semibold mb-3">{t('selectQuantity')}</h3>
                     <div className="grid grid-cols-3 gap-3">
                       {/* 1 Stück */}
                       <button
@@ -141,7 +146,7 @@ const ProductDetail = () => {
                           </div>
                         )}
                         <div className="text-center">
-                          <div className="text-2xl font-bold mb-1">1 Stück</div>
+                          <div className="text-2xl font-bold mb-1">1 {t('pieces')}</div>
                           <div className="text-sm text-muted-foreground">€{basePrice.toFixed(2)}</div>
                         </div>
                       </button>
@@ -163,8 +168,8 @@ const ProductDetail = () => {
                           </div>
                         )}
                         <div className="text-center">
-                          <div className="text-2xl font-bold mb-1">3 Stück</div>
-                          <div className="text-emerald-600 font-semibold text-sm mb-1">Spare 10%</div>
+                          <div className="text-2xl font-bold mb-1">3 {t('pieces')}</div>
+                          <div className="text-emerald-600 font-semibold text-sm mb-1">{t('save').replace('{discount}', '10')}</div>
                           <div className="text-sm text-muted-foreground line-through">€{(basePrice * 3).toFixed(2)}</div>
                           <div className="text-sm font-semibold">€{(basePrice * 3 * 0.9).toFixed(2)}</div>
                         </div>
@@ -185,13 +190,16 @@ const ProductDetail = () => {
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                             </svg>
                           </div>
-                        )}
-                        <div className="text-center">
-                          <div className="text-2xl font-bold mb-1">6 Stück</div>
-                          <div className="text-emerald-600 font-semibold text-sm mb-1">Spare 15%</div>
-                          <div className="text-sm text-muted-foreground line-through">€{(basePrice * 6).toFixed(2)}</div>
-                          <div className="text-sm font-semibold">€{(basePrice * 6 * 0.85).toFixed(2)}</div>
-                        </div>
+                         )}
+                         <div className="text-center">
+                           <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-emerald-500 text-white text-xs px-3 py-1 rounded-full font-semibold whitespace-nowrap">
+                             {t('mostPopular')}
+                           </div>
+                           <div className="text-2xl font-bold mb-1">6 {t('pieces')}</div>
+                           <div className="text-emerald-600 font-semibold text-sm mb-1">{t('save').replace('{discount}', '15')}</div>
+                           <div className="text-sm text-muted-foreground line-through">€{(basePrice * 6).toFixed(2)}</div>
+                           <div className="text-sm font-semibold">€{(basePrice * 6 * 0.85).toFixed(2)}</div>
+                         </div>
                       </button>
                     </div>
                   </div>
@@ -199,7 +207,7 @@ const ProductDetail = () => {
                   {/* Price Summary */}
                   <div className="bg-secondary/20 rounded-xl p-4 space-y-2">
                     <div className="flex justify-between items-center">
-                      <span className="text-lg font-semibold">Gesamt:</span>
+                      <span className="text-lg font-semibold">{t('total')}:</span>
                       <div className="text-right">
                         {selectedPrice.discount > 0 && (
                           <div className="text-sm text-muted-foreground line-through">
@@ -214,7 +222,7 @@ const ProductDetail = () => {
                     {selectedPrice.discount > 0 && (
                       <>
                         <div className="text-emerald-600 font-semibold">
-                          Du sparst €{selectedPrice.savings.toFixed(2)} ({selectedPrice.discount}%)
+                          {t('wasSaved')} €{selectedPrice.savings.toFixed(2)} ({selectedPrice.discount}%)
                         </div>
                         <div className="text-sm text-muted-foreground flex items-center gap-2">
                           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -251,7 +259,7 @@ const ProductDetail = () => {
               className="w-full md:w-auto bg-primary hover:bg-primary/90 text-lg px-8"
               onClick={handleAddToCart}
             >
-              In den Warenkorb
+              {t('addToCart')}
             </Button>
           </div>
         </div>
