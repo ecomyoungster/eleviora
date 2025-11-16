@@ -9,7 +9,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2, Truck } from "lucide-react";
+import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2, Truck, BadgePercent } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { useTranslation } from "@/stores/localeStore";
 
@@ -30,6 +30,34 @@ export const CartDrawer = () => {
   const freeShippingThreshold = 49;
   const remainingForFreeShipping = freeShippingThreshold - totalPrice;
   const hasFreeShipping = totalPrice >= freeShippingThreshold;
+  
+  // Calculate savings from bundles
+  const bundleItems = items.filter(item => 
+    item.product.node.title.toLowerCase().includes('bundle') || 
+    item.product.node.title.toLowerCase().includes('paket') ||
+    item.product.node.title.toLowerCase().includes('komplettsystem')
+  );
+  
+  const totalSavings = bundleItems.reduce((sum, item) => {
+    const description = item.product.node.description.toLowerCase();
+    let savingsPercent = 0;
+    
+    if (description.includes('20%') || description.includes('sparen sie 20')) {
+      savingsPercent = 0.20;
+    } else if (description.includes('18%') || description.includes('sparen sie 18')) {
+      savingsPercent = 0.18;
+    } else if (description.includes('15%') || description.includes('sparen sie 15')) {
+      savingsPercent = 0.15;
+    } else if (description.includes('10%') || description.includes('sparen sie 10')) {
+      savingsPercent = 0.10;
+    }
+    
+    const itemPrice = parseFloat(item.price.amount) * item.quantity;
+    const savings = itemPrice / (1 - savingsPercent) * savingsPercent;
+    return sum + savings;
+  }, 0);
+  
+  const hasSavings = totalSavings > 0;
 
   const handleCheckout = async () => {
     try {
@@ -135,6 +163,23 @@ export const CartDrawer = () => {
               </div>
               
               <div className="flex-shrink-0 space-y-4 pt-4 border-t bg-background">
+                {/* Savings Indicator */}
+                {hasSavings && (
+                  <div className="flex items-center gap-2 p-3 bg-green-500/10 rounded-lg border border-green-500/20">
+                    <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
+                      <BadgePercent className="w-4 h-4 text-green-600" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm font-medium text-foreground">
+                        Du sparst €{totalSavings.toFixed(2)}
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        Durch Bundle-Rabatte
+                      </p>
+                    </div>
+                  </div>
+                )}
+                
                 {/* Free Shipping Indicator */}
                 {hasFreeShipping ? (
                   <div className="flex items-center gap-2 p-3 bg-primary/10 rounded-lg border border-primary/20">
