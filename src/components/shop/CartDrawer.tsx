@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/sheet";
 import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2 } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
+import { useTranslation } from "@/stores/localeStore";
 
 export const CartDrawer = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,6 +22,7 @@ export const CartDrawer = () => {
     removeItem, 
     createCheckout 
   } = useCartStore();
+  const t = useTranslation();
   
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = items.reduce((sum, item) => sum + (parseFloat(item.price.amount) * item.quantity), 0);
@@ -53,9 +55,9 @@ export const CartDrawer = () => {
       
       <SheetContent className="w-full sm:max-w-lg flex flex-col h-full">
         <SheetHeader className="flex-shrink-0">
-          <SheetTitle>Warenkorb</SheetTitle>
+          <SheetTitle>{t('shoppingCart')}</SheetTitle>
           <SheetDescription>
-            {totalItems === 0 ? "Ihr Warenkorb ist leer" : `${totalItems} Artikel in Ihrem Warenkorb`}
+            {totalItems === 0 ? t('cartEmpty') : `${totalItems} ${t('itemsInCart')}`}
           </SheetDescription>
         </SheetHeader>
         
@@ -64,7 +66,7 @@ export const CartDrawer = () => {
             <div className="flex-1 flex items-center justify-center">
               <div className="text-center">
                 <ShoppingCart className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                <p className="text-muted-foreground">Ihr Warenkorb ist leer</p>
+                <p className="text-muted-foreground">{t('cartEmpty')}</p>
               </div>
             </div>
           ) : (
@@ -130,7 +132,7 @@ export const CartDrawer = () => {
               
               <div className="flex-shrink-0 space-y-4 pt-4 border-t bg-background">
                 <div className="flex justify-between items-center">
-                  <span className="text-lg font-semibold">Gesamt</span>
+                  <span className="text-lg font-semibold">{t('total')}</span>
                   <span className="text-xl font-bold">
                     €{totalPrice.toFixed(2)}
                   </span>
@@ -145,12 +147,12 @@ export const CartDrawer = () => {
                   {isLoading ? (
                     <>
                       <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      Checkout wird erstellt...
+                      {t('creatingCheckout')}
                     </>
                   ) : (
                     <>
                       <ExternalLink className="w-4 h-4 mr-2" />
-                      Zur Kasse
+                      {t('checkoutWith')}
                     </>
                   )}
                 </Button>
