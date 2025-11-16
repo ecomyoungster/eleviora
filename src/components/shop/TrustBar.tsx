@@ -1,6 +1,6 @@
 import { Package, Truck } from "lucide-react";
 import paypalLogo from "@/assets/paypal-logo.png";
-import klarnaLogo from "@/assets/klarna-logo-new.png";
+import klarnaLogo from "@/assets/klarna-logo-badge.png";
 
 export const TrustBar = () => {
   return (
@@ -31,7 +31,7 @@ export const TrustBar = () => {
 
           {/* Klarna */}
           <div className="flex items-center gap-1 whitespace-nowrap">
-            <img src={klarnaLogo} alt="Klarna" className="h-7" />
+            <img src={klarnaLogo} alt="Klarna" className="h-8" />
             <span className="text-sm text-foreground">Bezahle in 30 Tagen</span>
           </div>
         </div>
