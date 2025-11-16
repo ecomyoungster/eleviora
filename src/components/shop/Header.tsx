@@ -40,8 +40,9 @@ export const Header = () => {
   const t = useTranslation();
   
   const languages = [
-    { code: 'de-DE' as Locale, country: 'DE' as const, name: 'Deutschland', currency: 'EUR €' },
-    { code: 'de-AT' as Locale, country: 'AT' as const, name: 'Österreich', currency: 'EUR €' },
+    { code: 'de-DE' as Locale, country: 'DE' as const, name: t('germany'), currency: 'EUR €' },
+    { code: 'de-AT' as Locale, country: 'AT' as const, name: t('austria'), currency: 'EUR €' },
+    { code: 'en-US' as Locale, country: 'US' as const, name: t('unitedStates'), currency: 'EUR €' },
   ];
   
   const currentLanguage = languages.find(lang => lang.code === locale);

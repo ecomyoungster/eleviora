@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 
-export type Locale = 'de-DE' | 'de-AT';
+export type Locale = 'de-DE' | 'de-AT' | 'en-US';
 
 interface LocaleStore {
   locale: Locale;
@@ -35,6 +35,7 @@ export const translations = {
     language: 'Sprache & Region',
     germany: 'Deutschland',
     austria: 'Österreich',
+    unitedStates: 'Vereinigte Staaten',
     creatingCheckout: 'Checkout wird erstellt...',
     checkoutWith: 'Zur Kasse',
   },
@@ -51,8 +52,26 @@ export const translations = {
     language: 'Sprache & Region',
     germany: 'Deutschland',
     austria: 'Österreich',
+    unitedStates: 'Vereinigte Staaten',
     creatingCheckout: 'Kassa wird erstellt...',
     checkoutWith: 'Zur Kassa',
+  },
+  'en-US': {
+    shop: 'SHOP',
+    bestsellers: 'BESTSELLERS',
+    bundles: 'BUNDLES',
+    addToCart: 'Add to Cart',
+    shoppingCart: 'Shopping Cart',
+    cartEmpty: 'Your cart is empty',
+    total: 'Total',
+    checkout: 'Checkout',
+    itemsInCart: 'Items in your cart',
+    language: 'Language & Region',
+    germany: 'Germany',
+    austria: 'Austria',
+    unitedStates: 'United States',
+    creatingCheckout: 'Creating checkout...',
+    checkoutWith: 'Checkout',
   },
 };
 
