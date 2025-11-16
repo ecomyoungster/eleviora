@@ -9,7 +9,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2 } from "lucide-react";
+import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2, Truck } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { useTranslation } from "@/stores/localeStore";
 
@@ -26,6 +26,10 @@ export const CartDrawer = () => {
   
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = items.reduce((sum, item) => sum + (parseFloat(item.price.amount) * item.quantity), 0);
+  
+  const freeShippingThreshold = 49;
+  const remainingForFreeShipping = freeShippingThreshold - totalPrice;
+  const hasFreeShipping = totalPrice >= freeShippingThreshold;
 
   const handleCheckout = async () => {
     try {
@@ -131,6 +135,38 @@ export const CartDrawer = () => {
               </div>
               
               <div className="flex-shrink-0 space-y-4 pt-4 border-t bg-background">
+                {/* Free Shipping Indicator */}
+                {hasFreeShipping ? (
+                  <div className="flex items-center gap-2 p-3 bg-primary/10 rounded-lg border border-primary/20">
+                    <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                      <Truck className="w-4 h-4 text-primary" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm font-medium text-foreground">
+                        Kostenloser Versand
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        Deine Bestellung wird kostenlos versendet
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="relative overflow-hidden p-3 bg-secondary/30 rounded-lg border border-border">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Truck className="w-4 h-4 text-muted-foreground" />
+                      <p className="text-sm font-medium text-foreground">
+                        Noch €{remainingForFreeShipping.toFixed(2)} bis zum kostenlosen Versand
+                      </p>
+                    </div>
+                    <div className="w-full bg-secondary rounded-full h-2 overflow-hidden">
+                      <div 
+                        className="h-full bg-primary transition-all duration-300 ease-out"
+                        style={{ width: `${Math.min((totalPrice / freeShippingThreshold) * 100, 100)}%` }}
+                      />
+                    </div>
+                  </div>
+                )}
+                
                 <div className="flex justify-between items-center">
                   <span className="text-lg font-semibold">{t('total')}</span>
                   <span className="text-xl font-bold">
