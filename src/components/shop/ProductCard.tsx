@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
@@ -35,8 +36,31 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   const price = parseFloat(node.priceRange.minVariantPrice.amount);
   const imageUrl = node.images.edges[0]?.node.url;
 
+  // Check if product is a bundle and extract discount
+  const isBundle = node.title.toLowerCase().includes('bundle') || 
+                   node.title.toLowerCase().includes('paket') ||
+                   node.title.toLowerCase().includes('komplettsystem');
+  
+  const extractDiscount = () => {
+    if (!isBundle) return null;
+    
+    // Try to extract discount percentage from description
+    const discountMatch = node.description?.match(/(\d+)\s*%\s*(?:Rabatt|sparen)/i);
+    if (discountMatch) {
+      return `${discountMatch[1]}% sparen`;
+    }
+    return null;
+  };
+
+  const discount = extractDiscount();
+
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition-shadow">
+    <Card className="overflow-hidden hover:shadow-lg transition-shadow relative">
+      {discount && (
+        <Badge className="absolute top-4 right-4 z-10 bg-accent text-accent-foreground text-sm font-bold px-3 py-1 shadow-lg">
+          {discount}
+        </Badge>
+      )}
       <Link to={`/product/${node.handle}`}>
         <div className="aspect-square bg-secondary/20 overflow-hidden">
           {imageUrl ? (
