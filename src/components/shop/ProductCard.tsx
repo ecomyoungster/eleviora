@@ -62,7 +62,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   const discount = getDiscount();
 
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition-shadow relative">
+    <Card className="overflow-hidden hover:shadow-lg transition-shadow relative flex flex-col h-full">
       {discount && (
         <Badge className="absolute top-4 right-4 z-10 bg-emerald-500 hover:bg-emerald-500 text-white text-sm font-semibold px-4 py-1.5 shadow-lg rounded-full">
           {discount}
@@ -83,18 +83,18 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           )}
         </div>
       </Link>
-      <div className="p-6 space-y-4">
+      <div className="p-6 space-y-4 flex flex-col flex-1">
         <Link to={`/product/${node.handle}`}>
-          <h3 className="font-serif text-xl font-semibold text-foreground hover:text-primary transition-colors">
+          <h3 className="font-serif text-xl font-semibold text-foreground hover:text-primary transition-colors min-h-[3.5rem] line-clamp-2">
             {translated.title}
           </h3>
         </Link>
         {translated.description && (
-          <p className="text-sm text-muted-foreground line-clamp-2">
+          <p className="text-sm text-muted-foreground line-clamp-2 flex-1">
             {translated.description}
           </p>
         )}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mt-auto">
           <span className="text-2xl font-bold text-foreground">
             €{price.toFixed(2)}
           </span>
