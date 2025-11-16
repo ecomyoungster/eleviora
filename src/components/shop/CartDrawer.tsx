@@ -314,7 +314,7 @@ export const CartDrawer = () => {
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>
-              {locale === 'de-AT' ? 'Möchten Sie das auch?' : 'Would you like to add this?'}
+              {locale.startsWith('de') ? 'Möchten Sie das auch?' : 'Would you like to add this?'}
             </AlertDialogTitle>
             <AlertDialogDescription className="space-y-4">
               {upsellProduct && (
@@ -344,10 +344,10 @@ export const CartDrawer = () => {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel onClick={handleCheckout}>
-              {locale === 'de-AT' ? 'Nein danke' : 'No thanks'}
+              {locale.startsWith('de') ? 'Nein danke' : 'No thanks'}
             </AlertDialogCancel>
             <AlertDialogAction onClick={handleAddUpsellAndCheckout}>
-              {locale === 'de-AT' ? 'Ja bitte' : 'Yes please'}
+              {locale.startsWith('de') ? 'Ja bitte' : 'Yes please'}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
