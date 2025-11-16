@@ -129,8 +129,8 @@ export const Header = () => {
                     <CollapsibleTrigger className="flex w-full items-center justify-between py-3 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors border-t mt-4 pt-4">
                       <div className="flex items-center gap-3">
                         {currentLanguage && (
-                          <div className="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-muted">
-                            <FlagIcon country={currentLanguage.country} className="w-6 h-4" />
+                          <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center bg-muted border-2 border-border shadow-sm">
+                            <FlagIcon country={currentLanguage.country} className="w-8 h-8 object-cover" />
                           </div>
                         )}
                         <div>
@@ -152,8 +152,8 @@ export const Header = () => {
                             className="flex w-full items-center justify-between py-3 text-sm hover:bg-muted/50 rounded-md px-3 transition-colors"
                           >
                             <div className="flex items-center gap-3">
-                              <div className="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-muted">
-                                <FlagIcon country={lang.country} className="w-6 h-4" />
+                              <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center bg-muted border-2 border-border shadow-sm flex-shrink-0">
+                                <FlagIcon country={lang.country} className="w-8 h-8 object-cover" />
                               </div>
                               <div className="text-left">
                                 <div className="font-medium text-foreground">{lang.name}</div>
