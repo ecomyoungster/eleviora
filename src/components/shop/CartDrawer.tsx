@@ -334,8 +334,7 @@ export const CartDrawer = () => {
                       {getTranslatedProduct(upsellProduct.node.handle, locale, upsellProduct.node.title, upsellProduct.node.description).description}
                     </p>
                     <p className="font-bold text-primary">
-                      {upsellProduct.node.priceRange.minVariantPrice.currencyCode}{' '}
-                      {parseFloat(upsellProduct.node.priceRange.minVariantPrice.amount).toFixed(2)}
+                      €{parseFloat(upsellProduct.node.priceRange.minVariantPrice.amount).toFixed(2)}
                     </p>
                   </div>
                 </div>
