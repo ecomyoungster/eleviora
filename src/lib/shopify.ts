@@ -99,13 +99,20 @@ const STOREFRONT_QUERY = `
   }
 `;
 
-export async function storefrontApiRequest(query: string, variables: any = {}) {
+export async function storefrontApiRequest(query: string, variables: any = {}, locale?: string) {
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+    'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_TOKEN
+  };
+  
+  // Set language based on locale
+  if (locale) {
+    headers['Accept-Language'] = locale === 'de-AT' ? 'de-AT' : 'de-DE';
+  }
+  
   const response = await fetch(SHOPIFY_STOREFRONT_URL, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_TOKEN
-    },
+    headers,
     body: JSON.stringify({
       query,
       variables,
@@ -172,6 +179,9 @@ const CART_CREATE_MUTATION = `
             }
           }
         }
+        buyerIdentity {
+          countryCode
+        }
       }
       userErrors {
         field
@@ -196,18 +206,28 @@ export interface CartItem {
   }>;
 }
 
-export async function createStorefrontCheckout(items: CartItem[]): Promise<string> {
+export async function createStorefrontCheckout(items: CartItem[], locale: string = 'de-DE'): Promise<string> {
   try {
     const lines = items.map(item => ({
       quantity: item.quantity,
       merchandiseId: item.variantId,
     }));
 
-    const cartData = await storefrontApiRequest(CART_CREATE_MUTATION, {
-      input: {
-        lines,
+    // Set country code based on locale
+    const countryCode = locale === 'de-AT' ? 'AT' : 'DE';
+
+    const cartData = await storefrontApiRequest(
+      CART_CREATE_MUTATION, 
+      {
+        input: {
+          lines,
+          buyerIdentity: {
+            countryCode,
+          },
+        },
       },
-    });
+      locale
+    );
 
     if (cartData.data.cartCreate.userErrors.length > 0) {
       throw new Error(`Cart creation failed: ${cartData.data.cartCreate.userErrors.map((e: any) => e.message).join(', ')}`);

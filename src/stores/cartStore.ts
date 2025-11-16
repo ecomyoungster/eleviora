@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { CartItem, createStorefrontCheckout } from '@/lib/shopify';
+import { useLocaleStore } from './localeStore';
 
 interface CartStore {
   items: CartItem[];
@@ -76,7 +77,8 @@ export const useCartStore = create<CartStore>()(
 
         setLoading(true);
         try {
-          const checkoutUrl = await createStorefrontCheckout(items);
+          const locale = useLocaleStore.getState().locale;
+          const checkoutUrl = await createStorefrontCheckout(items, locale);
           setCheckoutUrl(checkoutUrl);
         } catch (error) {
           console.error('Failed to create checkout:', error);
