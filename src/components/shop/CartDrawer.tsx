@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -9,22 +9,46 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2, Truck, BadgePercent } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { useTranslation, useLocaleStore } from "@/stores/localeStore";
 import { getTranslatedProduct } from "@/lib/translations";
+import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 
 export const CartDrawer = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showUpsell, setShowUpsell] = useState(false);
+  const [upsellProduct, setUpsellProduct] = useState<ShopifyProduct | null>(null);
+  const [allProducts, setAllProducts] = useState<ShopifyProduct[]>([]);
   const { 
     items, 
     isLoading, 
     updateQuantity, 
     removeItem, 
-    createCheckout 
+    createCheckout,
+    addItem 
   } = useCartStore();
   const t = useTranslation();
   const locale = useLocaleStore(state => state.locale);
+
+  // Load products for upsell
+  useEffect(() => {
+    const loadProducts = async () => {
+      const products = await fetchProducts(50);
+      setAllProducts(products);
+    };
+    loadProducts();
+  }, []);
   
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = items.reduce((sum, item) => sum + (parseFloat(item.price.amount) * item.quantity), 0);
@@ -61,8 +85,24 @@ export const CartDrawer = () => {
   
   const hasSavings = totalSavings > 0;
 
+  const handleCheckoutClick = () => {
+    // Get a random product that's not already in cart
+    const productsNotInCart = allProducts.filter(
+      product => !items.some(item => item.product.node.id === product.node.id)
+    );
+    
+    if (productsNotInCart.length > 0) {
+      const randomProduct = productsNotInCart[Math.floor(Math.random() * productsNotInCart.length)];
+      setUpsellProduct(randomProduct);
+      setShowUpsell(true);
+    } else {
+      handleCheckout();
+    }
+  };
+
   const handleCheckout = async () => {
     try {
+      setShowUpsell(false);
       await createCheckout();
       const checkoutUrl = useCartStore.getState().checkoutUrl;
       if (checkoutUrl) {
@@ -72,6 +112,21 @@ export const CartDrawer = () => {
     } catch (error) {
       console.error('Checkout failed:', error);
     }
+  };
+
+  const handleAddUpsellAndCheckout = () => {
+    if (upsellProduct) {
+      const variant = upsellProduct.node.variants.edges[0].node;
+      addItem({
+        product: upsellProduct,
+        variantId: variant.id,
+        variantTitle: variant.title,
+        price: variant.price,
+        quantity: 1,
+        selectedOptions: variant.selectedOptions,
+      });
+    }
+    handleCheckout();
   };
 
   return (
@@ -231,7 +286,7 @@ export const CartDrawer = () => {
                 </div>
                 
                 <Button 
-                  onClick={handleCheckout}
+                  onClick={handleCheckoutClick}
                   className="w-full" 
                   size="lg"
                   disabled={items.length === 0 || isLoading}
@@ -253,6 +308,50 @@ export const CartDrawer = () => {
           )}
         </div>
       </SheetContent>
+
+      {/* Upsell Dialog */}
+      <AlertDialog open={showUpsell} onOpenChange={setShowUpsell}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              {locale === 'de-AT' ? 'Möchten Sie das auch?' : 'Would you like to add this?'}
+            </AlertDialogTitle>
+            <AlertDialogDescription className="space-y-4">
+              {upsellProduct && (
+                <div className="flex gap-4 items-start">
+                  {upsellProduct.node.images?.edges?.[0]?.node && (
+                    <img
+                      src={upsellProduct.node.images.edges[0].node.url}
+                      alt={getTranslatedProduct(upsellProduct.node.handle, locale, upsellProduct.node.title, upsellProduct.node.description).title}
+                      className="w-24 h-24 object-cover rounded-md"
+                    />
+                  )}
+                  <div className="flex-1">
+                    <h4 className="font-semibold text-foreground mb-1">
+                      {getTranslatedProduct(upsellProduct.node.handle, locale, upsellProduct.node.title, upsellProduct.node.description).title}
+                    </h4>
+                    <p className="text-sm mb-2 line-clamp-2">
+                      {getTranslatedProduct(upsellProduct.node.handle, locale, upsellProduct.node.title, upsellProduct.node.description).description}
+                    </p>
+                    <p className="font-bold text-primary">
+                      {upsellProduct.node.priceRange.minVariantPrice.currencyCode}{' '}
+                      {parseFloat(upsellProduct.node.priceRange.minVariantPrice.amount).toFixed(2)}
+                    </p>
+                  </div>
+                </div>
+              )}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={handleCheckout}>
+              {locale === 'de-AT' ? 'Nein danke' : 'No thanks'}
+            </AlertDialogCancel>
+            <AlertDialogAction onClick={handleAddUpsellAndCheckout}>
+              {locale === 'de-AT' ? 'Ja bitte' : 'Yes please'}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </Sheet>
   );
 };
