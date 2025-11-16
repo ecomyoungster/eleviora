@@ -53,12 +53,13 @@ export const Header = () => {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
-          <Sheet open={isOpen} onOpenChange={setIsOpen}>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <Menu className="h-5 w-5" />
-              </Button>
-            </SheetTrigger>
+          <div className="flex items-center gap-6">
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
             <SheetContent side="left" className="w-80 p-0">
               <div className="p-6">
                 <div className="space-y-1">
@@ -115,6 +116,27 @@ export const Header = () => {
               </div>
             </SheetContent>
           </Sheet>
+
+          <button 
+            onClick={() => {
+              const section = document.getElementById('bestsellers');
+              section?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="text-sm font-medium hover:text-primary transition-colors hidden md:block"
+          >
+            Bestsellers
+          </button>
+
+          <button 
+            onClick={() => {
+              const section = document.getElementById('bundles');
+              section?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="text-sm font-medium hover:text-primary transition-colors hidden md:block"
+          >
+            Bundles
+          </button>
+          </div>
 
           <div className="absolute left-1/2 -translate-x-1/2">
             <Link to="/">
