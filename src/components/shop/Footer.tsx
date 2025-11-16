@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CreditCard } from "lucide-react";
+import { useTranslation } from "@/stores/localeStore";
 
 export const Footer = () => {
+  const t = useTranslation();
+  
   return (
     <footer className="bg-foreground/5 border-t">
       <div className="container mx-auto px-4 py-12">
@@ -12,33 +15,33 @@ export const Footer = () => {
               VitalAge
             </h3>
             <p className="text-muted-foreground">
-              Premium-Nahrungsergänzung für ein vitales Leben ab 50.
+              {t('footerTagline')}
             </p>
           </div>
           
           <div>
-            <h4 className="font-semibold mb-4 text-foreground">Rechtliches</h4>
+            <h4 className="font-semibold mb-4 text-foreground">{t('footerLegal')}</h4>
             <ul className="space-y-2 text-muted-foreground">
-              <li><a href="#" className="hover:text-primary transition-colors">Impressum</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Datenschutz</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">AGB</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Widerrufsrecht</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors">{t('footerImprint')}</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors">{t('footerPrivacy')}</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors">{t('footerTerms')}</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors">{t('footerRevocation')}</a></li>
             </ul>
           </div>
           
           <div>
-            <h4 className="font-semibold mb-4 text-foreground">Newsletter</h4>
+            <h4 className="font-semibold mb-4 text-foreground">{t('footerNewsletter')}</h4>
             <p className="text-muted-foreground mb-4">
-              Bleib informiert über neue Angebote und Gesundheitstipps
+              {t('footerNewsletterDesc')}
             </p>
             <div className="flex gap-2">
               <Input 
                 type="email" 
-                placeholder="Ihre E-Mail" 
+                placeholder={t('footerEmailPlaceholder')}
                 className="bg-background"
               />
               <Button className="bg-primary hover:bg-primary/90">
-                Anmelden
+                {t('footerSubscribe')}
               </Button>
             </div>
           </div>
@@ -46,10 +49,10 @@ export const Footer = () => {
         
         <div className="pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-muted-foreground text-sm">
-            © 2024 VitalAge. Alle Rechte vorbehalten.
+            {t('footerRights')}
           </p>
           <div className="flex items-center gap-4 text-muted-foreground">
-            <span className="text-sm">Sichere Zahlung mit:</span>
+            <span className="text-sm">{t('footerPayment')}</span>
             <div className="flex gap-2">
               <CreditCard className="w-8 h-8" />
               <span className="text-sm">Visa, Mastercard, PayPal</span>

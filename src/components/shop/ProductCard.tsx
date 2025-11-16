@@ -5,7 +5,8 @@ import { ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
-import { useTranslation } from "@/stores/localeStore";
+import { useTranslation, useLocaleStore } from "@/stores/localeStore";
+import { getTranslatedProduct } from "@/lib/translations";
 
 interface ProductCardProps {
   product: ShopifyProduct;
@@ -14,7 +15,10 @@ interface ProductCardProps {
 export const ProductCard = ({ product }: ProductCardProps) => {
   const addItem = useCartStore(state => state.addItem);
   const t = useTranslation();
+  const locale = useLocaleStore(state => state.locale);
   const { node } = product;
+  
+  const translated = getTranslatedProduct(node.handle, locale, node.title, node.description);
 
   const handleAddToCart = () => {
     const variant = node.variants.edges[0]?.node;
@@ -30,7 +34,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
     };
     
     addItem(cartItem);
-    toast.success("Produkt zum Warenkorb hinzugefügt", {
+    toast.success(t('addToCart'), {
       position: "top-center"
     });
   };
@@ -43,13 +47,13 @@ export const ProductCard = ({ product }: ProductCardProps) => {
     const title = node.title.toLowerCase();
     
     if (title.includes('schönheit von innen') || title.includes('beauty')) {
-      return '18% sparen';
+      return locale === 'en-US' ? 'Save 18%' : '18% sparen';
     }
-    if (title.includes('gelenk') || title.includes('beweglichkeit')) {
-      return '20% sparen';
+    if (title.includes('gelenk') || title.includes('beweglichkeit') || title.includes('joint')) {
+      return locale === 'en-US' ? 'Save 20%' : '20% sparen';
     }
-    if (title.includes('ganzkörper') || title.includes('vital')) {
-      return '20% sparen';
+    if (title.includes('ganzkörper') || title.includes('vital') || title.includes('full body')) {
+      return locale === 'en-US' ? 'Save 20%' : '20% sparen';
     }
     
     return null;
@@ -69,12 +73,12 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           {imageUrl ? (
             <img 
               src={imageUrl} 
-              alt={node.title}
+              alt={translated.title}
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-              Kein Bild verfügbar
+              {locale === 'en-US' ? 'No image available' : 'Kein Bild verfügbar'}
             </div>
           )}
         </div>
@@ -82,12 +86,12 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       <div className="p-6 space-y-4">
         <Link to={`/product/${node.handle}`}>
           <h3 className="font-serif text-xl font-semibold text-foreground hover:text-primary transition-colors">
-            {node.title}
+            {translated.title}
           </h3>
         </Link>
-        {node.description && (
+        {translated.description && (
           <p className="text-sm text-muted-foreground line-clamp-2">
-            {node.description}
+            {translated.description}
           </p>
         )}
         <div className="flex items-center justify-between">

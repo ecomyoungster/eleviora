@@ -1,24 +1,27 @@
 import { Heart, Sparkles, Zap } from "lucide-react";
-
-const benefits = [
-  {
-    icon: Heart,
-    title: "Weniger Gelenkschmerzen",
-    description: "Spürbare Reduzierung von Steifheit und Gelenkbeschwerden"
-  },
-  {
-    icon: Sparkles,
-    title: "Strahlendere Haut",
-    description: "Glattere, straffere Haut mit natürlichem Glow"
-  },
-  {
-    icon: Zap,
-    title: "Mehr Energie",
-    description: "Gesteigerte Lebensqualität und Vitalität im Alltag"
-  }
-];
+import { useTranslation } from "@/stores/localeStore";
 
 export const Benefits = () => {
+  const t = useTranslation();
+  
+  const benefits = [
+    {
+      icon: Heart,
+      title: t('benefit1Title'),
+      description: t('benefit1Desc')
+    },
+    {
+      icon: Sparkles,
+      title: t('benefit2Title'),
+      description: t('benefit2Desc')
+    },
+    {
+      icon: Zap,
+      title: t('benefit3Title'),
+      description: t('benefit3Desc')
+    }
+  ];
+  
   return (
     <section className="py-20 bg-secondary/30">
       <div className="container mx-auto px-4">
