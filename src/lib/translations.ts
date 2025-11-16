@@ -101,15 +101,15 @@ export const productTranslations: Record<string, Record<Locale, { title: string;
   },
   'bundle-schonheit-von-innen-anti-aging-bestseller': {
     'de-DE': {
-      title: 'Schönheit von Innen (Anti-Aging Bestseller)',
+      title: 'Schönheit von Innen',
       description: 'Der Beauty-Boost für strahlende Haut und starke Abwehrkräfte! Enthält Kollagen Hydrolysat + Vitamin C + Zink + Elderberry Gummies. Die perfekte Kombination für jugendliches Aussehen und Wohlbefinden. 18% Rabatt!'
     },
     'de-AT': {
-      title: 'Schönheit von Innen (Anti-Aging Bestseller)',
+      title: 'Schönheit von Innen',
       description: 'Der Beauty-Boost für strahlende Haut und starke Abwehrkräfte! Enthält Kollagen Hydrolysat + Vitamin C + Zink + Elderberry Gummies. Die perfekte Kombination für jugendliches Aussehen und Wohlbefinden. 18% Rabatt!'
     },
     'en-US': {
-      title: 'Beauty from Within (Anti-Aging Bestseller)',
+      title: 'Beauty from Within',
       description: 'The beauty boost for radiant skin and strong defenses! Contains Collagen Hydrolysate + Vitamin C + Zinc + Elderberry Gummies. The perfect combination for youthful appearance and well-being. 18% discount!'
     }
   },
