@@ -36,28 +36,29 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   const price = parseFloat(node.priceRange.minVariantPrice.amount);
   const imageUrl = node.images.edges[0]?.node.url;
 
-  // Check if product is a bundle and extract discount
-  const isBundle = node.title.toLowerCase().includes('bundle') || 
-                   node.title.toLowerCase().includes('paket') ||
-                   node.title.toLowerCase().includes('komplettsystem');
-  
-  const extractDiscount = () => {
-    if (!isBundle) return null;
+  // Check if product is a bundle and get discount
+  const getDiscount = () => {
+    const title = node.title.toLowerCase();
     
-    // Try to extract discount percentage from description
-    const discountMatch = node.description?.match(/(\d+)\s*%\s*(?:Rabatt|sparen)/i);
-    if (discountMatch) {
-      return `${discountMatch[1]}% sparen`;
+    if (title.includes('schönheit von innen') || title.includes('beauty')) {
+      return '18% sparen';
     }
+    if (title.includes('gelenk') || title.includes('beweglichkeit')) {
+      return '20% sparen';
+    }
+    if (title.includes('ganzkörper') || title.includes('vital')) {
+      return '20% sparen';
+    }
+    
     return null;
   };
 
-  const discount = extractDiscount();
+  const discount = getDiscount();
 
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow relative">
       {discount && (
-        <Badge className="absolute top-4 right-4 z-10 bg-primary text-primary-foreground text-sm font-bold px-3 py-1 shadow-lg">
+        <Badge className="absolute top-4 right-4 z-10 bg-emerald-500 hover:bg-emerald-500 text-white text-sm font-semibold px-4 py-1.5 shadow-lg rounded-full">
           {discount}
         </Badge>
       )}
