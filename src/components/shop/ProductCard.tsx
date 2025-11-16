@@ -5,6 +5,7 @@ import { ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
+import { useTranslation } from "@/stores/localeStore";
 
 interface ProductCardProps {
   product: ShopifyProduct;
@@ -12,6 +13,7 @@ interface ProductCardProps {
 
 export const ProductCard = ({ product }: ProductCardProps) => {
   const addItem = useCartStore(state => state.addItem);
+  const t = useTranslation();
   const { node } = product;
 
   const handleAddToCart = () => {
@@ -96,7 +98,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             onClick={handleAddToCart}
             className="bg-primary hover:bg-primary/90"
           >
-            In den Warenkorb
+            {t('addToCart')}
           </Button>
         </div>
       </div>

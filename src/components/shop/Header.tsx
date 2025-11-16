@@ -1,7 +1,7 @@
 import { CartDrawer } from "./CartDrawer";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Menu, ChevronRight } from "lucide-react";
+import { Menu, ChevronRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -17,12 +17,21 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import { useLocaleStore, useTranslation, Locale } from "@/stores/localeStore";
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [shopOpen, setShopOpen] = useState(false);
+  const [languageOpen, setLanguageOpen] = useState(false);
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
+  const { locale, setLocale } = useLocaleStore();
+  const t = useTranslation();
+  
+  const languages = [
+    { code: 'de-DE' as Locale, flag: '🇩🇪', name: 'Deutschland', currency: 'EUR €' },
+    { code: 'de-AT' as Locale, flag: '🇦🇹', name: 'Österreich', currency: 'EUR €' },
+  ];
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -65,7 +74,7 @@ export const Header = () => {
                 <div className="space-y-1">
                   <Collapsible open={shopOpen} onOpenChange={setShopOpen}>
                     <CollapsibleTrigger className="flex w-full items-center justify-between py-3 text-sm font-medium uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors">
-                      SHOP
+                      {t('shop')}
                       <ChevronRight className={`h-4 w-4 transition-transform ${shopOpen ? 'rotate-90' : ''}`} />
                     </CollapsibleTrigger>
                     <CollapsibleContent>
@@ -99,7 +108,7 @@ export const Header = () => {
                     }}
                     className="flex w-full items-center justify-between py-3 text-sm font-medium uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    BESTSELLERS
+                    {t('bestsellers')}
                   </button>
 
                   <button 
@@ -110,8 +119,40 @@ export const Header = () => {
                     }}
                     className="flex w-full items-center justify-between py-3 text-sm font-medium uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    BUNDLES
+                    {t('bundles')}
                   </button>
+
+                  <Collapsible open={languageOpen} onOpenChange={setLanguageOpen}>
+                    <CollapsibleTrigger className="flex w-full items-center justify-between py-3 text-sm font-medium uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors border-t mt-4 pt-4">
+                      {t('language')}
+                      <ChevronRight className={`h-4 w-4 transition-transform ${languageOpen ? 'rotate-90' : ''}`} />
+                    </CollapsibleTrigger>
+                    <CollapsibleContent>
+                      <div className="space-y-1 pl-4 pt-2">
+                        {languages.map((lang) => (
+                          <button
+                            key={lang.code}
+                            onClick={() => {
+                              setLocale(lang.code);
+                              setIsOpen(false);
+                            }}
+                            className="flex w-full items-center justify-between py-3 text-sm hover:bg-muted/50 rounded-md px-3 transition-colors"
+                          >
+                            <div className="flex items-center gap-3">
+                              <span className="text-2xl">{lang.flag}</span>
+                              <div className="text-left">
+                                <div className="font-medium text-foreground">{lang.name}</div>
+                                <div className="text-xs text-muted-foreground">{lang.currency}</div>
+                              </div>
+                            </div>
+                            {locale === lang.code && (
+                              <Check className="h-4 w-4 text-primary" />
+                            )}
+                          </button>
+                        ))}
+                      </div>
+                    </CollapsibleContent>
+                  </Collapsible>
                 </div>
               </div>
             </SheetContent>
