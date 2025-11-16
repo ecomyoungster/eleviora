@@ -133,9 +133,9 @@ export const Header = () => {
                             <FlagIcon country={currentLanguage.country} className="w-7 h-7" />
                           </div>
                         )}
-                        <div>
-                          <div className="uppercase tracking-wider text-sm font-medium">{currentLanguage?.name}</div>
-                          <div className="text-xs text-muted-foreground">{currentLanguage?.currency}</div>
+                        <div className="flex items-center gap-2">
+                          <span className="uppercase tracking-wider text-sm font-medium">{currentLanguage?.name}</span>
+                          <span className="text-xs text-muted-foreground">• {currentLanguage?.currency}</span>
                         </div>
                       </div>
                       <ChevronRight className={`h-4 w-4 transition-transform ${languageOpen ? 'rotate-90' : ''}`} />
@@ -155,9 +155,9 @@ export const Header = () => {
                               <div className="w-7 h-7 rounded-full overflow-hidden flex items-center justify-center shadow-sm flex-shrink-0">
                                 <FlagIcon country={lang.country} className="w-7 h-7" />
                               </div>
-                              <div className="text-left">
-                                <div className="font-medium text-foreground">{lang.name}</div>
-                                <div className="text-xs text-muted-foreground">{lang.currency}</div>
+                              <div className="flex items-center gap-2">
+                                <span className="font-medium text-foreground">{lang.name}</span>
+                                <span className="text-xs text-muted-foreground">• {lang.currency}</span>
                               </div>
                             </div>
                             {locale === lang.code && (
