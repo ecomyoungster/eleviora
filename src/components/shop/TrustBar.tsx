@@ -30,8 +30,8 @@ export const TrustBar = () => {
           </div>
 
           {/* Klarna */}
-          <div className="flex items-center gap-2 whitespace-nowrap">
-            <img src={klarnaLogo} alt="Klarna" className="h-5" />
+          <div className="flex items-center gap-1 whitespace-nowrap">
+            <img src={klarnaLogo} alt="Klarna" className="h-8" />
             <span className="text-sm text-foreground">Bezahle in 30 Tagen</span>
           </div>
         </div>
