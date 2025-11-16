@@ -60,14 +60,24 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   };
 
   const discount = getDiscount();
+  
+  // Check if product is bestseller
+  const isBestseller = node.handle.includes('schonheit-von-innen') || node.handle.includes('beauty');
 
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow relative flex flex-col h-full">
-      {discount && (
-        <Badge className="absolute top-4 right-4 z-10 bg-emerald-500 hover:bg-emerald-500 text-white text-sm font-semibold px-4 py-1.5 shadow-lg rounded-full">
-          {discount}
-        </Badge>
-      )}
+      <div className="absolute top-4 right-4 z-10 flex flex-col gap-2">
+        {isBestseller && (
+          <Badge className="bg-amber-500 hover:bg-amber-500 text-white text-sm font-semibold px-4 py-1.5 shadow-lg rounded-full">
+            {locale === 'en-US' ? 'Bestseller' : 'Bestseller'}
+          </Badge>
+        )}
+        {discount && (
+          <Badge className="bg-emerald-500 hover:bg-emerald-500 text-white text-sm font-semibold px-4 py-1.5 shadow-lg rounded-full">
+            {discount}
+          </Badge>
+        )}
+      </div>
       <Link to={`/product/${node.handle}`}>
         <div className="aspect-square bg-secondary/20 overflow-hidden">
           {imageUrl ? (
