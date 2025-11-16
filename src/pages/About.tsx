@@ -210,26 +210,26 @@ const About = () => {
           </div>
         </section>
 
-        {/* Community Section with Image */}
+        {/* Community Section */}
         <section className="max-w-6xl mx-auto mb-20">
-          <div className="relative rounded-3xl overflow-hidden">
-            <img 
-              src={communityImage} 
-              alt="wellbe Community" 
-              className="w-full h-[500px] object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/50 to-transparent flex items-end">
-              <div className="p-8 md:p-12 max-w-3xl">
-                <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-4">
-                  Sei Teil unserer Community
-                </h2>
-                <p className="text-foreground/90 leading-relaxed text-lg">
-                  Wenn du Teil der wellbe-Community wirst, trittst du einer unvergleichbaren Gruppe von Menschen 
-                  bei, die genauso lebensfroh und energiegeladen sind wie du und alles dafür tun, sich in ihrer 
-                  Haut wohlzufühlen. Wir unterstützen uns gegenseitig, teilen unser Wissen und motivieren uns auf 
-                  unserer gemeinsamen Reise zu einem vitalen Leben. Zusammen können wir alles schaffen!
-                </p>
-              </div>
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <img 
+                src={communityImage} 
+                alt="wellbe Community" 
+                className="rounded-2xl shadow-xl w-full h-auto object-cover"
+              />
+            </div>
+            <div>
+              <h2 className="font-serif text-3xl font-bold text-foreground mb-6">
+                Sei Teil unserer Community
+              </h2>
+              <p className="text-muted-foreground leading-relaxed">
+                Wenn du Teil der wellbe-Community wirst, trittst du einer unvergleichbaren Gruppe von Menschen 
+                bei, die genauso lebensfroh und energiegeladen sind wie du und alles dafür tun, sich in ihrer 
+                Haut wohlzufühlen. Wir unterstützen uns gegenseitig, teilen unser Wissen und motivieren uns auf 
+                unserer gemeinsamen Reise zu einem vitalen Leben. Zusammen können wir alles schaffen!
+              </p>
             </div>
           </div>
         </section>
