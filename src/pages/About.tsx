@@ -1,6 +1,10 @@
 import { Header } from "@/components/shop/Header";
 import { Footer } from "@/components/shop/Footer";
 import { TrustBar } from "@/components/shop/TrustBar";
+import heroImage from "@/assets/about-hero.jpg";
+import qualityImage from "@/assets/about-quality.jpg";
+import communityImage from "@/assets/about-community.jpg";
+import innovationImage from "@/assets/about-innovation.jpg";
 
 const About = () => {
   return (
@@ -9,37 +13,57 @@ const About = () => {
       <TrustBar />
       
       <main className="container mx-auto px-4 py-16">
-        {/* Hero Section */}
-        <div className="max-w-4xl mx-auto text-center mb-16">
-          <h1 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Willkommen bei wellbe
-          </h1>
-          <p className="text-xl text-primary font-semibold mb-4">
-            Hol dir deine jugendliche Energie zurück!
-          </p>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            Hey, schön, dass du zu uns gefunden hast! Bei wellbe sind wir fest davon überzeugt, 
-            dass man sich jung und voller Energie fühlen kann, egal wie alt man ist. Unser Team 
-            ist total begeistert davon, dir dabei zu helfen, dich großartig zu fühlen und dabei 
-            noch fantastisch auszusehen.
-          </p>
+        {/* Hero Section with Image */}
+        <div className="max-w-6xl mx-auto mb-20">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="order-2 md:order-1">
+              <h1 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-6 animate-fade-in">
+                Willkommen bei wellbe
+              </h1>
+              <p className="text-xl text-primary font-semibold mb-4">
+                Hol dir deine jugendliche Energie zurück!
+              </p>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                Hey, schön, dass du zu uns gefunden hast! Bei wellbe sind wir fest davon überzeugt, 
+                dass man sich jung und voller Energie fühlen kann, egal wie alt man ist. Unser Team 
+                ist total begeistert davon, dir dabei zu helfen, dich großartig zu fühlen und dabei 
+                noch fantastisch auszusehen.
+              </p>
+            </div>
+            <div className="order-1 md:order-2">
+              <img 
+                src={heroImage} 
+                alt="Wellness und Vitalität" 
+                className="rounded-2xl shadow-2xl w-full h-auto object-cover animate-fade-in"
+              />
+            </div>
+          </div>
         </div>
 
-        {/* Mission Section */}
-        <section className="max-w-4xl mx-auto mb-16">
-          <div className="bg-secondary/30 rounded-2xl p-8 md:p-12">
-            <h2 className="font-serif text-3xl font-bold text-foreground mb-6">
-              Unsere Mission
-            </h2>
-            <p className="text-muted-foreground leading-relaxed">
-              Bei wellbe ist es unsere Mission, Menschen dabei zu unterstützen, ein erfülltes und 
-              vitalitätsreiches Leben zu führen. Wir glauben daran, dass jeder das Recht hat, sich 
-              jugendlich, gesund und energiegeladen zu fühlen, unabhängig von Alter oder Lebensumständen. 
-              Unser Ziel ist es, hochwertige Produkte anzubieten, die einen positiven Einfluss auf das 
-              Wohlbefinden unserer Kunden haben. Wir streben danach, die besten Lösungen aus Natur, 
-              Wissenschaft und Innovation zu kombinieren, um Menschen auf ihrem Weg zu einem vitalen 
-              und erfüllten Leben zu begleiten.
-            </p>
+        {/* Mission Section with Image */}
+        <section className="max-w-6xl mx-auto mb-20">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <img 
+                src={innovationImage} 
+                alt="Innovation und Wissenschaft" 
+                className="rounded-2xl shadow-xl w-full h-auto object-cover"
+              />
+            </div>
+            <div className="bg-secondary/30 rounded-2xl p-8 md:p-12">
+              <h2 className="font-serif text-3xl font-bold text-foreground mb-6">
+                Unsere Mission
+              </h2>
+              <p className="text-muted-foreground leading-relaxed">
+                Bei wellbe ist es unsere Mission, Menschen dabei zu unterstützen, ein erfülltes und 
+                vitalitätsreiches Leben zu führen. Wir glauben daran, dass jeder das Recht hat, sich 
+                jugendlich, gesund und energiegeladen zu fühlen, unabhängig von Alter oder Lebensumständen. 
+                Unser Ziel ist es, hochwertige Produkte anzubieten, die einen positiven Einfluss auf das 
+                Wohlbefinden unserer Kunden haben. Wir streben danach, die besten Lösungen aus Natur, 
+                Wissenschaft und Innovation zu kombinieren, um Menschen auf ihrem Weg zu einem vitalen 
+                und erfüllten Leben zu begleiten.
+              </p>
+            </div>
           </div>
         </section>
 
@@ -143,17 +167,30 @@ const About = () => {
           </div>
         </section>
 
-        {/* Qualität und Reinheit Section */}
-        <section className="max-w-4xl mx-auto mb-16">
-          <h2 className="font-serif text-3xl font-bold text-foreground mb-6">
-            Qualität und Reinheit
-          </h2>
-          <p className="text-muted-foreground leading-relaxed">
-            Wir lassen nichts dem Zufall überlassen, wenn es um Qualität und Reinheit geht. Unsere 
-            Produkte durchlaufen strenge Tests, um sicherzustellen, dass sie höchsten Standards entsprechen. 
-            Wir beziehen unsere Zutaten von vertrauenswürdigen Lieferanten, die unsere Werte teilen und 
-            Nachhaltigkeit großschreiben. Bei uns bekommst du nur die beste Qualität, denn du verdienst es!
-          </p>
+        {/* Qualität und Reinheit Section with Image */}
+        <section className="max-w-6xl mx-auto mb-20">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="order-2 md:order-1">
+              <h2 className="font-serif text-3xl font-bold text-foreground mb-6">
+                Qualität und Reinheit
+              </h2>
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                Wir lassen nichts dem Zufall überlassen, wenn es um Qualität und Reinheit geht. Unsere 
+                Produkte durchlaufen strenge Tests, um sicherzustellen, dass sie höchsten Standards entsprechen.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                Wir beziehen unsere Zutaten von vertrauenswürdigen Lieferanten, die unsere Werte teilen und 
+                Nachhaltigkeit großschreiben. Bei uns bekommst du nur die beste Qualität, denn du verdienst es!
+              </p>
+            </div>
+            <div className="order-1 md:order-2">
+              <img 
+                src={qualityImage} 
+                alt="Hochwertige Produkte und Zutaten" 
+                className="rounded-2xl shadow-xl w-full h-auto object-cover"
+              />
+            </div>
+          </div>
         </section>
 
         {/* Persönliche Note Section */}
@@ -173,17 +210,28 @@ const About = () => {
           </div>
         </section>
 
-        {/* Community Section */}
-        <section className="max-w-4xl mx-auto mb-16">
-          <h2 className="font-serif text-3xl font-bold text-foreground mb-6">
-            Sei Teil unserer Community
-          </h2>
-          <p className="text-muted-foreground leading-relaxed">
-            Wenn du Teil der wellbe-Community wirst, trittst du einer unvergleichbaren Gruppe von Menschen 
-            bei, die genauso lebensfroh und energiegeladen sind wie du und alles dafür tun, sich in ihrer 
-            Haut wohlzufühlen. Wir unterstützen uns gegenseitig, teilen unser Wissen und motivieren uns auf 
-            unserer gemeinsamen Reise zu einem vitalen Leben. Zusammen können wir alles schaffen!
-          </p>
+        {/* Community Section with Image */}
+        <section className="max-w-6xl mx-auto mb-20">
+          <div className="relative rounded-3xl overflow-hidden">
+            <img 
+              src={communityImage} 
+              alt="wellbe Community" 
+              className="w-full h-[500px] object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/50 to-transparent flex items-end">
+              <div className="p-8 md:p-12 max-w-3xl">
+                <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-4">
+                  Sei Teil unserer Community
+                </h2>
+                <p className="text-foreground/90 leading-relaxed text-lg">
+                  Wenn du Teil der wellbe-Community wirst, trittst du einer unvergleichbaren Gruppe von Menschen 
+                  bei, die genauso lebensfroh und energiegeladen sind wie du und alles dafür tun, sich in ihrer 
+                  Haut wohlzufühlen. Wir unterstützen uns gegenseitig, teilen unser Wissen und motivieren uns auf 
+                  unserer gemeinsamen Reise zu einem vitalen Leben. Zusammen können wir alles schaffen!
+                </p>
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* CTA Section */}
