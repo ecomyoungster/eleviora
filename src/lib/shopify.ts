@@ -107,7 +107,13 @@ export async function storefrontApiRequest(query: string, variables: any = {}, l
   
   // Set language based on locale
   if (locale) {
-    headers['Accept-Language'] = locale === 'de-AT' ? 'de-AT' : 'de-DE';
+    if (locale === 'de-AT') {
+      headers['Accept-Language'] = 'de-AT';
+    } else if (locale === 'en-US') {
+      headers['Accept-Language'] = 'en-US';
+    } else {
+      headers['Accept-Language'] = 'de-DE';
+    }
   }
   
   const response = await fetch(SHOPIFY_STOREFRONT_URL, {
@@ -213,7 +219,7 @@ export async function createStorefrontCheckout(items: CartItem[], locale: string
       merchandiseId: item.variantId,
     }));
 
-    // Set country code based on locale
+    // Set country code based on locale - EN uses DE as default market
     const countryCode = locale === 'de-AT' ? 'AT' : 'DE';
 
     const cartData = await storefrontApiRequest(
