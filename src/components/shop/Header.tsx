@@ -1,7 +1,7 @@
 import { CartDrawer } from "./CartDrawer";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Menu } from "lucide-react";
+import { Menu, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -12,9 +12,15 @@ import {
 } from "@/components/ui/sheet";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 import { Skeleton } from "@/components/ui/skeleton";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [shopOpen, setShopOpen] = useState(false);
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -49,107 +55,66 @@ export const Header = () => {
         <div className="flex h-16 items-center justify-between">
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden">
+              <Button variant="ghost" size="icon">
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-80">
-              <SheetHeader>
-                <SheetTitle className="font-serif text-2xl">Katalog</SheetTitle>
-              </SheetHeader>
-              <div className="mt-6 space-y-6">
-                <div>
-                  <h3 className="font-semibold mb-3 text-foreground">Alle Produkte</h3>
-                  {loading ? (
-                    <div className="space-y-2">
-                      <Skeleton className="h-8 w-full" />
-                      <Skeleton className="h-8 w-full" />
-                    </div>
-                  ) : (
-                    <div className="space-y-1">
-                      {products.map(product => (
-                        <Link
-                          key={product.node.id}
-                          to={`/product/${product.node.handle}`}
-                          className="block py-2 px-3 text-sm hover:bg-muted rounded-md transition-colors"
-                          onClick={() => setIsOpen(false)}
-                        >
-                          {product.node.title}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
+            <SheetContent side="left" className="w-80 p-0">
+              <div className="p-6">
+                <div className="space-y-1">
+                  <Collapsible open={shopOpen} onOpenChange={setShopOpen}>
+                    <CollapsibleTrigger className="flex w-full items-center justify-between py-3 text-sm font-medium uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors">
+                      SHOP
+                      <ChevronRight className={`h-4 w-4 transition-transform ${shopOpen ? 'rotate-90' : ''}`} />
+                    </CollapsibleTrigger>
+                    <CollapsibleContent>
+                      {loading ? (
+                        <div className="space-y-2 pl-4 pt-2">
+                          <Skeleton className="h-6 w-full" />
+                          <Skeleton className="h-6 w-full" />
+                        </div>
+                      ) : (
+                        <div className="space-y-1 pl-4 pt-2">
+                          {products.map(product => (
+                            <Link
+                              key={product.node.id}
+                              to={`/product/${product.node.handle}`}
+                              className="block py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                              onClick={() => setIsOpen(false)}
+                            >
+                              {product.node.title}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </CollapsibleContent>
+                  </Collapsible>
 
-                <div>
-                  <h3 className="font-semibold mb-3 text-foreground">Best Sellers</h3>
-                  {loading ? (
-                    <div className="space-y-2">
-                      <Skeleton className="h-8 w-full" />
-                      <Skeleton className="h-8 w-full" />
-                    </div>
-                  ) : (
-                    <div className="space-y-1">
-                      {bestSellers.map(product => (
-                        <Link
-                          key={product.node.id}
-                          to={`/product/${product.node.handle}`}
-                          className="block py-2 px-3 text-sm hover:bg-muted rounded-md transition-colors"
-                          onClick={() => setIsOpen(false)}
-                        >
-                          {product.node.title}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                  <button 
+                    onClick={() => {
+                      const section = document.getElementById('bestsellers');
+                      section?.scrollIntoView({ behavior: 'smooth' });
+                      setIsOpen(false);
+                    }}
+                    className="flex w-full items-center justify-between py-3 text-sm font-medium uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    BESTSELLERS
+                  </button>
 
-                <div>
-                  <h3 className="font-semibold mb-3 text-foreground">Bundles</h3>
-                  {loading ? (
-                    <div className="space-y-2">
-                      <Skeleton className="h-8 w-full" />
-                      <Skeleton className="h-8 w-full" />
-                    </div>
-                  ) : (
-                    <div className="space-y-1">
-                      {bundles.map(product => (
-                        <Link
-                          key={product.node.id}
-                          to={`/product/${product.node.handle}`}
-                          className="block py-2 px-3 text-sm hover:bg-muted rounded-md transition-colors"
-                          onClick={() => setIsOpen(false)}
-                        >
-                          {product.node.title}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
+                  <button 
+                    onClick={() => {
+                      const section = document.getElementById('bundles');
+                      section?.scrollIntoView({ behavior: 'smooth' });
+                      setIsOpen(false);
+                    }}
+                    className="flex w-full items-center justify-between py-3 text-sm font-medium uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    BUNDLES
+                  </button>
                 </div>
               </div>
             </SheetContent>
           </Sheet>
-
-          <div className="hidden md:flex items-center gap-6">
-            <button 
-              onClick={() => {
-                const section = document.getElementById('bestsellers');
-                section?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="text-sm font-medium hover:text-primary transition-colors"
-            >
-              Best Sellers
-            </button>
-            <button 
-              onClick={() => {
-                const section = document.getElementById('bundles');
-                section?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="text-sm font-medium hover:text-primary transition-colors"
-            >
-              Bundles
-            </button>
-          </div>
 
           <div className="absolute left-1/2 -translate-x-1/2">
             <Link to="/">
