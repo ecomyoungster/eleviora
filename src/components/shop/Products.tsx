@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 import { ProductCard } from "./ProductCard";
 import { Loader2 } from "lucide-react";
+import { useTranslation } from "@/stores/localeStore";
 
 export const Products = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
+  const t = useTranslation();
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -46,10 +48,10 @@ export const Products = () => {
         <div className="container mx-auto px-4">
           <div className="text-center py-20">
             <h2 className="font-serif text-4xl font-bold mb-4 text-foreground">
-              Noch keine Produkte verfügbar
+              {t('noProducts')}
             </h2>
             <p className="text-muted-foreground text-lg">
-              Bitte erstellen Sie Produkte, indem Sie im Chat beschreiben, was Sie anbieten möchten.
+              {t('noProductsDesc')}
             </p>
           </div>
         </div>
@@ -62,10 +64,10 @@ export const Products = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="font-serif text-4xl font-bold mb-4 text-foreground">
-            Unsere Premium-Produkte
+            {t('productsTitle')}
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Hochwertige Nahrungsergänzung für mehr Wohlbefinden
+            {t('productsDesc')}
           </p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
