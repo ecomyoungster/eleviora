@@ -18,6 +18,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { useLocaleStore, useTranslation, Locale } from "@/stores/localeStore";
+import { FlagIcon } from "@/components/FlagIcon";
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,8 +30,8 @@ export const Header = () => {
   const t = useTranslation();
   
   const languages = [
-    { code: 'de-DE' as Locale, flag: '🇩🇪', name: 'Deutschland', currency: 'EUR €' },
-    { code: 'de-AT' as Locale, flag: '🇦🇹', name: 'Österreich', currency: 'EUR €' },
+    { code: 'de-DE' as Locale, country: 'DE' as const, name: 'Deutschland', currency: 'EUR €' },
+    { code: 'de-AT' as Locale, country: 'AT' as const, name: 'Österreich', currency: 'EUR €' },
   ];
   
   const currentLanguage = languages.find(lang => lang.code === locale);
@@ -126,10 +127,16 @@ export const Header = () => {
 
                   <Collapsible open={languageOpen} onOpenChange={setLanguageOpen}>
                     <CollapsibleTrigger className="flex w-full items-center justify-between py-3 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors border-t mt-4 pt-4">
-                      <div className="flex items-center gap-2">
-                        <span className="text-2xl">{currentLanguage?.flag}</span>
-                        <span className="uppercase tracking-wider">{currentLanguage?.name}</span>
-                        <span className="text-xs">• {currentLanguage?.currency}</span>
+                      <div className="flex items-center gap-3">
+                        {currentLanguage && (
+                          <div className="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-muted">
+                            <FlagIcon country={currentLanguage.country} className="w-6 h-4" />
+                          </div>
+                        )}
+                        <div>
+                          <div className="uppercase tracking-wider text-sm font-medium">{currentLanguage?.name}</div>
+                          <div className="text-xs text-muted-foreground">{currentLanguage?.currency}</div>
+                        </div>
                       </div>
                       <ChevronRight className={`h-4 w-4 transition-transform ${languageOpen ? 'rotate-90' : ''}`} />
                     </CollapsibleTrigger>
@@ -145,7 +152,9 @@ export const Header = () => {
                             className="flex w-full items-center justify-between py-3 text-sm hover:bg-muted/50 rounded-md px-3 transition-colors"
                           >
                             <div className="flex items-center gap-3">
-                              <span className="text-2xl">{lang.flag}</span>
+                              <div className="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-muted">
+                                <FlagIcon country={lang.country} className="w-6 h-4" />
+                              </div>
                               <div className="text-left">
                                 <div className="font-medium text-foreground">{lang.name}</div>
                                 <div className="text-xs text-muted-foreground">{lang.currency}</div>
