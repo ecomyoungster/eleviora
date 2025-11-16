@@ -1,7 +1,7 @@
 import { CartDrawer } from "./CartDrawer";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Menu, ChevronRight, Check } from "lucide-react";
+import { Menu, ChevronRight, Check, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -19,11 +19,21 @@ import {
 } from "@/components/ui/collapsible";
 import { useLocaleStore, useTranslation, Locale } from "@/stores/localeStore";
 import { FlagIcon } from "@/components/FlagIcon";
+import { Input } from "@/components/ui/input";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [shopOpen, setShopOpen] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const { locale, setLocale } = useLocaleStore();
@@ -60,6 +70,14 @@ export const Header = () => {
     p.node.title.toLowerCase().includes('paket') ||
     p.node.title.toLowerCase().includes('komplettsystem')
   );
+
+  const filteredProducts = products.filter(p => {
+    const query = searchQuery.toLowerCase();
+    return (
+      p.node.title.toLowerCase().includes(query) ||
+      p.node.description.toLowerCase().includes(query)
+    );
+  });
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -216,7 +234,72 @@ export const Header = () => {
               </h1>
             </Link>
           </div>
-          <CartDrawer />
+          <div className="flex items-center gap-2">
+            <Dialog open={searchOpen} onOpenChange={setSearchOpen}>
+              <DialogTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Search className="h-5 w-5" />
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-2xl max-h-[80vh]">
+                <DialogHeader>
+                  <DialogTitle>Produkte suchen</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-4">
+                  <Input
+                    type="search"
+                    placeholder="Produktname eingeben..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full"
+                    autoFocus
+                  />
+                  <div className="max-h-96 overflow-y-auto space-y-2">
+                    {loading ? (
+                      <div className="space-y-2">
+                        <Skeleton className="h-16 w-full" />
+                        <Skeleton className="h-16 w-full" />
+                        <Skeleton className="h-16 w-full" />
+                      </div>
+                    ) : filteredProducts.length > 0 ? (
+                      filteredProducts.map(product => (
+                        <Link
+                          key={product.node.id}
+                          to={`/product/${product.node.handle}`}
+                          onClick={() => {
+                            setSearchOpen(false);
+                            setSearchQuery("");
+                          }}
+                          className="flex items-center gap-4 p-4 rounded-lg border hover:bg-muted/50 transition-colors"
+                        >
+                          <div className="flex-1">
+                            <h3 className="font-medium text-foreground">{product.node.title}</h3>
+                            <p className="text-sm text-muted-foreground line-clamp-1">
+                              {product.node.description}
+                            </p>
+                          </div>
+                          <div className="text-right">
+                            <p className="font-semibold text-primary">
+                              €{product.node.priceRange.minVariantPrice.amount}
+                            </p>
+                          </div>
+                        </Link>
+                      ))
+                    ) : searchQuery ? (
+                      <p className="text-center text-muted-foreground py-8">
+                        Keine Produkte gefunden
+                      </p>
+                    ) : (
+                      <p className="text-center text-muted-foreground py-8">
+                        Beginne mit der Eingabe, um Produkte zu suchen
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
+            <CartDrawer />
+          </div>
         </div>
       </div>
     </header>
