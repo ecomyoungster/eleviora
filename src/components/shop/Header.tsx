@@ -27,6 +27,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { getTranslatedProduct } from "@/lib/translations";
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);

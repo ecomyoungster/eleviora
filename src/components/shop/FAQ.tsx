@@ -4,40 +4,43 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-
-const faqs = [
-  {
-    question: "Wie lange dauert es, bis ich Ergebnisse sehe?",
-    answer: "Die meisten Kunden berichten von ersten spürbaren Verbesserungen nach 2-3 Wochen regelmäßiger Einnahme. Für optimale Ergebnisse empfehlen wir eine Anwendung über mindestens 8-12 Wochen."
-  },
-  {
-    question: "Sind die Produkte vegan?",
-    answer: "Unsere Kollagen-Produkte sind nicht vegan, da Kollagen aus natürlichen tierischen Quellen gewonnen wird. Jedoch sind alle unseren Vitamin- und Mineralstoff-Produkte 100% vegan und pflanzlich."
-  },
-  {
-    question: "Wo werden die Produkte hergestellt?",
-    answer: "Alle unsere Produkte werden in Deutschland unter strengsten Qualitätsstandards hergestellt und sind laborgeprüft. Wir garantieren höchste Reinheit und Bioverfügbarkeit."
-  },
-  {
-    question: "Kann ich die Produkte kombinieren?",
-    answer: "Ja, unsere Produkte sind so konzipiert, dass sie sicher miteinander kombiniert werden können. Für optimale Ergebnisse empfehlen wir unsere Bundle-Angebote, die aufeinander abgestimmte Produkte enthalten."
-  },
-  {
-    question: "Gibt es Nebenwirkungen?",
-    answer: "Unsere Produkte sind gut verträglich und bestehen aus natürlichen Inhaltsstoffen. Bei bekannten Allergien oder Unsicherheiten empfehlen wir, vor der Einnahme Ihren Arzt zu konsultieren."
-  }
-];
+import { useTranslation } from "@/stores/localeStore";
 
 export const FAQ = () => {
+  const t = useTranslation();
+  
+  const faqs = [
+    {
+      question: t('faq1Q'),
+      answer: t('faq1A')
+    },
+    {
+      question: t('faq2Q'),
+      answer: t('faq2A')
+    },
+    {
+      question: t('faq3Q'),
+      answer: t('faq3A')
+    },
+    {
+      question: t('faq4Q'),
+      answer: t('faq4A')
+    },
+    {
+      question: t('faq5Q'),
+      answer: t('faq5A')
+    }
+  ];
+  
   return (
     <section className="py-20">
       <div className="container mx-auto px-4 max-w-3xl">
         <div className="text-center mb-12">
           <h2 className="font-serif text-4xl font-bold mb-4 text-foreground">
-            Häufig gestellte Fragen
+            {t('faqTitle')}
           </h2>
           <p className="text-muted-foreground text-lg">
-            Alles, was Sie wissen müssen
+            {t('faqSubtitle')}
           </p>
         </div>
         <Accordion type="single" collapsible className="w-full">

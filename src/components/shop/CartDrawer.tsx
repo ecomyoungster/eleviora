@@ -171,10 +171,10 @@ export const CartDrawer = () => {
                     </div>
                     <div className="flex-1">
                       <p className="text-sm font-medium text-foreground">
-                        Du sparst €{totalSavings.toFixed(2)}
+                        {t('savings').replace('{amount}', totalSavings.toFixed(2))}
                       </p>
                       <p className="text-xs text-muted-foreground">
-                        Durch Bundle-Rabatte
+                        {t('savingsDesc')}
                       </p>
                     </div>
                   </div>
@@ -188,10 +188,10 @@ export const CartDrawer = () => {
                     </div>
                     <div className="flex-1">
                       <p className="text-sm font-medium text-foreground">
-                        Kostenloser Versand
+                        {t('freeShipping')}
                       </p>
                       <p className="text-xs text-muted-foreground">
-                        Deine Bestellung wird kostenlos versendet
+                        {t('freeShippingDesc')}
                       </p>
                     </div>
                   </div>
@@ -200,7 +200,7 @@ export const CartDrawer = () => {
                     <div className="flex items-center gap-2 mb-2">
                       <Truck className="w-4 h-4 text-muted-foreground" />
                       <p className="text-sm font-medium text-foreground">
-                        Noch €{remainingForFreeShipping.toFixed(2)} bis zum kostenlosen Versand
+                        {t('freeShippingRemaining').replace('{amount}', remainingForFreeShipping.toFixed(2))}
                       </p>
                     </div>
                     <div className="w-full bg-secondary rounded-full h-2 overflow-hidden">
