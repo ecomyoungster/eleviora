@@ -28,9 +28,9 @@ export const BestSellers = () => {
   if (loading) {
     return (
       <section id="bestsellers" className="py-16 bg-background">
-        <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4">
           <h2 className="font-serif text-3xl md:text-4xl font-bold text-center mb-4">
-            Best Sellers
+            Bestsellers
           </h2>
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
             Unsere beliebtesten Produkte für Ihre Gesundheit
@@ -57,7 +57,7 @@ export const BestSellers = () => {
     <section id="bestsellers" className="py-16 bg-background">
       <div className="container mx-auto px-4">
         <h2 className="font-serif text-3xl md:text-4xl font-bold text-center mb-4">
-          Best Sellers
+          Bestsellers
         </h2>
         <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
           Unsere beliebtesten Produkte für Ihre Gesundheit
