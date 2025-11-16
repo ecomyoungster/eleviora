@@ -11,7 +11,13 @@ export const Products = () => {
     const loadProducts = async () => {
       try {
         const data = await fetchProducts();
-        setProducts(data);
+        // Filter out bundles
+        const filteredProducts = data.filter(p => 
+          !p.node.title.toLowerCase().includes('bundle') && 
+          !p.node.title.toLowerCase().includes('paket') &&
+          !p.node.title.toLowerCase().includes('komplettsystem')
+        );
+        setProducts(filteredProducts);
       } catch (error) {
         console.error("Error loading products:", error);
       } finally {
