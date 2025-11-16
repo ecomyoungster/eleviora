@@ -32,6 +32,8 @@ export const Header = () => {
     { code: 'de-DE' as Locale, flag: '🇩🇪', name: 'Deutschland', currency: 'EUR €' },
     { code: 'de-AT' as Locale, flag: '🇦🇹', name: 'Österreich', currency: 'EUR €' },
   ];
+  
+  const currentLanguage = languages.find(lang => lang.code === locale);
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -123,8 +125,12 @@ export const Header = () => {
                   </button>
 
                   <Collapsible open={languageOpen} onOpenChange={setLanguageOpen}>
-                    <CollapsibleTrigger className="flex w-full items-center justify-between py-3 text-sm font-medium uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors border-t mt-4 pt-4">
-                      {t('language')}
+                    <CollapsibleTrigger className="flex w-full items-center justify-between py-3 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors border-t mt-4 pt-4">
+                      <div className="flex items-center gap-2">
+                        <span className="text-2xl">{currentLanguage?.flag}</span>
+                        <span className="uppercase tracking-wider">{currentLanguage?.name}</span>
+                        <span className="text-xs">• {currentLanguage?.currency}</span>
+                      </div>
                       <ChevronRight className={`h-4 w-4 transition-transform ${languageOpen ? 'rotate-90' : ''}`} />
                     </CollapsibleTrigger>
                     <CollapsibleContent>
