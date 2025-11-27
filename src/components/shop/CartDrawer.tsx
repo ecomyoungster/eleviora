@@ -170,6 +170,22 @@ export const CartDrawer = () => {
                       item.product.node.description
                     );
                     
+                    // Calculate original price and discount
+                    const currentPrice = parseFloat(item.price.amount);
+                    let originalUnitPrice = currentPrice;
+                    let discountPercent = 0;
+                    
+                    if (item.quantity === 3) {
+                      originalUnitPrice = currentPrice / 0.9;
+                      discountPercent = 10;
+                    } else if (item.quantity === 6) {
+                      originalUnitPrice = currentPrice / 0.85;
+                      discountPercent = 15;
+                    }
+                    
+                    const hasDiscount = discountPercent > 0;
+                    const savings = (originalUnitPrice - currentPrice) * item.quantity;
+                    
                     return (
                       <div key={item.variantId} className="flex gap-4 p-2">
                         <div className="w-16 h-16 bg-secondary rounded-md overflow-hidden flex-shrink-0">
@@ -187,9 +203,26 @@ export const CartDrawer = () => {
                           <p className="text-sm text-muted-foreground">
                             {item.selectedOptions.map(option => option.value).join(' • ')}
                           </p>
-                          <p className="font-semibold">
-                            €{parseFloat(item.price.amount).toFixed(2)}
-                          </p>
+                          <div className="space-y-0.5">
+                            {hasDiscount && (
+                              <div className="flex items-center gap-2">
+                                <span className="text-xs text-muted-foreground line-through">
+                                  €{originalUnitPrice.toFixed(2)}
+                                </span>
+                                <span className="text-xs font-semibold text-primary bg-primary/10 px-1.5 py-0.5 rounded">
+                                  -{discountPercent}%
+                                </span>
+                              </div>
+                            )}
+                            <p className="font-semibold text-foreground">
+                              €{currentPrice.toFixed(2)}
+                            </p>
+                            {hasDiscount && (
+                              <p className="text-xs text-primary font-medium">
+                                {locale.startsWith('de') ? `Sparst €${savings.toFixed(2)}` : `Save €${savings.toFixed(2)}`}
+                              </p>
+                            )}
+                          </div>
                         </div>
                         
                         <div className="flex flex-col items-end gap-2 flex-shrink-0">
