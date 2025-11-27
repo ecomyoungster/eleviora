@@ -85,26 +85,12 @@ const ProductDetail = () => {
   const handleAddToCart = () => {
     if (!variant) return;
 
-    // Calculate discounted price based on quantity
-    const unitPrice = basePrice;
-    let discountMultiplier = 1;
-    
-    if (selectedQuantity === 3) {
-      discountMultiplier = 0.9; // 10% discount
-    } else if (selectedQuantity === 6) {
-      discountMultiplier = 0.85; // 15% discount
-    }
-    
-    const discountedUnitPrice = unitPrice * discountMultiplier;
-
+    // Store original price - discount will be applied at checkout via discount code
     const cartItem = {
       product,
       variantId: variant.id,
       variantTitle: variant.title,
-      price: {
-        amount: discountedUnitPrice.toFixed(2),
-        currencyCode: variant.price.currencyCode
-      },
+      price: variant.price, // Original price
       quantity: selectedQuantity,
       selectedOptions: variant.selectedOptions || []
     };
