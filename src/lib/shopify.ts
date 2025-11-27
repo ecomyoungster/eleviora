@@ -219,19 +219,41 @@ export async function createStorefrontCheckout(items: CartItem[], locale: string
       merchandiseId: item.variantId,
     }));
 
+    // Determine discount code based on quantities
+    let discountCode: string | null = null;
+    const totalQuantity = items.reduce((sum, item) => sum + item.quantity, 0);
+    
+    // Check if any item has quantity-based discount
+    const hasQuantityDiscount = items.some(item => item.quantity === 3 || item.quantity === 6);
+    
+    if (hasQuantityDiscount) {
+      // Use the highest applicable discount
+      const maxQuantity = Math.max(...items.map(item => item.quantity));
+      if (maxQuantity >= 6) {
+        discountCode = 'MENGE6'; // 15% discount
+      } else if (maxQuantity >= 3) {
+        discountCode = 'MENGE3'; // 10% discount
+      }
+    }
+
     // Set country code based on locale - EN uses DE as default market
     const countryCode = locale === 'de-AT' ? 'AT' : 'DE';
 
+    const input: any = {
+      lines,
+      buyerIdentity: {
+        countryCode,
+      },
+    };
+
+    // Add discount code if applicable
+    if (discountCode) {
+      input.discountCodes = [discountCode];
+    }
+
     const cartData = await storefrontApiRequest(
       CART_CREATE_MUTATION, 
-      {
-        input: {
-          lines,
-          buyerIdentity: {
-            countryCode,
-          },
-        },
-      },
+      { input },
       locale
     );
 
