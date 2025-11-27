@@ -169,7 +169,7 @@ const ProductDetail = () => {
                         )}
                         <div className="text-center">
                           <div className="text-2xl font-bold mb-1">3 {t('pieces')}</div>
-                          <div className="text-emerald-600 font-semibold text-sm mb-1">{t('save').replace('{discount}', '10')}</div>
+                          <div className="text-primary font-semibold text-sm mb-1">{t('save').replace('{discount}', '10')}</div>
                           <div className="text-sm text-muted-foreground line-through">€{(basePrice * 3).toFixed(2)}</div>
                           <div className="text-sm font-semibold">€{(basePrice * 3 * 0.9).toFixed(2)}</div>
                         </div>
@@ -192,11 +192,11 @@ const ProductDetail = () => {
                           </div>
                          )}
                          <div className="text-center">
-                           <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-emerald-500 text-white text-xs px-3 py-1 rounded-full font-semibold whitespace-nowrap">
+                           <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs px-3 py-1 rounded-full font-semibold whitespace-nowrap">
                              {t('mostPopular')}
                            </div>
                            <div className="text-2xl font-bold mb-1">6 {t('pieces')}</div>
-                           <div className="text-emerald-600 font-semibold text-sm mb-1">{t('save').replace('{discount}', '15')}</div>
+                           <div className="text-primary font-semibold text-sm mb-1">{t('save').replace('{discount}', '15')}</div>
                            <div className="text-sm text-muted-foreground line-through">€{(basePrice * 6).toFixed(2)}</div>
                            <div className="text-sm font-semibold">€{(basePrice * 6 * 0.85).toFixed(2)}</div>
                          </div>
@@ -221,7 +221,7 @@ const ProductDetail = () => {
                     </div>
                     {selectedPrice.discount > 0 && (
                       <>
-                        <div className="text-emerald-600 font-semibold">
+                        <div className="text-primary font-semibold">
                           {t('wasSaved')} €{selectedPrice.savings.toFixed(2)} ({selectedPrice.discount}%)
                         </div>
                         <div className="text-sm text-muted-foreground flex items-center gap-2">

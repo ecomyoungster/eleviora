@@ -73,7 +73,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           </Badge>
         )}
         {discount && (
-          <Badge className="bg-emerald-500 hover:bg-emerald-500 text-white text-sm font-semibold px-4 py-1.5 shadow-lg rounded-full">
+          <Badge className="bg-primary hover:bg-primary text-white text-sm font-semibold px-4 py-1.5 shadow-lg rounded-full">
             {discount}
           </Badge>
         )}
