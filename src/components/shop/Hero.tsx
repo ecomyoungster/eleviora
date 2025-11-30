@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import heroImage from "@/assets/hero-collagen-new.png";
+import heroImage from "@/assets/hero-collagen.jpg";
 import { useTranslation } from "@/stores/localeStore";
 
 export const Hero = () => {
