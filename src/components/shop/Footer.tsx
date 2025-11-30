@@ -11,8 +11,8 @@ export const Footer = () => {
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           <div>
-            <h3 className="font-serif text-2xl font-bold mb-4 text-foreground">
-              VitalAge
+            <h3 className="font-brand text-3xl font-semibold mb-4 text-foreground tracking-wide">
+              eleviora
             </h3>
             <p className="text-muted-foreground">
               {t('footerTagline')}
