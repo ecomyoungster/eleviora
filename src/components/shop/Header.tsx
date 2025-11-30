@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/collapsible";
 import { useLocaleStore, useTranslation, Locale } from "@/stores/localeStore";
 import { FlagIcon } from "@/components/FlagIcon";
+import { Logo } from "@/components/Logo";
 import { Input } from "@/components/ui/input";
 import {
   Dialog,
@@ -230,10 +231,8 @@ export const Header = () => {
           </div>
 
           <div className="absolute left-1/2 -translate-x-1/2">
-            <Link to="/">
-              <h1 className="font-brand text-3xl font-semibold text-foreground hover:text-primary transition-colors cursor-pointer tracking-wide">
-                eleviora
-              </h1>
+            <Link to="/" className="hover:opacity-80 transition-opacity">
+              <Logo size="md" />
             </Link>
           </div>
           <div className="flex items-center gap-2">
