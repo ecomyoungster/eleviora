@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CreditCard } from "lucide-react";
+import { Logo } from "@/components/Logo";
 import { useTranslation } from "@/stores/localeStore";
 
 export const Footer = () => {
@@ -11,9 +12,7 @@ export const Footer = () => {
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           <div>
-            <h3 className="font-brand text-3xl font-semibold mb-4 text-foreground tracking-wide">
-              eleviora
-            </h3>
+            <Logo size="md" className="mb-4" />
             <p className="text-muted-foreground">
               {t('footerTagline')}
             </p>
