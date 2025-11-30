@@ -231,8 +231,8 @@ export const Header = () => {
 
           <div className="absolute left-1/2 -translate-x-1/2">
             <Link to="/">
-              <h1 className="font-serif text-2xl font-bold text-foreground hover:text-primary transition-colors cursor-pointer">
-                VitalAge
+              <h1 className="font-brand text-3xl font-semibold text-foreground hover:text-primary transition-colors cursor-pointer tracking-wide">
+                eleviora
               </h1>
             </Link>
           </div>
