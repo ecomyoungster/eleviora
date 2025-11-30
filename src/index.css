@@ -18,8 +18,8 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 20%;
 
-    /* Sage green - primary brand color - more saturated */
-    --primary: 120 25% 58%;
+    /* Sage green - primary brand color #91a390 */
+    --primary: 117 10% 60%;
     --primary-foreground: 0 0% 100%;
 
     /* Soft beige - secondary surfaces */
@@ -31,7 +31,7 @@ All colors MUST be HSL.
     --muted-foreground: 0 0% 45%;
 
     /* Accent using sage green */
-    --accent: 120 25% 58%;
+    --accent: 117 10% 60%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 70% 50%;
@@ -39,12 +39,12 @@ All colors MUST be HSL.
 
     --border: 40 20% 88%;
     --input: 40 20% 88%;
-    --ring: 120 25% 58%;
+    --ring: 117 10% 60%;
 
     --radius: 0.75rem;
 
     /* Custom wellness tokens */
-    --wellness-green: 120 25% 58%;
+    --wellness-green: 117 10% 60%;
     --wellness-beige: 40 30% 90%;
     --wellness-rose: 350 50% 88%;
     --wellness-cream: 40 20% 98%;
@@ -68,7 +68,7 @@ All colors MUST be HSL.
     --popover: 0 0% 16%;
     --popover-foreground: 40 20% 95%;
 
-    --primary: 120 25% 62%;
+    --primary: 117 10% 64%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 0 0% 20%;
@@ -77,7 +77,7 @@ All colors MUST be HSL.
     --muted: 0 0% 20%;
     --muted-foreground: 0 0% 65%;
 
-    --accent: 120 25% 62%;
+    --accent: 117 10% 64%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 70% 50%;
@@ -85,7 +85,7 @@ All colors MUST be HSL.
 
     --border: 0 0% 24%;
     --input: 0 0% 24%;
-    --ring: 120 25% 62%;
+    --ring: 117 10% 64%;
   }
 }
 
