@@ -9,6 +9,12 @@ import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { useTranslation, useLocaleStore } from "@/stores/localeStore";
 import { getTranslatedProduct } from "@/lib/translations";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const ProductDetail = () => {
   const { handle } = useParams();
@@ -307,6 +313,46 @@ const ProductDetail = () => {
               {t('addToCart')}
             </Button>
           </div>
+        </div>
+
+        {/* Product Information Section */}
+        <div className="container mx-auto px-4 py-12 max-w-4xl">
+          <h2 className="text-2xl font-bold mb-6">PRODUKTINFORMATION</h2>
+          <Accordion type="single" collapsible className="w-full space-y-2">
+            <AccordionItem value="description" className="border rounded-lg px-6 bg-secondary/5">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline">
+                Beschreibung
+              </AccordionTrigger>
+              <AccordionContent className="text-muted-foreground pt-2 pb-4">
+                {translated.description}
+              </AccordionContent>
+            </AccordionItem>
+            
+            {!isBundle && (
+              <>
+                <AccordionItem value="usage" className="border rounded-lg px-6 bg-secondary/5">
+                  <AccordionTrigger className="text-lg font-semibold hover:no-underline">
+                    Anwendung
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground pt-2 pb-4">
+                    <p>Nehmen Sie täglich die empfohlene Dosis mit ausreichend Wasser ein. Für beste Ergebnisse sollte das Produkt regelmäßig über einen längeren Zeitraum eingenommen werden.</p>
+                    <p className="mt-2 font-semibold">Hinweis:</p>
+                    <p>Die angegebene empfohlene tägliche Verzehrmenge darf nicht überschritten werden. Nahrungsergänzungsmittel sind kein Ersatz für eine ausgewogene und abwechslungsreiche Ernährung sowie eine gesunde Lebensweise.</p>
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="ingredients" className="border rounded-lg px-6 bg-secondary/5">
+                  <AccordionTrigger className="text-lg font-semibold hover:no-underline">
+                    Zutaten
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground pt-2 pb-4">
+                    <p>Hochwertige Inhaltsstoffe in Premium-Qualität, laborgeprüft und ohne unnötige Zusatzstoffe.</p>
+                    <p className="mt-2">Hergestellt in Deutschland nach höchsten Qualitätsstandards (HACCP-zertifiziert).</p>
+                  </AccordionContent>
+                </AccordionItem>
+              </>
+            )}
+          </Accordion>
         </div>
       </main>
       <Footer />
