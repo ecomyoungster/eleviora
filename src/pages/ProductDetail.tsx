@@ -15,6 +15,7 @@ const ProductDetail = () => {
   const [product, setProduct] = useState<ShopifyProduct | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedQuantity, setSelectedQuantity] = useState<1 | 3 | 6>(1);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const addItem = useCartStore(state => state.addItem);
   const t = useTranslation();
   const locale = useLocaleStore(state => state.locale);
@@ -66,7 +67,8 @@ const ProductDetail = () => {
   const translated = getTranslatedProduct(node.handle, locale, node.title, node.description);
   const variant = node.variants.edges[0]?.node;
   const basePrice = parseFloat(node.priceRange.minVariantPrice.amount);
-  const imageUrl = node.images.edges[0]?.node.url;
+  const images = node.images.edges.map(edge => edge.node);
+  const currentImage = images[selectedImageIndex]?.url;
 
   // Check if product is a bundle
   const isBundle = node.title.toLowerCase().includes('bundle') || 
@@ -121,16 +123,42 @@ const ProductDetail = () => {
       <main className="container mx-auto px-4 py-12">
         <div className="grid lg:grid-cols-2 gap-12">
           <div className="flex justify-center lg:justify-end">
-            <div className="aspect-[3/4] bg-secondary/20 rounded-xl overflow-hidden max-w-md w-full">
-              {imageUrl ? (
-                <img 
-                  src={imageUrl} 
-                  alt={translated.title}
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-                  {t('noImage')}
+            <div className="max-w-md w-full space-y-4">
+              {/* Main Image */}
+              <div className="aspect-[3/4] bg-secondary/20 rounded-xl overflow-hidden">
+                {currentImage ? (
+                  <img 
+                    src={currentImage} 
+                    alt={translated.title}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-muted-foreground">
+                    {t('noImage')}
+                  </div>
+                )}
+              </div>
+              
+              {/* Image Thumbnails */}
+              {images.length > 1 && (
+                <div className="grid grid-cols-3 gap-3">
+                  {images.map((image, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setSelectedImageIndex(index)}
+                      className={`aspect-[3/4] rounded-lg overflow-hidden border-2 transition-all ${
+                        selectedImageIndex === index
+                          ? 'border-primary ring-2 ring-primary/20'
+                          : 'border-border hover:border-primary/50'
+                      }`}
+                    >
+                      <img
+                        src={image.url}
+                        alt={`${translated.title} - Bild ${index + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </button>
+                  ))}
                 </div>
               )}
             </div>
