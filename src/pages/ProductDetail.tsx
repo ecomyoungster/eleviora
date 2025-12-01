@@ -120,18 +120,20 @@ const ProductDetail = () => {
       <Header />
       <main className="container mx-auto px-4 py-12">
         <div className="grid lg:grid-cols-2 gap-12">
-          <div className="aspect-square bg-secondary/20 rounded-xl overflow-hidden">
-            {imageUrl ? (
-              <img 
-                src={imageUrl} 
-                alt={translated.title}
-                className="w-full h-full object-contain"
-              />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-                {t('noImage')}
-              </div>
-            )}
+          <div className="flex justify-center lg:justify-end">
+            <div className="aspect-square bg-secondary/20 rounded-xl overflow-hidden max-w-md w-full">
+              {imageUrl ? (
+                <img 
+                  src={imageUrl} 
+                  alt={translated.title}
+                  className="w-full h-full object-contain"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-muted-foreground">
+                  {t('noImage')}
+                </div>
+              )}
+            </div>
           </div>
           <div className="space-y-6">
             <h1 className="font-serif text-4xl font-bold text-foreground">
