@@ -4,11 +4,11 @@ export const productTranslations: Record<string, Record<Locale, { title: string;
   'kollagen-hydrolysat-pulver': {
     'de-DE': {
       title: 'Kollagen Hydrolysat Pulver',
-      description: 'Premium Kollagen Hydrolysat Pulver für straffe Haut, kräftige Haare und gesunde Gelenke. Hergestellt in Deutschland mit höchster Bioverfügbarkeit. Ideal für Menschen ab 50, die ihre natürliche Schönheit und Beweglichkeit bewahren möchten.'
+      description: 'Unser Kollagenhydrolysat – Hochdosiert und geprüfte Qualität für dein Wohlbefinden'
     },
     'de-AT': {
       title: 'Kollagen Hydrolysat Pulver',
-      description: 'Premium Kollagen Hydrolysat Pulver für straffe Haut, kräftige Haare und gesunde Gelenke. Hergestellt in Deutschland mit höchster Bioverfügbarkeit. Ideal für Menschen ab 50, die ihre natürliche Schönheit und Beweglichkeit bewahren möchten.'
+      description: 'Unser Kollagenhydrolysat – Hochdosiert und geprüfte Qualität für dein Wohlbefinden'
     },
     'en-US': {
       title: 'Collagen Hydrolysate Powder',
