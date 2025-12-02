@@ -285,27 +285,16 @@ const ProductDetail = () => {
                     )}
                   </div>
                 </div>
-
-                {translated.description && (
-                  <div className="prose prose-lg text-muted-foreground">
-                    <p>{translated.description}</p>
-                  </div>
-                )}
               </>
             ) : (
               <>
                 <p className="text-3xl font-bold text-foreground">
                   €{basePrice.toFixed(2)}
                 </p>
-                {translated.description && (
-                  <div className="prose prose-lg text-muted-foreground">
-                    <p>{translated.description}</p>
-                  </div>
-                )}
               </>
             )}
 
-            <Button 
+            <Button
               size="lg"
               className="w-full md:w-auto bg-primary hover:bg-primary/90 text-lg px-8"
               onClick={handleAddToCart}
@@ -321,7 +310,7 @@ const ProductDetail = () => {
                   <AccordionTrigger className="text-lg font-semibold hover:no-underline">
                     Beschreibung
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pt-2 pb-4">
+                  <AccordionContent className="text-muted-foreground pt-2 pb-4 whitespace-pre-line">
                     {translated.description}
                   </AccordionContent>
                 </AccordionItem>
