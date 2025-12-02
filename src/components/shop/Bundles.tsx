@@ -3,6 +3,9 @@ import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 import { ProductCard } from "./ProductCard";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslation } from "@/stores/localeStore";
+import bundleSchoenheit from "@/assets/bundle-schoenheit.jpg";
+import bundleGelenk from "@/assets/bundle-gelenk.jpg";
+import bundleGanzkoerper from "@/assets/bundle-ganzkoerper.jpg";
 
 export const Bundles = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
@@ -79,9 +82,22 @@ export const Bundles = () => {
           {t('bundlesDesc')}
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {products.map((product) => (
-            <ProductCard key={product.node.id} product={product} />
-          ))}
+          {products.map((product) => {
+            const handle = product.node.handle;
+            let customImage: string | undefined;
+            
+            if (handle.includes('schonheit-von-innen')) {
+              customImage = bundleSchoenheit;
+            } else if (handle.includes('gelenk-beweglichkeit')) {
+              customImage = bundleGelenk;
+            } else if (handle.includes('ganzkorper') || handle.includes('vital')) {
+              customImage = bundleGanzkoerper;
+            }
+            
+            return (
+              <ProductCard key={product.node.id} product={product} customImage={customImage} />
+            );
+          })}
         </div>
       </div>
     </section>

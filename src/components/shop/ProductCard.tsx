@@ -10,9 +10,10 @@ import { getTranslatedProduct } from "@/lib/translations";
 
 interface ProductCardProps {
   product: ShopifyProduct;
+  customImage?: string;
 }
 
-export const ProductCard = ({ product }: ProductCardProps) => {
+export const ProductCard = ({ product, customImage }: ProductCardProps) => {
   const addItem = useCartStore(state => state.addItem);
   const t = useTranslation();
   const locale = useLocaleStore(state => state.locale);
@@ -40,7 +41,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   };
 
   const price = parseFloat(node.priceRange.minVariantPrice.amount);
-  const imageUrl = node.images.edges[0]?.node.url;
+  const imageUrl = customImage || node.images.edges[0]?.node.url;
 
   // Check if product is a bundle and get discount
   const getDiscount = () => {
