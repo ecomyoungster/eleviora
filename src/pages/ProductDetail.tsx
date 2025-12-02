@@ -15,6 +15,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import bundleSchoenheit from "@/assets/bundle-schoenheit.jpg";
+import bundleGelenk from "@/assets/bundle-gelenk.jpg";
+import bundleGanzkoerper from "@/assets/bundle-ganzkoerper.jpg";
 
 const ProductDetail = () => {
   const { handle } = useParams();
@@ -73,8 +76,18 @@ const ProductDetail = () => {
   const translated = getTranslatedProduct(node.handle, locale, node.title, node.description);
   const variant = node.variants.edges[0]?.node;
   const basePrice = parseFloat(node.priceRange.minVariantPrice.amount);
+  
+  // Get custom bundle image if applicable
+  const getBundleImage = () => {
+    if (node.handle.includes('schonheit-von-innen')) return bundleSchoenheit;
+    if (node.handle.includes('gelenk-beweglichkeit')) return bundleGelenk;
+    if (node.handle.includes('ganzkorper') || node.handle.includes('vital')) return bundleGanzkoerper;
+    return null;
+  };
+  
+  const bundleImage = getBundleImage();
   const images = node.images.edges.map(edge => edge.node);
-  const currentImage = images[selectedImageIndex]?.url;
+  const currentImage = bundleImage || images[selectedImageIndex]?.url;
 
   // Check if product is a bundle
   const isBundle = node.title.toLowerCase().includes('bundle') || 
@@ -145,8 +158,8 @@ const ProductDetail = () => {
                 )}
               </div>
               
-              {/* Image Thumbnails */}
-              {images.length > 1 && (
+              {/* Image Thumbnails - hide for bundles with custom images */}
+              {!bundleImage && images.length > 1 && (
                 <div className="grid grid-cols-3 gap-3">
                   {images.map((image, index) => (
                     <button
