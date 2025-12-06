@@ -55,7 +55,15 @@ export const CartDrawer = () => {
   
   const freeShippingThreshold = 49;
   const remainingForFreeShipping = freeShippingThreshold - totalPrice;
-  const hasFreeShipping = totalPrice >= freeShippingThreshold;
+  
+  // Check if cart contains any bundles - bundles always have free shipping
+  const hasBundleInCart = items.some(item => 
+    item.product.node.title.toLowerCase().includes('bundle') || 
+    item.product.node.title.toLowerCase().includes('paket') ||
+    item.product.node.title.toLowerCase().includes('komplettsystem')
+  );
+  
+  const hasFreeShipping = hasBundleInCart || totalPrice >= freeShippingThreshold;
   
   // Calculate savings from bundles
   const bundleItems = items.filter(item => 
