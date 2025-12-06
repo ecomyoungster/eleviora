@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { useTranslation, useLocaleStore } from "@/stores/localeStore";
 import { getTranslatedProduct } from "@/lib/translations";
+import { NutritionTable } from "@/components/shop/NutritionTable";
 import {
   Accordion,
   AccordionContent,
@@ -345,9 +346,8 @@ const ProductDetail = () => {
                       <AccordionTrigger className="text-lg font-semibold hover:no-underline">
                         Zutaten
                       </AccordionTrigger>
-                      <AccordionContent className="text-muted-foreground pt-2 pb-4">
-                        <p>Hochwertige Inhaltsstoffe in Premium-Qualität, laborgeprüft und ohne unnötige Zusatzstoffe.</p>
-                        <p className="mt-2">Hergestellt in Deutschland nach höchsten Qualitätsstandards (HACCP-zertifiziert).</p>
+                      <AccordionContent className="pt-2 pb-4">
+                        <NutritionTable handle={node.handle} />
                       </AccordionContent>
                     </AccordionItem>
                   </>
