@@ -92,7 +92,41 @@ const ProductDetail = () => {
 
   // Check if product is a bundle
   const isBundle = node.title.toLowerCase().includes('bundle') || 
-                   node.handle.includes('bundle');
+                   node.handle.includes('bundle') ||
+                   node.handle.includes('komplettsystem') ||
+                   node.handle.includes('paket');
+
+  // Bundle pricing data
+  const bundlePricing: Record<string, { oneTime: number; uvp: number; monthly: { 1: number; 3: number; 6: number }; discounts: { 1: number; 3: number; 6: number } }> = {
+    'schonheit-von-innen': {
+      oneTime: 49.99,
+      uvp: 59.98,
+      monthly: { 1: 44.99, 3: 42.99, 6: 39.99 },
+      discounts: { 1: 10, 3: 14, 6: 20 }
+    },
+    'gelenk-beweglichkeit': {
+      oneTime: 89.99,
+      uvp: 113.96,
+      monthly: { 1: 79.99, 3: 74.99, 6: 69.99 },
+      discounts: { 1: 11, 3: 17, 6: 22 }
+    },
+    'ganzkorper': {
+      oneTime: 76.99,
+      uvp: 80.97,
+      monthly: { 1: 69.99, 3: 64.99, 6: 59.99 },
+      discounts: { 1: 9, 3: 15, 6: 22 }
+    }
+  };
+
+  // Get bundle pricing based on handle
+  const getBundlePricing = () => {
+    if (node.handle.includes('schonheit-von-innen')) return bundlePricing['schonheit-von-innen'];
+    if (node.handle.includes('gelenk-beweglichkeit')) return bundlePricing['gelenk-beweglichkeit'];
+    if (node.handle.includes('ganzkorper') || node.handle.includes('vital')) return bundlePricing['ganzkorper'];
+    return null;
+  };
+
+  const currentBundlePricing = getBundlePricing();
 
   // Calculate prices with discounts
   const getQuantityPrice = (qty: 1 | 3 | 6) => {
@@ -103,6 +137,17 @@ const ProductDetail = () => {
   };
 
   const selectedPrice = getQuantityPrice(selectedQuantity);
+
+  // Bundle subscription price
+  const getBundlePrice = (months: 1 | 3 | 6) => {
+    if (!currentBundlePricing) return { monthly: basePrice, discount: 0 };
+    return {
+      monthly: currentBundlePricing.monthly[months],
+      discount: currentBundlePricing.discounts[months]
+    };
+  };
+
+  const selectedBundlePrice = getBundlePrice(selectedQuantity);
 
   const handleAddToCart = () => {
     if (!variant) return;
@@ -300,12 +345,122 @@ const ProductDetail = () => {
                   </div>
                 </div>
               </>
+            ) : currentBundlePricing ? (
+              <div className="space-y-4">
+                <div>
+                  <h3 className="text-lg font-semibold mb-3">{t('selectQuantity').replace('Menge', 'Abo').replace('Quantity', 'Subscription')}</h3>
+                  <div className="grid grid-cols-3 gap-3">
+                    {/* 1 Monat */}
+                    <button
+                      onClick={() => setSelectedQuantity(1)}
+                      className={`relative border-2 rounded-2xl p-4 transition-all ${
+                        selectedQuantity === 1
+                          ? 'border-primary bg-primary/5'
+                          : 'border-border hover:border-primary/50'
+                      }`}
+                    >
+                      {selectedQuantity === 1 && (
+                        <div className="absolute -top-2 -right-2 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+                          <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                      )}
+                      <div className="text-center">
+                        <div className="text-2xl font-bold mb-1">1 {locale.startsWith('de') ? 'Monat' : 'Month'}</div>
+                        <div className="text-primary font-semibold text-sm mb-1">{t('save').replace('{discount}', currentBundlePricing.discounts[1].toString())}</div>
+                        <div className="text-sm text-muted-foreground line-through">€{currentBundlePricing.oneTime.toFixed(2)}</div>
+                        <div className="text-sm font-semibold">€{currentBundlePricing.monthly[1].toFixed(2)}</div>
+                      </div>
+                    </button>
+
+                    {/* 3 Monate */}
+                    <button
+                      onClick={() => setSelectedQuantity(3)}
+                      className={`relative border-2 rounded-2xl p-4 transition-all ${
+                        selectedQuantity === 3
+                          ? 'border-primary bg-primary/5'
+                          : 'border-border hover:border-primary/50'
+                      }`}
+                    >
+                      {selectedQuantity === 3 && (
+                        <div className="absolute -top-2 -right-2 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+                          <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                      )}
+                      <div className="text-center">
+                        <div className="text-2xl font-bold mb-1">3 {locale.startsWith('de') ? 'Monate' : 'Months'}</div>
+                        <div className="text-primary font-semibold text-sm mb-1">{t('save').replace('{discount}', currentBundlePricing.discounts[3].toString())}</div>
+                        <div className="text-sm text-muted-foreground line-through">€{currentBundlePricing.oneTime.toFixed(2)}</div>
+                        <div className="text-sm font-semibold">€{currentBundlePricing.monthly[3].toFixed(2)}</div>
+                      </div>
+                    </button>
+
+                    {/* 6 Monate */}
+                    <button
+                      onClick={() => setSelectedQuantity(6)}
+                      className={`relative border-2 rounded-2xl p-4 transition-all ${
+                        selectedQuantity === 6
+                          ? 'border-primary bg-primary/5'
+                          : 'border-border hover:border-primary/50'
+                      }`}
+                    >
+                      {selectedQuantity === 6 && (
+                        <div className="absolute -top-2 -right-2 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+                          <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                      )}
+                      <div className="text-center">
+                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs px-3 py-1 rounded-full font-semibold whitespace-nowrap">
+                          {t('mostPopular')}
+                        </div>
+                        <div className="text-2xl font-bold mb-1">6 {locale.startsWith('de') ? 'Monate' : 'Months'}</div>
+                        <div className="text-primary font-semibold text-sm mb-1">{t('save').replace('{discount}', currentBundlePricing.discounts[6].toString())}</div>
+                        <div className="text-sm text-muted-foreground line-through">€{currentBundlePricing.oneTime.toFixed(2)}</div>
+                        <div className="text-sm font-semibold">€{currentBundlePricing.monthly[6].toFixed(2)}</div>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Bundle Price Summary */}
+                <div className="bg-secondary/20 rounded-xl p-4 space-y-2">
+                  <div className="flex justify-between items-center">
+                    <span className="text-lg font-semibold">{locale.startsWith('de') ? 'Monatlich' : 'Monthly'}:</span>
+                    <div className="text-right">
+                      <div className="text-sm text-muted-foreground line-through">
+                        €{currentBundlePricing.oneTime.toFixed(2)}
+                      </div>
+                      <div className="text-3xl font-bold text-foreground">
+                        €{selectedBundlePrice.monthly.toFixed(2)}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-primary font-semibold">
+                    {t('wasSaved')} €{(currentBundlePricing.oneTime - selectedBundlePrice.monthly).toFixed(2)} ({selectedBundlePrice.discount}%)
+                  </div>
+                  <div className="text-sm text-muted-foreground flex items-center gap-2">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    {locale.startsWith('de') ? 'Jederzeit kündbar' : 'Cancel anytime'}
+                  </div>
+                  <div className="text-sm text-muted-foreground flex items-center gap-2">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    {locale.startsWith('de') ? 'Kostenloser Versand' : 'Free shipping'}
+                  </div>
+                </div>
+              </div>
             ) : (
-              <>
-                <p className="text-3xl font-bold text-foreground">
-                  €{basePrice.toFixed(2)}
-                </p>
-              </>
+              <p className="text-3xl font-bold text-foreground">
+                €{basePrice.toFixed(2)}
+              </p>
             )}
 
             <Button
