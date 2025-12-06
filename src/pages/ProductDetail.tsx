@@ -152,34 +152,63 @@ const ProductDetail = () => {
   const handleAddToCart = () => {
     if (!variant) return;
 
-    // Calculate discounted price based on quantity
-    const unitPrice = basePrice;
-    let discountMultiplier = 1;
-    
-    if (selectedQuantity === 3) {
-      discountMultiplier = 0.9; // 10% discount
-    } else if (selectedQuantity === 6) {
-      discountMultiplier = 0.85; // 15% discount
-    }
-    
-    const discountedUnitPrice = unitPrice * discountMultiplier;
+    // For bundles: quantity is always 1, price is the subscription price
+    // For regular products: quantity varies, price is discounted based on quantity
+    if (isBundle && currentBundlePricing) {
+      const subscriptionMonths = selectedQuantity;
+      const monthlyPrice = currentBundlePricing.monthly[subscriptionMonths];
+      
+      const cartItem = {
+        product,
+        variantId: variant.id,
+        variantTitle: `${variant.title} (${subscriptionMonths} ${subscriptionMonths === 1 ? (locale.startsWith('de') ? 'Monat' : 'Month') : (locale.startsWith('de') ? 'Monate' : 'Months')} Abo)`,
+        price: {
+          amount: monthlyPrice.toFixed(2),
+          currencyCode: variant.price.currencyCode
+        },
+        quantity: 1, // Always 1 bundle for subscriptions
+        selectedOptions: [
+          ...variant.selectedOptions || [],
+          { name: 'Abo', value: `${subscriptionMonths} ${subscriptionMonths === 1 ? 'Monat' : 'Monate'}` }
+        ]
+      };
+      
+      addItem(cartItem);
+      toast.success(locale.startsWith('de') 
+        ? `${subscriptionMonths}-Monats-Abo hinzugefügt` 
+        : `${subscriptionMonths}-month subscription added`, {
+        position: "top-center"
+      });
+    } else {
+      // Regular product logic
+      const unitPrice = basePrice;
+      let discountMultiplier = 1;
+      
+      if (selectedQuantity === 3) {
+        discountMultiplier = 0.9; // 10% discount
+      } else if (selectedQuantity === 6) {
+        discountMultiplier = 0.85; // 15% discount
+      }
+      
+      const discountedUnitPrice = unitPrice * discountMultiplier;
 
-    const cartItem = {
-      product,
-      variantId: variant.id,
-      variantTitle: variant.title,
-      price: {
-        amount: discountedUnitPrice.toFixed(2),
-        currencyCode: variant.price.currencyCode
-      },
-      quantity: selectedQuantity,
-      selectedOptions: variant.selectedOptions || []
-    };
-    
-    addItem(cartItem);
-    toast.success(t('addedToCart').replace('{quantity}', selectedQuantity.toString()), {
-      position: "top-center"
-    });
+      const cartItem = {
+        product,
+        variantId: variant.id,
+        variantTitle: variant.title,
+        price: {
+          amount: discountedUnitPrice.toFixed(2),
+          currencyCode: variant.price.currencyCode
+        },
+        quantity: selectedQuantity,
+        selectedOptions: variant.selectedOptions || []
+      };
+      
+      addItem(cartItem);
+      toast.success(t('addedToCart').replace('{quantity}', selectedQuantity.toString()), {
+        position: "top-center"
+      });
+    }
   };
 
   return (
