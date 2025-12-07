@@ -307,8 +307,8 @@ export const CartDrawer = () => {
                       <p className="text-sm font-medium text-foreground">
                         {bundleSubscriptionItem && subscriptionMonths
                           ? (locale.startsWith('de') 
-                              ? `Deine Bestellung wird für ${subscriptionMonths} Monate kostenlos versendet`
-                              : `Your order will be shipped free for ${subscriptionMonths} months`)
+                              ? `Deine Bestellung wird für ${subscriptionMonths} ${subscriptionMonths === '1' ? 'Monat' : 'Monate'} kostenlos versendet`
+                              : `Your order will be shipped free for ${subscriptionMonths} ${subscriptionMonths === '1' ? 'month' : 'months'}`)
                           : t('freeShipping')
                         }
                       </p>
