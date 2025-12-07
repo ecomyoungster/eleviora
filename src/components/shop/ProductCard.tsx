@@ -46,15 +46,16 @@ export const ProductCard = ({ product, customImage }: ProductCardProps) => {
   // Check if product is a bundle and get discount
   const getDiscount = () => {
     const title = node.title.toLowerCase();
+    const handle = node.handle.toLowerCase();
     
-    if (title.includes('schönheit von innen') || title.includes('beauty')) {
-      return locale === 'en-US' ? 'Save 18%' : '18% sparen';
+    if (title.includes('schönheit von innen') || title.includes('beauty') || handle.includes('schonheit-von-innen')) {
+      return locale === 'en-US' ? 'Save up to 20%' : 'Bis zu 20% sparen';
     }
-    if (title.includes('gelenk') || title.includes('beweglichkeit') || title.includes('joint')) {
-      return locale === 'en-US' ? 'Save 20%' : '20% sparen';
+    if (title.includes('gelenk') || title.includes('beweglichkeit') || title.includes('joint') || handle.includes('gelenk-beweglichkeit')) {
+      return locale === 'en-US' ? 'Save up to 22%' : 'Bis zu 22% sparen';
     }
-    if (title.includes('ganzkörper') || title.includes('vital') || title.includes('full body')) {
-      return locale === 'en-US' ? 'Save 20%' : '20% sparen';
+    if (title.includes('ganzkörper') || title.includes('vital') || title.includes('full body') || handle.includes('ganzkorper')) {
+      return locale === 'en-US' ? 'Save up to 22%' : 'Bis zu 22% sparen';
     }
     
     return null;
