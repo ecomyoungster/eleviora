@@ -57,11 +57,21 @@ export const CartDrawer = () => {
   const remainingForFreeShipping = freeShippingThreshold - totalPrice;
   
   // Check if cart contains any bundles - bundles always have free shipping
+  const bundleSubscriptionItem = items.find(item => {
+    const title = item.product.node.title.toLowerCase();
+    const isBundle = title.includes('bundle') || title.includes('paket') || title.includes('komplettsystem');
+    const hasAbo = item.selectedOptions.some(opt => opt.name === 'Abo');
+    return isBundle && hasAbo;
+  });
+  
   const hasBundleInCart = items.some(item => 
     item.product.node.title.toLowerCase().includes('bundle') || 
     item.product.node.title.toLowerCase().includes('paket') ||
     item.product.node.title.toLowerCase().includes('komplettsystem')
   );
+  
+  // Get subscription months from bundle item
+  const subscriptionMonths = bundleSubscriptionItem?.selectedOptions.find(opt => opt.name === 'Abo')?.value.match(/\d+/)?.[0];
   
   const hasFreeShipping = hasBundleInCart || totalPrice >= freeShippingThreshold;
   
@@ -295,11 +305,18 @@ export const CartDrawer = () => {
                     </div>
                     <div className="flex-1">
                       <p className="text-sm font-medium text-foreground">
-                        {t('freeShipping')}
+                        {bundleSubscriptionItem && subscriptionMonths
+                          ? (locale.startsWith('de') 
+                              ? `Deine Bestellung wird für ${subscriptionMonths} Monate kostenlos versendet`
+                              : `Your order will be shipped free for ${subscriptionMonths} months`)
+                          : t('freeShipping')
+                        }
                       </p>
-                      <p className="text-xs text-muted-foreground">
-                        {t('freeShippingDesc')}
-                      </p>
+                      {!bundleSubscriptionItem && (
+                        <p className="text-xs text-muted-foreground">
+                          {t('freeShippingDesc')}
+                        </p>
+                      )}
                     </div>
                   </div>
                 ) : (
