@@ -35,17 +35,17 @@ const productBenefits: Record<string, string[]> = {
   'kollagen-hydrolysat-pulver': [
     'Verbesserte Haut, Haare & Nägel',
     'Unterstützung der Gelenke',
-    'Premium Qualität aus Deutschland',
+    'Premium Qualität',
     'Keine Zusatzstoffe',
   ],
   'omega-3-softgels': [
     'Unterstützt Herz & Kreislauf',
     'Fördert die Gehirnfunktion',
     'Hochdosiert & rein',
-    'Made in Germany',
+    'Keine Zusatzstoffe',
   ],
   'msm-pulver': [
-    'Natürlicher Schwefel',
+    'Hochwertiger Schwefel',
     'Unterstützt Gelenke & Knorpel',
     'Hohe Bioverfügbarkeit',
     'Ohne Zusatzstoffe',
@@ -65,8 +65,8 @@ const productBenefits: Record<string, string[]> = {
   'chondroitin-pulver': [
     'Für gesunde Knorpel',
     'Unterstützt die Gelenkfunktion',
-    'Made in Germany',
-    'Laborgeprüft',
+    'Premium Qualität',
+    'Hohe Bioverfügbarkeit',
   ],
 };
 
@@ -79,19 +79,19 @@ const productFAQ = {
     },
     {
       q: 'Wann sehe ich erste Ergebnisse?',
-      a: 'Erste Verbesserungen bemerken viele Kunden nach 2-4 Wochen. Für optimale Ergebnisse empfehlen wir eine regelmäßige Einnahme über mindestens 8-12 Wochen.',
+      a: 'Viele Nutzer berichten, dass sie sich nach einigen Wochen regelmäßiger Anwendung wohler fühlen. Die Erfahrungen sind individuell und können variieren. Für eine nachhaltige Routine empfehlen wir eine Anwendung über mehrere Wochen.',
     },
     {
       q: 'Wie funktioniert das Abo?',
-      a: 'Das Abo liefert automatisch in Ihrem gewählten Intervall (30, 90 oder 180 Tage). Sie sparen 15% und ab der zweiten Lieferung entfällt der Versand. Jederzeit kündbar, keine Mindestlaufzeit.',
+      a: 'Wählen Sie Ihre gewünschte Kur-Dauer: 1 Monat (1 Lieferung), 3 Monate (3 Lieferungen) oder 6 Monate (6 Lieferungen). Das Abo endet automatisch nach Ablauf. Ab der zweiten Lieferung entfällt der Versand.',
     },
     {
       q: 'Kann ich jederzeit kündigen?',
-      a: 'Ja, das Abo ist flexibel und jederzeit kündbar. Keine Vertragsbindung, keine versteckten Kosten. Einfach per E-Mail oder in Ihrem Kundenkonto.',
+      a: 'Ja, das Abo ist flexibel und jederzeit kündbar. Keine Vertragsbindung, keine versteckten Kosten. Einfach per E-Mail.',
     },
     {
       q: 'Warum ist dieses Produkt hochwertiger als andere?',
-      a: 'Unsere Produkte werden in Deutschland unter höchsten Qualitätsstandards hergestellt, sind laborgeprüft und enthalten keine unnötigen Zusatzstoffe. Wir setzen auf maximale Bioverfügbarkeit.',
+      a: 'Unsere Produkte werden nach hohen Qualitätsstandards hergestellt und enthalten keine unnötigen Zusatzstoffe.',
     },
   ],
   en: [
@@ -101,19 +101,19 @@ const productFAQ = {
     },
     {
       q: 'When will I see first results?',
-      a: 'Many customers notice improvements after 2-4 weeks. For optimal results, we recommend regular intake for at least 8-12 weeks.',
+      a: 'Many users report feeling better after a few weeks of regular use. Experiences are individual and may vary. For a sustainable routine, we recommend using the product for several weeks.',
     },
     {
       q: 'How does the subscription work?',
-      a: 'The subscription automatically delivers at your chosen interval (30, 90, or 180 days). You save 15% and shipping is free from the second delivery. Cancel anytime, no minimum term.',
+      a: 'Choose your desired treatment duration: 1 month (1 delivery), 3 months (3 deliveries), or 6 months (6 deliveries). The subscription ends automatically after completion. Free shipping from the second delivery.',
     },
     {
       q: 'Can I cancel anytime?',
-      a: 'Yes, the subscription is flexible and can be cancelled anytime. No contract, no hidden costs. Simply by email or in your customer account.',
+      a: 'Yes, the subscription is flexible and can be cancelled anytime. No contract, no hidden costs. Simply by email.',
     },
     {
       q: 'Why is this product better than others?',
-      a: 'Our products are manufactured in Germany under the highest quality standards, lab-tested, and contain no unnecessary additives. We focus on maximum bioavailability.',
+      a: 'Our products are manufactured to high quality standards and contain no unnecessary additives.',
     },
   ],
 };
@@ -280,16 +280,40 @@ const ProductDetail = () => {
 
   const selectedBundlePrice = getBundlePrice(selectedQuantity);
 
-  // Get subscription interval text
-  const getIntervalText = (interval: 30 | 90 | 180) => {
+  // Get subscription duration text
+  const getSubscriptionDurationText = (months: 1 | 3 | 6) => {
     if (locale.startsWith('de')) {
-      if (interval === 30) return 'Alle 30 Tage';
-      if (interval === 90) return 'Alle 90 Tage (3 Monate)';
-      return 'Alle 180 Tage (6 Monate)';
+      if (months === 1) return '1-Monats-Kur';
+      if (months === 3) return '3-Monats-Kur';
+      return '6-Monats-Kur';
     }
-    if (interval === 30) return 'Every 30 days';
-    if (interval === 90) return 'Every 90 days (3 months)';
-    return 'Every 180 days (6 months)';
+    if (months === 1) return '1-month treatment';
+    if (months === 3) return '3-month treatment';
+    return '6-month treatment';
+  };
+
+  // Get subscription description text
+  const getSubscriptionDescription = (months: 1 | 3 | 6) => {
+    if (locale.startsWith('de')) {
+      if (months === 1) return 'eine 1-Monats-Kur, um zu testen';
+      if (months === 3) return 'eine 3-Monats-Kur, um richtige Ergebnisse zu sehen';
+      return 'eine 6-Monats-Komplettkur für beste Ergebnisse';
+    }
+    if (months === 1) return 'a 1-month treatment to try';
+    if (months === 3) return 'a 3-month treatment for real results';
+    return 'a 6-month complete treatment for best results';
+  };
+
+  // Get delivery info text
+  const getDeliveryInfoText = (months: 1 | 3 | 6) => {
+    if (locale.startsWith('de')) {
+      if (months === 1) return '1 Lieferung • endet automatisch';
+      if (months === 3) return '3 Lieferungen • endet automatisch';
+      return '6 Lieferungen • endet automatisch';
+    }
+    if (months === 1) return '1 delivery • ends automatically';
+    if (months === 3) return '3 deliveries • ends automatically';
+    return '6 deliveries • ends automatically';
   };
 
   const handleAddToCart = () => {
@@ -329,7 +353,7 @@ const ProductDetail = () => {
       const cartItem = {
         product,
         variantId: variant.id,
-        variantTitle: `${variant.title} (${locale.startsWith('de') ? 'Abo' : 'Subscription'} - ${getIntervalText(subscriptionInterval)})`,
+        variantTitle: `${variant.title} (${getSubscriptionDurationText(intervalMonths as 1 | 3 | 6)})`,
         price: {
           amount: subscriptionPrice.toFixed(2),
           currencyCode: variant.price.currencyCode
@@ -337,14 +361,14 @@ const ProductDetail = () => {
         quantity: 1,
         selectedOptions: [
           ...variant.selectedOptions || [],
-          { name: 'Abo', value: getIntervalText(subscriptionInterval) }
+          { name: 'Abo', value: getSubscriptionDurationText(intervalMonths as 1 | 3 | 6) }
         ]
       };
       
       addItem(cartItem);
       toast.success(locale.startsWith('de') 
-        ? 'Abo zum Warenkorb hinzugefügt' 
-        : 'Subscription added to cart', {
+        ? `${intervalMonths}-Monats-Kur zum Warenkorb hinzugefügt` 
+        : `${intervalMonths}-month treatment added to cart`, {
         position: "top-center"
       });
     } else {
@@ -461,6 +485,7 @@ const ProductDetail = () => {
                       </div>
                     </button>
 
+
                     {/* Subscription Option */}
                     <button
                       onClick={() => setPurchaseType('subscription')}
@@ -494,38 +519,50 @@ const ProductDetail = () => {
                     </button>
                   </div>
 
-                  {/* Subscription Interval Selection */}
+                  {/* Subscription Duration Selection */}
                   {purchaseType === 'subscription' && (
                     <div className="pl-9 space-y-3">
                       <p className="text-sm font-medium text-muted-foreground">
-                        {locale.startsWith('de') ? 'Lieferintervall wählen:' : 'Choose delivery interval:'}
+                        {locale.startsWith('de') ? 'Kur-Dauer wählen:' : 'Choose treatment duration:'}
                       </p>
                       <div className="space-y-2">
-                        {([30, 90, 180] as const).map((interval) => (
+                        {([1, 3, 6] as const).map((months) => (
                           <button
-                            key={interval}
-                            onClick={() => setSubscriptionInterval(interval)}
-                            className={`w-full flex items-center gap-3 p-3 rounded-lg border transition-all ${
-                              subscriptionInterval === interval
+                            key={months}
+                            onClick={() => setSubscriptionInterval(months === 1 ? 30 : months === 3 ? 90 : 180)}
+                            className={`w-full flex items-start gap-3 p-3 rounded-lg border transition-all ${
+                              (months === 1 && subscriptionInterval === 30) ||
+                              (months === 3 && subscriptionInterval === 90) ||
+                              (months === 6 && subscriptionInterval === 180)
                                 ? 'border-primary bg-primary/5'
                                 : 'border-border hover:border-primary/50'
                             }`}
                           >
-                            <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
-                              subscriptionInterval === interval ? 'border-primary' : 'border-muted-foreground'
+                            <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                              (months === 1 && subscriptionInterval === 30) ||
+                              (months === 3 && subscriptionInterval === 90) ||
+                              (months === 6 && subscriptionInterval === 180) 
+                                ? 'border-primary' 
+                                : 'border-muted-foreground'
                             }`}>
-                              {subscriptionInterval === interval && (
+                              {((months === 1 && subscriptionInterval === 30) ||
+                                (months === 3 && subscriptionInterval === 90) ||
+                                (months === 6 && subscriptionInterval === 180)) && (
                                 <div className="w-2 h-2 rounded-full bg-primary" />
                               )}
                             </div>
-                            <span className="text-sm font-medium">{getIntervalText(interval)}</span>
+                            <div className="flex-1 text-left">
+                              <div className="font-medium">{getSubscriptionDurationText(months)}</div>
+                              <div className="text-xs text-muted-foreground">{getSubscriptionDescription(months)}</div>
+                              <div className="text-xs text-primary mt-1">{getDeliveryInfoText(months)}</div>
+                            </div>
                           </button>
                         ))}
                       </div>
                       <p className="text-xs text-muted-foreground italic">
                         {locale.startsWith('de') 
-                          ? 'Flexibles Abo – jederzeit kündbar. Keine Mindestlaufzeit.'
-                          : 'Flexible subscription – cancel anytime. No minimum term.'}
+                          ? 'Kostenloser Versand ab der 2. Lieferung • Jederzeit kündbar'
+                          : 'Free shipping from 2nd delivery • Cancel anytime'}
                       </p>
                     </div>
                   )}
@@ -671,80 +708,110 @@ const ProductDetail = () => {
             ) : currentBundlePricing ? (
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-lg font-semibold mb-3">{t('selectQuantity').replace('Menge', 'Abo').replace('Quantity', 'Subscription')}</h3>
-                  <div className="grid grid-cols-3 gap-3">
+                  <h3 className="text-lg font-semibold mb-3">{locale.startsWith('de') ? 'Kur-Dauer wählen:' : 'Choose treatment duration:'}</h3>
+                  <div className="space-y-3">
                     {/* 1 Monat */}
                     <button
                       onClick={() => setSelectedQuantity(1)}
-                      className={`relative border-2 rounded-2xl p-4 transition-all ${
+                      className={`w-full flex items-start gap-4 p-4 rounded-xl border-2 transition-all ${
                         selectedQuantity === 1
                           ? 'border-primary bg-primary/5'
                           : 'border-border hover:border-primary/50'
                       }`}
                     >
-                      {selectedQuantity === 1 && (
-                        <div className="absolute -top-2 -right-2 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
-                          <Check className="w-4 h-4 text-white" />
+                      <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-1 ${
+                        selectedQuantity === 1 ? 'border-primary' : 'border-muted-foreground'
+                      }`}>
+                        {selectedQuantity === 1 && (
+                          <div className="w-2.5 h-2.5 rounded-full bg-primary" />
+                        )}
+                      </div>
+                      <div className="flex-1 text-left">
+                        <div className="flex items-center gap-2">
+                          <span className="font-semibold text-lg">1-Monats-Kur</span>
+                          <span className="bg-primary text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                            -{currentBundlePricing.discounts[1]}%
+                          </span>
                         </div>
-                      )}
-                      <div className="text-center">
-                        <div className="text-2xl font-bold mb-1">1 {locale.startsWith('de') ? 'Monat' : 'Month'}</div>
-                        <div className="text-primary font-semibold text-sm mb-1">{t('save').replace('{discount}', currentBundlePricing.discounts[1].toString())}</div>
-                        <div className="text-sm text-muted-foreground line-through">€{currentBundlePricing.oneTime.toFixed(2)}</div>
-                        <div className="text-sm font-semibold">€{currentBundlePricing.monthly[1].toFixed(2)}</div>
+                        <div className="text-sm text-muted-foreground">{locale.startsWith('de') ? 'eine 1-Monats-Kur, um zu testen' : 'a 1-month treatment to try'}</div>
+                        <div className="text-xs text-primary mt-1">{locale.startsWith('de') ? '1 Lieferung • endet automatisch' : '1 delivery • ends automatically'}</div>
+                        <div className="flex items-center gap-2 mt-2">
+                          <span className="text-lg font-bold">€{currentBundlePricing.monthly[1].toFixed(2)}</span>
+                          <span className="text-sm text-muted-foreground line-through">€{currentBundlePricing.oneTime.toFixed(2)}</span>
+                        </div>
                       </div>
                     </button>
 
                     {/* 3 Monate */}
                     <button
                       onClick={() => setSelectedQuantity(3)}
-                      className={`relative border-2 rounded-2xl p-4 transition-all ${
+                      className={`w-full flex items-start gap-4 p-4 rounded-xl border-2 transition-all ${
                         selectedQuantity === 3
                           ? 'border-primary bg-primary/5'
                           : 'border-border hover:border-primary/50'
                       }`}
                     >
-                      {selectedQuantity === 3 && (
-                        <div className="absolute -top-2 -right-2 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
-                          <Check className="w-4 h-4 text-white" />
+                      <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-1 ${
+                        selectedQuantity === 3 ? 'border-primary' : 'border-muted-foreground'
+                      }`}>
+                        {selectedQuantity === 3 && (
+                          <div className="w-2.5 h-2.5 rounded-full bg-primary" />
+                        )}
+                      </div>
+                      <div className="flex-1 text-left">
+                        <div className="flex items-center gap-2">
+                          <span className="font-semibold text-lg">3-Monats-Kur</span>
+                          <span className="bg-primary text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                            -{currentBundlePricing.discounts[3]}%
+                          </span>
                         </div>
-                      )}
-                      <div className="text-center">
-                        <div className="text-2xl font-bold mb-1">3 {locale.startsWith('de') ? 'Monate' : 'Months'}</div>
-                        <div className="text-primary font-semibold text-sm mb-1">{t('save').replace('{discount}', currentBundlePricing.discounts[3].toString())}</div>
-                        <div className="text-sm text-muted-foreground line-through">€{currentBundlePricing.oneTime.toFixed(2)}</div>
-                        <div className="text-sm font-semibold">€{currentBundlePricing.monthly[3].toFixed(2)}</div>
+                        <div className="text-sm text-muted-foreground">{locale.startsWith('de') ? 'eine 3-Monats-Kur, um richtige Ergebnisse zu sehen' : 'a 3-month treatment for real results'}</div>
+                        <div className="text-xs text-primary mt-1">{locale.startsWith('de') ? '3 Lieferungen • endet automatisch' : '3 deliveries • ends automatically'}</div>
+                        <div className="flex items-center gap-2 mt-2">
+                          <span className="text-lg font-bold">€{currentBundlePricing.monthly[3].toFixed(2)}</span>
+                          <span className="text-sm text-muted-foreground line-through">€{currentBundlePricing.oneTime.toFixed(2)}</span>
+                        </div>
                       </div>
                     </button>
 
                     {/* 6 Monate */}
                     <button
                       onClick={() => setSelectedQuantity(6)}
-                      className={`relative border-2 rounded-2xl p-4 transition-all ${
+                      className={`w-full flex items-start gap-4 p-4 rounded-xl border-2 transition-all relative ${
                         selectedQuantity === 6
                           ? 'border-primary bg-primary/5'
                           : 'border-border hover:border-primary/50'
                       }`}
                     >
-                      {selectedQuantity === 6 && (
-                        <div className="absolute -top-2 -right-2 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
-                          <Check className="w-4 h-4 text-white" />
+                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs px-3 py-1 rounded-full font-semibold whitespace-nowrap">
+                        {t('mostPopular')}
+                      </div>
+                      <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-1 ${
+                        selectedQuantity === 6 ? 'border-primary' : 'border-muted-foreground'
+                      }`}>
+                        {selectedQuantity === 6 && (
+                          <div className="w-2.5 h-2.5 rounded-full bg-primary" />
+                        )}
+                      </div>
+                      <div className="flex-1 text-left">
+                        <div className="flex items-center gap-2">
+                          <span className="font-semibold text-lg">6-Monats-Komplettkur</span>
+                          <span className="bg-primary text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                            -{currentBundlePricing.discounts[6]}%
+                          </span>
                         </div>
-                      )}
-                      <div className="text-center">
-                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs px-3 py-1 rounded-full font-semibold whitespace-nowrap">
-                          {t('mostPopular')}
+                        <div className="text-sm text-muted-foreground">{locale.startsWith('de') ? 'eine 6-Monats-Komplettkur für beste Ergebnisse' : 'a 6-month complete treatment for best results'}</div>
+                        <div className="text-xs text-primary mt-1">{locale.startsWith('de') ? '6 Lieferungen • endet automatisch' : '6 deliveries • ends automatically'}</div>
+                        <div className="flex items-center gap-2 mt-2">
+                          <span className="text-lg font-bold">€{currentBundlePricing.monthly[6].toFixed(2)}</span>
+                          <span className="text-sm text-muted-foreground line-through">€{currentBundlePricing.oneTime.toFixed(2)}</span>
                         </div>
-                        <div className="text-2xl font-bold mb-1">6 {locale.startsWith('de') ? 'Monate' : 'Months'}</div>
-                        <div className="text-primary font-semibold text-sm mb-1">{t('save').replace('{discount}', currentBundlePricing.discounts[6].toString())}</div>
-                        <div className="text-sm text-muted-foreground line-through">€{currentBundlePricing.oneTime.toFixed(2)}</div>
-                        <div className="text-sm font-semibold">€{currentBundlePricing.monthly[6].toFixed(2)}</div>
                       </div>
                     </button>
                   </div>
                 </div>
 
-                {/* Bundle Price Summary */}
+                {/* Bundle Info */}
                 <div className="bg-secondary/20 rounded-xl p-4 space-y-2">
                   <div className="flex justify-between items-center">
                     <span className="text-lg font-semibold">{locale.startsWith('de') ? 'Monatlich' : 'Monthly'}:</span>
@@ -762,11 +829,11 @@ const ProductDetail = () => {
                   </div>
                   <div className="text-sm text-muted-foreground flex items-center gap-2">
                     <Check className="w-4 h-4" />
-                    {locale.startsWith('de') ? 'Jederzeit kündbar' : 'Cancel anytime'}
+                    {locale.startsWith('de') ? 'Endet automatisch nach Ablauf' : 'Ends automatically after completion'}
                   </div>
                   <div className="text-sm text-muted-foreground flex items-center gap-2">
                     <Truck className="w-4 h-4" />
-                    {locale.startsWith('de') ? 'Kostenloser Versand' : 'Free shipping'}
+                    {locale.startsWith('de') ? 'Kostenloser Versand ab der 2. Lieferung' : 'Free shipping from 2nd delivery'}
                   </div>
                 </div>
               </div>
@@ -803,18 +870,24 @@ const ProductDetail = () => {
                 
                 {/* Trust badges */}
                 <div className="flex flex-wrap gap-4 mt-4 pt-4 border-t border-border/50">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Shield className="w-4 h-4" />
-                    <span>{locale.startsWith('de') ? 'Laborgeprüft' : 'Lab tested'}</span>
-                  </div>
+                  {!node.handle.includes('omega') && (
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <Shield className="w-4 h-4" />
+                      <span>{locale.startsWith('de') ? 'HACCP Konform' : 'HACCP Certified'}</span>
+                    </div>
+                  )}
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <Leaf className="w-4 h-4" />
-                    <span>{locale.startsWith('de') ? 'Natürlich' : 'Natural'}</span>
+                    <span>{locale.startsWith('de') ? 'Hochwertige Inhaltsstoffe' : 'Premium Ingredients'}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Award className="w-4 h-4" />
-                    <span>Made in Germany</span>
-                  </div>
+                  {node.handle.includes('vitamin-c-gummies') && (
+                    <>
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <Award className="w-4 h-4" />
+                        <span>GMP & ISO 22000</span>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             )}
