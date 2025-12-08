@@ -83,7 +83,7 @@ const productFAQ = {
     },
     {
       q: 'Wie funktioniert das Abo?',
-      a: 'Wählen Sie Ihre gewünschte Kur-Dauer: 1 Monat (1 Lieferung), 3 Monate (3 Lieferungen) oder 6 Monate (6 Lieferungen). Das Abo endet automatisch nach Ablauf. Ab der zweiten Lieferung entfällt der Versand.',
+      a: 'Wählen Sie Ihre gewünschte Kur-Dauer: 2 Monate (2 Lieferungen), 3 Monate (3 Lieferungen) oder 6 Monate (6 Lieferungen). Das Abo endet automatisch nach Ablauf. Ab der zweiten Lieferung entfällt der Versand.',
     },
     {
       q: 'Kann ich jederzeit kündigen?',
@@ -105,7 +105,7 @@ const productFAQ = {
     },
     {
       q: 'How does the subscription work?',
-      a: 'Choose your desired treatment duration: 1 month (1 delivery), 3 months (3 deliveries), or 6 months (6 deliveries). The subscription ends automatically after completion. Free shipping from the second delivery.',
+      a: 'Choose your desired treatment duration: 2 months (2 deliveries), 3 months (3 deliveries), or 6 months (6 deliveries). The subscription ends automatically after completion. Free shipping from the second delivery.',
     },
     {
       q: 'Can I cancel anytime?',
@@ -122,10 +122,10 @@ const ProductDetail = () => {
   const { handle } = useParams();
   const [product, setProduct] = useState<ShopifyProduct | null>(null);
   const [loading, setLoading] = useState(true);
-  const [selectedQuantity, setSelectedQuantity] = useState<1 | 3 | 6>(1);
+  const [selectedQuantity, setSelectedQuantity] = useState<2 | 3 | 6>(2);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [purchaseType, setPurchaseType] = useState<'onetime' | 'subscription'>('onetime');
-  const [subscriptionInterval, setSubscriptionInterval] = useState<30 | 90 | 180>(30);
+  const [subscriptionInterval, setSubscriptionInterval] = useState<60 | 90 | 180>(60);
   const addItem = useCartStore(state => state.addItem);
   const t = useTranslation();
   const locale = useLocaleStore(state => state.locale);
@@ -227,24 +227,24 @@ const ProductDetail = () => {
   const currentBenefits = getProductBenefits();
 
   // Bundle pricing data
-  const bundlePricing: Record<string, { oneTime: number; uvp: number; monthly: { 1: number; 3: number; 6: number }; discounts: { 1: number; 3: number; 6: number } }> = {
+  const bundlePricing: Record<string, { oneTime: number; uvp: number; monthly: { 2: number; 3: number; 6: number }; discounts: { 2: number; 3: number; 6: number } }> = {
     'schonheit-von-innen': {
       oneTime: 49.99,
       uvp: 59.98,
-      monthly: { 1: 44.99, 3: 42.99, 6: 39.99 },
-      discounts: { 1: 10, 3: 14, 6: 20 }
+      monthly: { 2: 44.99, 3: 42.99, 6: 39.99 },
+      discounts: { 2: 10, 3: 14, 6: 20 }
     },
     'gelenk-beweglichkeit': {
       oneTime: 89.99,
       uvp: 113.96,
-      monthly: { 1: 79.99, 3: 74.99, 6: 69.99 },
-      discounts: { 1: 11, 3: 17, 6: 22 }
+      monthly: { 2: 79.99, 3: 74.99, 6: 69.99 },
+      discounts: { 2: 11, 3: 17, 6: 22 }
     },
     'ganzkorper': {
       oneTime: 76.99,
       uvp: 80.97,
-      monthly: { 1: 69.99, 3: 64.99, 6: 59.99 },
-      discounts: { 1: 9, 3: 15, 6: 22 }
+      monthly: { 2: 69.99, 3: 64.99, 6: 59.99 },
+      discounts: { 2: 9, 3: 15, 6: 22 }
     }
   };
 
@@ -259,7 +259,7 @@ const ProductDetail = () => {
   const currentBundlePricing = getBundlePricing();
 
   // Calculate prices with discounts for regular products
-  const getQuantityPrice = (qty: 1 | 3 | 6) => {
+  const getQuantityPrice = (qty: 2 | 3 | 6) => {
     const price = currentProductPricing.regular;
     const total = price * qty;
     if (qty === 3) return { total, discounted: total * 0.9, discount: 10, savings: total * 0.1 };
@@ -270,7 +270,7 @@ const ProductDetail = () => {
   const selectedPrice = getQuantityPrice(selectedQuantity);
 
   // Bundle subscription price
-  const getBundlePrice = (months: 1 | 3 | 6) => {
+  const getBundlePrice = (months: 2 | 3 | 6) => {
     if (!currentBundlePricing) return { monthly: basePrice, discount: 0 };
     return {
       monthly: currentBundlePricing.monthly[months],
@@ -281,37 +281,37 @@ const ProductDetail = () => {
   const selectedBundlePrice = getBundlePrice(selectedQuantity);
 
   // Get subscription duration text
-  const getSubscriptionDurationText = (months: 1 | 3 | 6) => {
+  const getSubscriptionDurationText = (months: 2 | 3 | 6) => {
     if (locale.startsWith('de')) {
-      if (months === 1) return '1-Monats-Kur';
-      if (months === 3) return '3-Monats-Kur';
-      return '6-Monats-Kur';
+      if (months === 2) return '2 Monate Versorgung';
+      if (months === 3) return '3 Monate Versorgung';
+      return '6 Monate Versorgung';
     }
-    if (months === 1) return '1-month treatment';
-    if (months === 3) return '3-month treatment';
-    return '6-month treatment';
+    if (months === 2) return '2 months supply';
+    if (months === 3) return '3 months supply';
+    return '6 months supply';
   };
 
   // Get subscription description text
-  const getSubscriptionDescription = (months: 1 | 3 | 6) => {
+  const getSubscriptionDescription = (months: 2 | 3 | 6) => {
     if (locale.startsWith('de')) {
-      if (months === 1) return 'eine 1-Monats-Kur, um zu testen';
+      if (months === 2) return 'eine 2-Monats-Kur, um zu testen';
       if (months === 3) return 'eine 3-Monats-Kur, um richtige Ergebnisse zu sehen';
       return 'eine 6-Monats-Komplettkur für beste Ergebnisse';
     }
-    if (months === 1) return 'a 1-month treatment to try';
+    if (months === 2) return 'a 2-month treatment to try';
     if (months === 3) return 'a 3-month treatment for real results';
     return 'a 6-month complete treatment for best results';
   };
 
   // Get delivery info text
-  const getDeliveryInfoText = (months: 1 | 3 | 6) => {
+  const getDeliveryInfoText = (months: 2 | 3 | 6) => {
     if (locale.startsWith('de')) {
-      if (months === 1) return '1 Lieferung • endet automatisch';
+      if (months === 2) return '2 Lieferungen • endet automatisch';
       if (months === 3) return '3 Lieferungen • endet automatisch';
       return '6 Lieferungen • endet automatisch';
     }
-    if (months === 1) return '1 delivery • ends automatically';
+    if (months === 2) return '2 deliveries • ends automatically';
     if (months === 3) return '3 deliveries • ends automatically';
     return '6 deliveries • ends automatically';
   };
@@ -327,7 +327,7 @@ const ProductDetail = () => {
       const cartItem = {
         product,
         variantId: variant.id,
-        variantTitle: `${variant.title} (${subscriptionMonths} ${subscriptionMonths === 1 ? (locale.startsWith('de') ? 'Monat' : 'Month') : (locale.startsWith('de') ? 'Monate' : 'Months')} Abo)`,
+        variantTitle: `${variant.title} (${subscriptionMonths} ${locale.startsWith('de') ? 'Monate' : 'Months'} Abo)`,
         price: {
           amount: monthlyPrice.toFixed(2),
           currencyCode: variant.price.currencyCode
@@ -335,7 +335,7 @@ const ProductDetail = () => {
         quantity: 1,
         selectedOptions: [
           ...variant.selectedOptions || [],
-          { name: 'Abo', value: `${subscriptionMonths} ${subscriptionMonths === 1 ? 'Monat' : 'Monate'}` }
+          { name: 'Abo', value: `${subscriptionMonths} Monate` }
         ]
       };
       
@@ -348,12 +348,12 @@ const ProductDetail = () => {
     } else if (purchaseType === 'subscription') {
       // Individual product with subscription
       const subscriptionPrice = currentProductPricing.subscription;
-      const intervalMonths = subscriptionInterval === 30 ? 1 : subscriptionInterval === 90 ? 3 : 6;
+      const intervalMonths = subscriptionInterval === 60 ? 2 : subscriptionInterval === 90 ? 3 : 6;
       
       const cartItem = {
         product,
         variantId: variant.id,
-        variantTitle: `${variant.title} (${getSubscriptionDurationText(intervalMonths as 1 | 3 | 6)})`,
+        variantTitle: `${variant.title} (${getSubscriptionDurationText(intervalMonths as 2 | 3 | 6)})`,
         price: {
           amount: subscriptionPrice.toFixed(2),
           currencyCode: variant.price.currencyCode
@@ -361,7 +361,7 @@ const ProductDetail = () => {
         quantity: 1,
         selectedOptions: [
           ...variant.selectedOptions || [],
-          { name: 'Abo', value: getSubscriptionDurationText(intervalMonths as 1 | 3 | 6) }
+          { name: 'Abo', value: getSubscriptionDurationText(intervalMonths as 2 | 3 | 6) }
         ]
       };
       
@@ -526,12 +526,12 @@ const ProductDetail = () => {
                         {locale.startsWith('de') ? 'Kur-Dauer wählen:' : 'Choose treatment duration:'}
                       </p>
                       <div className="space-y-2">
-                        {([1, 3, 6] as const).map((months) => (
+                        {([2, 3, 6] as const).map((months) => (
                           <button
                             key={months}
-                            onClick={() => setSubscriptionInterval(months === 1 ? 30 : months === 3 ? 90 : 180)}
+                            onClick={() => setSubscriptionInterval(months === 2 ? 60 : months === 3 ? 90 : 180)}
                             className={`w-full flex items-start gap-3 p-3 rounded-lg border transition-all ${
-                              (months === 1 && subscriptionInterval === 30) ||
+                              (months === 2 && subscriptionInterval === 60) ||
                               (months === 3 && subscriptionInterval === 90) ||
                               (months === 6 && subscriptionInterval === 180)
                                 ? 'border-primary bg-primary/5'
@@ -539,13 +539,13 @@ const ProductDetail = () => {
                             }`}
                           >
                             <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-0.5 ${
-                              (months === 1 && subscriptionInterval === 30) ||
+                              (months === 2 && subscriptionInterval === 60) ||
                               (months === 3 && subscriptionInterval === 90) ||
                               (months === 6 && subscriptionInterval === 180) 
                                 ? 'border-primary' 
                                 : 'border-muted-foreground'
                             }`}>
-                              {((months === 1 && subscriptionInterval === 30) ||
+                              {((months === 2 && subscriptionInterval === 60) ||
                                 (months === 3 && subscriptionInterval === 90) ||
                                 (months === 6 && subscriptionInterval === 180)) && (
                                 <div className="w-2 h-2 rounded-full bg-primary" />
@@ -572,23 +572,23 @@ const ProductDetail = () => {
                     <div className="space-y-3">
                       <h3 className="text-lg font-semibold">{t('selectQuantity')}</h3>
                       <div className="grid grid-cols-3 gap-3">
-                        {/* 1 Stück */}
+                        {/* 2 Stück */}
                         <button
-                          onClick={() => setSelectedQuantity(1)}
+                          onClick={() => setSelectedQuantity(2)}
                           className={`relative border-2 rounded-2xl p-4 transition-all ${
-                            selectedQuantity === 1
+                            selectedQuantity === 2
                               ? 'border-primary bg-primary/5'
                               : 'border-border hover:border-primary/50'
                           }`}
                         >
-                          {selectedQuantity === 1 && (
+                          {selectedQuantity === 2 && (
                             <div className="absolute -top-2 -right-2 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
                               <Check className="w-4 h-4 text-white" />
                             </div>
                           )}
                           <div className="text-center">
-                            <div className="text-2xl font-bold mb-1">1 {t('pieces')}</div>
-                            <div className="text-sm text-muted-foreground">€{currentProductPricing.regular.toFixed(2)}</div>
+                            <div className="text-2xl font-bold mb-1">2 {t('pieces')}</div>
+                            <div className="text-sm text-muted-foreground">€{(currentProductPricing.regular * 2).toFixed(2)}</div>
                           </div>
                         </button>
 
@@ -710,33 +710,33 @@ const ProductDetail = () => {
                 <div>
                   <h3 className="text-lg font-semibold mb-3">{locale.startsWith('de') ? 'Kur-Dauer wählen:' : 'Choose treatment duration:'}</h3>
                   <div className="space-y-3">
-                    {/* 1 Monat */}
+                    {/* 2 Monate */}
                     <button
-                      onClick={() => setSelectedQuantity(1)}
+                      onClick={() => setSelectedQuantity(2)}
                       className={`w-full flex items-start gap-4 p-4 rounded-xl border-2 transition-all ${
-                        selectedQuantity === 1
+                        selectedQuantity === 2
                           ? 'border-primary bg-primary/5'
                           : 'border-border hover:border-primary/50'
                       }`}
                     >
                       <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-1 ${
-                        selectedQuantity === 1 ? 'border-primary' : 'border-muted-foreground'
+                        selectedQuantity === 2 ? 'border-primary' : 'border-muted-foreground'
                       }`}>
-                        {selectedQuantity === 1 && (
+                        {selectedQuantity === 2 && (
                           <div className="w-2.5 h-2.5 rounded-full bg-primary" />
                         )}
                       </div>
                       <div className="flex-1 text-left">
                         <div className="flex items-center gap-2">
-                          <span className="font-semibold text-lg">1-Monats-Kur</span>
+                          <span className="font-semibold text-lg">2 Monate Versorgung</span>
                           <span className="bg-primary text-white text-xs font-bold px-2 py-0.5 rounded-full">
-                            -{currentBundlePricing.discounts[1]}%
+                            -{currentBundlePricing.discounts[2]}%
                           </span>
                         </div>
-                        <div className="text-sm text-muted-foreground">{locale.startsWith('de') ? 'eine 1-Monats-Kur, um zu testen' : 'a 1-month treatment to try'}</div>
-                        <div className="text-xs text-primary mt-1">{locale.startsWith('de') ? '1 Lieferung • endet automatisch' : '1 delivery • ends automatically'}</div>
+                        <div className="text-sm text-muted-foreground">{locale.startsWith('de') ? 'eine 2-Monats-Kur, um zu testen' : 'a 2-month treatment to try'}</div>
+                        <div className="text-xs text-primary mt-1">{locale.startsWith('de') ? '2 Lieferungen • endet automatisch' : '2 deliveries • ends automatically'}</div>
                         <div className="flex items-center gap-2 mt-2">
-                          <span className="text-lg font-bold">€{currentBundlePricing.monthly[1].toFixed(2)}</span>
+                          <span className="text-lg font-bold">€{currentBundlePricing.monthly[2].toFixed(2)}</span>
                           <span className="text-sm text-muted-foreground line-through">€{currentBundlePricing.oneTime.toFixed(2)}</span>
                         </div>
                       </div>
@@ -760,7 +760,7 @@ const ProductDetail = () => {
                       </div>
                       <div className="flex-1 text-left">
                         <div className="flex items-center gap-2">
-                          <span className="font-semibold text-lg">3-Monats-Kur</span>
+                          <span className="font-semibold text-lg">3 Monate Versorgung</span>
                           <span className="bg-primary text-white text-xs font-bold px-2 py-0.5 rounded-full">
                             -{currentBundlePricing.discounts[3]}%
                           </span>
@@ -795,7 +795,7 @@ const ProductDetail = () => {
                       </div>
                       <div className="flex-1 text-left">
                         <div className="flex items-center gap-2">
-                          <span className="font-semibold text-lg">6-Monats-Komplettkur</span>
+                          <span className="font-semibold text-lg">6 Monate Versorgung</span>
                           <span className="bg-primary text-white text-xs font-bold px-2 py-0.5 rounded-full">
                             -{currentBundlePricing.discounts[6]}%
                           </span>
