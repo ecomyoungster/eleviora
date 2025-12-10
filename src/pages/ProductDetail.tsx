@@ -603,71 +603,71 @@ const ProductDetail = () => {
                   {purchaseType === 'onetime' && (
                     <div className="space-y-3">
                       <h3 className="text-lg font-semibold">{t('selectQuantity')}</h3>
-                      <div className="grid grid-cols-4 gap-3">
+                      <div className="grid grid-cols-3 gap-4">
                         {/* 1 Stück */}
                         <button
                           onClick={() => setSelectedQuantity(1)}
-                          className={`relative border-2 rounded-2xl p-4 transition-all ${
+                          className={`relative border-2 rounded-2xl p-6 transition-all ${
                             selectedQuantity === 1
                               ? 'border-primary bg-primary/5'
                               : 'border-border hover:border-primary/50'
                           }`}
                         >
                           {selectedQuantity === 1 && (
-                            <div className="absolute -top-2 -right-2 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+                            <div className="absolute top-3 right-3 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
                               <Check className="w-4 h-4 text-white" />
                             </div>
                           )}
                           <div className="text-center">
-                            <div className="text-2xl font-bold mb-1">1 {t('pieces')}</div>
-                            <div className="text-sm text-muted-foreground">€{currentProductPricing.regular.toFixed(2)}</div>
+                            <div className="text-2xl font-bold mb-2">1 {t('pieces')}</div>
+                            <div className="text-base text-muted-foreground">€{currentProductPricing.regular.toFixed(2)}</div>
                           </div>
                         </button>
 
                         {/* 3 Stück */}
                         <button
                           onClick={() => setSelectedQuantity(3)}
-                          className={`relative border-2 rounded-2xl p-4 transition-all ${
+                          className={`relative border-2 rounded-2xl p-6 transition-all ${
                             selectedQuantity === 3
                               ? 'border-primary bg-primary/5'
                               : 'border-border hover:border-primary/50'
                           }`}
                         >
-                          <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs px-2 py-0.5 rounded-full font-semibold whitespace-nowrap">
+                          <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs px-3 py-1 rounded-full font-semibold whitespace-nowrap">
                             {locale.startsWith('de') ? 'Am beliebtesten' : 'Most popular'}
                           </div>
                           {selectedQuantity === 3 && (
-                            <div className="absolute -top-2 -right-2 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+                            <div className="absolute top-3 right-3 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
                               <Check className="w-4 h-4 text-white" />
                             </div>
                           )}
-                          <div className="text-center pt-1">
+                          <div className="text-center pt-2">
                             <div className="text-2xl font-bold mb-1">3 {t('pieces')}</div>
-                            <div className="text-primary font-semibold text-sm mb-1">{t('save').replace('{discount}', '10')}</div>
+                            <div className="text-primary font-semibold text-sm mb-2">{t('save').replace('{discount}', '10')}</div>
                             <div className="text-sm text-muted-foreground line-through">€{(currentProductPricing.regular * 3).toFixed(2)}</div>
-                            <div className="text-sm font-semibold">€{(currentProductPricing.regular * 3 * 0.9).toFixed(2)}</div>
+                            <div className="text-base font-semibold">€{(currentProductPricing.regular * 3 * 0.9).toFixed(2)}</div>
                           </div>
                         </button>
 
                         {/* 6 Stück */}
                         <button
                           onClick={() => setSelectedQuantity(6)}
-                          className={`relative border-2 rounded-2xl p-4 transition-all ${
+                          className={`relative border-2 rounded-2xl p-6 transition-all ${
                             selectedQuantity === 6
                               ? 'border-primary bg-primary/5'
                               : 'border-border hover:border-primary/50'
                           }`}
                         >
                           {selectedQuantity === 6 && (
-                            <div className="absolute -top-2 -right-2 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+                            <div className="absolute top-3 right-3 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
                               <Check className="w-4 h-4 text-white" />
                             </div>
                           )}
                           <div className="text-center">
                             <div className="text-2xl font-bold mb-1">6 {t('pieces')}</div>
-                            <div className="text-primary font-semibold text-sm mb-1">{t('save').replace('{discount}', '15')}</div>
+                            <div className="text-primary font-semibold text-sm mb-2">{t('save').replace('{discount}', '15')}</div>
                             <div className="text-sm text-muted-foreground line-through">€{(currentProductPricing.regular * 6).toFixed(2)}</div>
-                            <div className="text-sm font-semibold">€{(currentProductPricing.regular * 6 * 0.85).toFixed(2)}</div>
+                            <div className="text-base font-semibold">€{(currentProductPricing.regular * 6 * 0.85).toFixed(2)}</div>
                           </div>
                         </button>
                       </div>
