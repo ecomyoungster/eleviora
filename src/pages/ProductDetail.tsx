@@ -33,40 +33,40 @@ const productPricing: Record<string, { regular: number; subscription: number }> 
 // Product benefits data
 const productBenefits: Record<string, string[]> = {
   'kollagen-hydrolysat-pulver': [
-    'Verbesserte Haut, Haare & Nägel',
-    'Unterstützung der Gelenke',
-    'Premium Qualität',
+    'Reines Kollagenpulver',
+    'Laborgeprüft',
+    'Neutraler Geschmack',
     'Keine Zusatzstoffe',
   ],
   'omega-3-softgels': [
-    'Unterstützt Herz & Kreislauf',
-    'Fördert die Gehirnfunktion',
+    'Ideal für Menschen, die Wert auf Ernährung und Wohlbefinden legen',
+    'EPA und DHA tragen zur Erhaltung normaler Sehkraft bei',
     'Hochdosiert & rein',
     'Keine Zusatzstoffe',
   ],
   'msm-pulver': [
     'Hochwertiger Schwefel',
-    'Unterstützt Gelenke & Knorpel',
-    'Hohe Bioverfügbarkeit',
+    'Geruchlos',
+    'Alltagsgerecht',
     'Ohne Zusatzstoffe',
   ],
   'vitamin-c-gummies': [
     'Stärkt das Immunsystem',
     'Mit Zink & Holunder',
     'Köstlicher Geschmack',
-    'Ohne künstliche Farbstoffe',
+    'Nährstoffreich',
   ],
   'glucosamin-pulver': [
-    'Unterstützung der Gelenke',
-    'Fördert die Beweglichkeit',
-    'Premium Qualität',
-    'Hohe Bioverfügbarkeit',
+    'Laborgeprüft',
+    'Gut mischbar',
+    'Neutraler Geschmack',
+    'Ohne Zusatzstoffe',
   ],
   'chondroitin-pulver': [
-    'Für gesunde Knorpel',
-    'Unterstützt die Gelenkfunktion',
-    'Premium Qualität',
-    'Hohe Bioverfügbarkeit',
+    'Rein & gut löslich',
+    'Für Vitalität im Alltag',
+    'Unterstützt bewusste Ernährung',
+    'Ohne Zusatzstoffe',
   ],
 };
 
@@ -122,7 +122,7 @@ const ProductDetail = () => {
   const { handle } = useParams();
   const [product, setProduct] = useState<ShopifyProduct | null>(null);
   const [loading, setLoading] = useState(true);
-  const [selectedQuantity, setSelectedQuantity] = useState<2 | 3 | 6>(2);
+  const [selectedQuantity, setSelectedQuantity] = useState<1 | 2 | 3 | 6>(1);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [purchaseType, setPurchaseType] = useState<'onetime' | 'subscription'>('onetime');
   const [subscriptionInterval, setSubscriptionInterval] = useState<60 | 90 | 180>(60);
@@ -259,7 +259,7 @@ const ProductDetail = () => {
   const currentBundlePricing = getBundlePricing();
 
   // Calculate prices with discounts for regular products
-  const getQuantityPrice = (qty: 2 | 3 | 6) => {
+  const getQuantityPrice = (qty: 1 | 2 | 3 | 6) => {
     const price = currentProductPricing.regular;
     const total = price * qty;
     if (qty === 3) return { total, discounted: total * 0.9, discount: 10, savings: total * 0.1 };
@@ -267,7 +267,7 @@ const ProductDetail = () => {
     return { total, discounted: total, discount: 0, savings: 0 };
   };
 
-  const selectedPrice = getQuantityPrice(selectedQuantity);
+  const selectedPrice = getQuantityPrice(selectedQuantity as 1 | 2 | 3 | 6);
 
   // Bundle subscription price
   const getBundlePrice = (months: 2 | 3 | 6) => {
@@ -278,14 +278,14 @@ const ProductDetail = () => {
     };
   };
 
-  const selectedBundlePrice = getBundlePrice(selectedQuantity);
+  const selectedBundlePrice = getBundlePrice((selectedQuantity === 1 ? 2 : selectedQuantity) as 2 | 3 | 6);
 
   // Get subscription duration text
   const getSubscriptionDurationText = (months: 2 | 3 | 6) => {
     if (locale.startsWith('de')) {
-      if (months === 2) return '2 Monate Versorgung';
-      if (months === 3) return '3 Monate Versorgung';
-      return '6 Monate Versorgung';
+      if (months === 2) return '2-Monate Vorrat';
+      if (months === 3) return '3-Monate Vorrat';
+      return '6-Monate Vorrat';
     }
     if (months === 2) return '2 months supply';
     if (months === 3) return '3 months supply';
@@ -295,13 +295,13 @@ const ProductDetail = () => {
   // Get subscription description text
   const getSubscriptionDescription = (months: 2 | 3 | 6) => {
     if (locale.startsWith('de')) {
-      if (months === 2) return 'eine 2-Monats-Kur, um zu testen';
-      if (months === 3) return 'eine 3-Monats-Kur, um richtige Ergebnisse zu sehen';
-      return 'eine 6-Monats-Komplettkur für beste Ergebnisse';
+      if (months === 2) return 'Zum Ausprobieren und Herantasten an eine neue Routine.';
+      if (months === 3) return 'Für eine regelmäßige, kontinuierliche Nutzung.';
+      return 'Für alle, die ihre tägliche Ergänzung langfristig planen möchten.';
     }
-    if (months === 2) return 'a 2-month treatment to try';
-    if (months === 3) return 'a 3-month treatment for real results';
-    return 'a 6-month complete treatment for best results';
+    if (months === 2) return 'To try out and ease into a new routine.';
+    if (months === 3) return 'For regular, continuous use.';
+    return 'For those who want to plan their daily supplement long-term.';
   };
 
   // Get delivery info text
@@ -319,33 +319,65 @@ const ProductDetail = () => {
   const handleAddToCart = () => {
     if (!variant) return;
 
-    // For bundles: quantity is always 1, price is the subscription price
+    // For bundles
     if (isBundle && currentBundlePricing) {
-      const subscriptionMonths = selectedQuantity;
-      const monthlyPrice = currentBundlePricing.monthly[subscriptionMonths];
-      
-      const cartItem = {
-        product,
-        variantId: variant.id,
-        variantTitle: `${variant.title} (${subscriptionMonths} ${locale.startsWith('de') ? 'Monate' : 'Months'} Abo)`,
-        price: {
-          amount: monthlyPrice.toFixed(2),
-          currencyCode: variant.price.currencyCode
-        },
-        quantity: 1,
-        selectedOptions: [
-          ...variant.selectedOptions || [],
-          { name: 'Abo', value: `${subscriptionMonths} Monate` }
-        ]
-      };
-      
-      addItem(cartItem);
-      toast.success(locale.startsWith('de') 
-        ? `${subscriptionMonths}-Monats-Abo hinzugefügt` 
-        : `${subscriptionMonths}-month subscription added`, {
-        position: "top-center"
-      });
-    } else if (purchaseType === 'subscription') {
+      if (purchaseType === 'subscription') {
+        const subscriptionMonths = selectedQuantity as 2 | 3 | 6;
+        const monthlyPrice = currentBundlePricing.monthly[subscriptionMonths];
+        
+        const cartItem = {
+          product,
+          variantId: variant.id,
+          variantTitle: `${variant.title} (${subscriptionMonths} ${locale.startsWith('de') ? 'Monate' : 'Months'} Abo)`,
+          price: {
+            amount: monthlyPrice.toFixed(2),
+            currencyCode: variant.price.currencyCode
+          },
+          quantity: 1,
+          selectedOptions: [
+            ...variant.selectedOptions || [],
+            { name: 'Abo', value: `${subscriptionMonths} Monate` }
+          ]
+        };
+        
+        addItem(cartItem);
+        toast.success(locale.startsWith('de') 
+          ? `${subscriptionMonths}-Monats-Abo hinzugefügt` 
+          : `${subscriptionMonths}-month subscription added`, {
+          position: "top-center"
+        });
+      } else {
+        // Bundle one-time purchase
+        let discountMultiplier = 1;
+        if (selectedQuantity === 3) {
+          discountMultiplier = 0.9;
+        } else if (selectedQuantity === 6) {
+          discountMultiplier = 0.85;
+        }
+        
+        const discountedUnitPrice = currentBundlePricing.oneTime * discountMultiplier;
+
+        const cartItem = {
+          product,
+          variantId: variant.id,
+          variantTitle: variant.title,
+          price: {
+            amount: discountedUnitPrice.toFixed(2),
+            currencyCode: variant.price.currencyCode
+          },
+          quantity: selectedQuantity as number,
+          selectedOptions: variant.selectedOptions || []
+        };
+        
+        addItem(cartItem);
+        toast.success(t('addedToCart').replace('{quantity}', selectedQuantity.toString()), {
+          position: "top-center"
+        });
+      }
+      return;
+    } 
+    
+    if (purchaseType === 'subscription') {
       // Individual product with subscription
       const subscriptionPrice = currentProductPricing.subscription;
       const intervalMonths = subscriptionInterval === 60 ? 2 : subscriptionInterval === 90 ? 3 : 6;
@@ -392,7 +424,7 @@ const ProductDetail = () => {
           amount: discountedUnitPrice.toFixed(2),
           currencyCode: variant.price.currencyCode
         },
-        quantity: selectedQuantity,
+        quantity: selectedQuantity as number,
         selectedOptions: variant.selectedOptions || []
       };
       
@@ -479,7 +511,7 @@ const ProductDetail = () => {
                       </div>
                       <div className="flex-1 text-left">
                         <div className="font-semibold">
-                          {locale.startsWith('de') ? 'Einmal kaufen' : 'One-time purchase'}
+                          {locale.startsWith('de') ? 'Einmalig kaufen' : 'One-time purchase'}
                         </div>
                         <div className="text-lg font-bold">€{currentProductPricing.regular.toFixed(2)}</div>
                       </div>
@@ -571,24 +603,24 @@ const ProductDetail = () => {
                   {purchaseType === 'onetime' && (
                     <div className="space-y-3">
                       <h3 className="text-lg font-semibold">{t('selectQuantity')}</h3>
-                      <div className="grid grid-cols-3 gap-3">
-                        {/* 2 Stück */}
+                      <div className="grid grid-cols-4 gap-3">
+                        {/* 1 Stück */}
                         <button
-                          onClick={() => setSelectedQuantity(2)}
+                          onClick={() => setSelectedQuantity(1)}
                           className={`relative border-2 rounded-2xl p-4 transition-all ${
-                            selectedQuantity === 2
+                            selectedQuantity === 1
                               ? 'border-primary bg-primary/5'
                               : 'border-border hover:border-primary/50'
                           }`}
                         >
-                          {selectedQuantity === 2 && (
+                          {selectedQuantity === 1 && (
                             <div className="absolute -top-2 -right-2 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
                               <Check className="w-4 h-4 text-white" />
                             </div>
                           )}
                           <div className="text-center">
-                            <div className="text-2xl font-bold mb-1">2 {t('pieces')}</div>
-                            <div className="text-sm text-muted-foreground">€{(currentProductPricing.regular * 2).toFixed(2)}</div>
+                            <div className="text-2xl font-bold mb-1">1 {t('pieces')}</div>
+                            <div className="text-sm text-muted-foreground">€{currentProductPricing.regular.toFixed(2)}</div>
                           </div>
                         </button>
 
@@ -601,12 +633,15 @@ const ProductDetail = () => {
                               : 'border-border hover:border-primary/50'
                           }`}
                         >
+                          <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs px-2 py-0.5 rounded-full font-semibold whitespace-nowrap">
+                            {locale.startsWith('de') ? 'Am beliebtesten' : 'Most popular'}
+                          </div>
                           {selectedQuantity === 3 && (
                             <div className="absolute -top-2 -right-2 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
                               <Check className="w-4 h-4 text-white" />
                             </div>
                           )}
-                          <div className="text-center">
+                          <div className="text-center pt-1">
                             <div className="text-2xl font-bold mb-1">3 {t('pieces')}</div>
                             <div className="text-primary font-semibold text-sm mb-1">{t('save').replace('{discount}', '10')}</div>
                             <div className="text-sm text-muted-foreground line-through">€{(currentProductPricing.regular * 3).toFixed(2)}</div>
@@ -629,9 +664,6 @@ const ProductDetail = () => {
                             </div>
                           )}
                           <div className="text-center">
-                            <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs px-3 py-1 rounded-full font-semibold whitespace-nowrap">
-                              {t('mostPopular')}
-                            </div>
                             <div className="text-2xl font-bold mb-1">6 {t('pieces')}</div>
                             <div className="text-primary font-semibold text-sm mb-1">{t('save').replace('{discount}', '15')}</div>
                             <div className="text-sm text-muted-foreground line-through">€{(currentProductPricing.regular * 6).toFixed(2)}</div>
@@ -707,134 +739,297 @@ const ProductDetail = () => {
               </>
             ) : currentBundlePricing ? (
               <div className="space-y-4">
-                <div>
-                  <h3 className="text-lg font-semibold mb-3">{locale.startsWith('de') ? 'Kur-Dauer wählen:' : 'Choose treatment duration:'}</h3>
-                  <div className="space-y-3">
-                    {/* 2 Monate */}
-                    <button
-                      onClick={() => setSelectedQuantity(2)}
-                      className={`w-full flex items-start gap-4 p-4 rounded-xl border-2 transition-all ${
-                        selectedQuantity === 2
-                          ? 'border-primary bg-primary/5'
-                          : 'border-border hover:border-primary/50'
-                      }`}
-                    >
-                      <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-1 ${
-                        selectedQuantity === 2 ? 'border-primary' : 'border-muted-foreground'
-                      }`}>
-                        {selectedQuantity === 2 && (
-                          <div className="w-2.5 h-2.5 rounded-full bg-primary" />
-                        )}
+                {/* Purchase Type Selection for Bundles */}
+                <div className="space-y-3">
+                  {/* One-time Purchase Option */}
+                  <button
+                    onClick={() => setPurchaseType('onetime')}
+                    className={`w-full flex items-center gap-4 p-4 rounded-xl border-2 transition-all ${
+                      purchaseType === 'onetime'
+                        ? 'border-primary bg-primary/5'
+                        : 'border-border hover:border-primary/50'
+                    }`}
+                  >
+                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                      purchaseType === 'onetime' ? 'border-primary' : 'border-muted-foreground'
+                    }`}>
+                      {purchaseType === 'onetime' && (
+                        <div className="w-2.5 h-2.5 rounded-full bg-primary" />
+                      )}
+                    </div>
+                    <div className="flex-1 text-left">
+                      <div className="font-semibold">
+                        {locale.startsWith('de') ? 'Einmalig kaufen' : 'One-time purchase'}
                       </div>
-                      <div className="flex-1 text-left">
-                        <div className="flex items-center gap-2">
-                          <span className="font-semibold text-lg">2 Monate Versorgung</span>
-                          <span className="bg-primary text-white text-xs font-bold px-2 py-0.5 rounded-full">
-                            -{currentBundlePricing.discounts[2]}%
-                          </span>
-                        </div>
-                        <div className="text-sm text-muted-foreground">{locale.startsWith('de') ? 'eine 2-Monats-Kur, um zu testen' : 'a 2-month treatment to try'}</div>
-                        <div className="text-xs text-primary mt-1">{locale.startsWith('de') ? '2 Lieferungen • endet automatisch' : '2 deliveries • ends automatically'}</div>
-                        <div className="flex items-center gap-2 mt-2">
-                          <span className="text-lg font-bold">€{currentBundlePricing.monthly[2].toFixed(2)}</span>
-                          <span className="text-sm text-muted-foreground line-through">€{currentBundlePricing.oneTime.toFixed(2)}</span>
-                        </div>
-                      </div>
-                    </button>
+                      <div className="text-lg font-bold">€{currentBundlePricing.oneTime.toFixed(2)}</div>
+                    </div>
+                  </button>
 
-                    {/* 3 Monate */}
-                    <button
-                      onClick={() => setSelectedQuantity(3)}
-                      className={`w-full flex items-start gap-4 p-4 rounded-xl border-2 transition-all ${
-                        selectedQuantity === 3
-                          ? 'border-primary bg-primary/5'
-                          : 'border-border hover:border-primary/50'
-                      }`}
-                    >
-                      <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-1 ${
-                        selectedQuantity === 3 ? 'border-primary' : 'border-muted-foreground'
-                      }`}>
-                        {selectedQuantity === 3 && (
-                          <div className="w-2.5 h-2.5 rounded-full bg-primary" />
-                        )}
+                  {/* Subscription Option */}
+                  <button
+                    onClick={() => setPurchaseType('subscription')}
+                    className={`w-full flex items-center gap-4 p-4 rounded-xl border-2 transition-all ${
+                      purchaseType === 'subscription'
+                        ? 'border-primary bg-primary/5'
+                        : 'border-border hover:border-primary/50'
+                    }`}
+                  >
+                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                      purchaseType === 'subscription' ? 'border-primary' : 'border-muted-foreground'
+                    }`}>
+                      {purchaseType === 'subscription' && (
+                        <div className="w-2.5 h-2.5 rounded-full bg-primary" />
+                      )}
+                    </div>
+                    <div className="flex-1 text-left">
+                      <div className="flex items-center gap-2">
+                        <span className="font-semibold">
+                          {locale.startsWith('de') ? 'Abonniere & spare' : 'Subscribe & save'}
+                        </span>
+                        <span className="bg-primary text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                          {locale.startsWith('de') ? 'Bis zu' : 'Up to'} -{currentBundlePricing.discounts[6]}%
+                        </span>
                       </div>
-                      <div className="flex-1 text-left">
-                        <div className="flex items-center gap-2">
-                          <span className="font-semibold text-lg">3 Monate Versorgung</span>
-                          <span className="bg-primary text-white text-xs font-bold px-2 py-0.5 rounded-full">
-                            -{currentBundlePricing.discounts[3]}%
-                          </span>
-                        </div>
-                        <div className="text-sm text-muted-foreground">{locale.startsWith('de') ? 'eine 3-Monats-Kur, um richtige Ergebnisse zu sehen' : 'a 3-month treatment for real results'}</div>
-                        <div className="text-xs text-primary mt-1">{locale.startsWith('de') ? '3 Lieferungen • endet automatisch' : '3 deliveries • ends automatically'}</div>
-                        <div className="flex items-center gap-2 mt-2">
-                          <span className="text-lg font-bold">€{currentBundlePricing.monthly[3].toFixed(2)}</span>
-                          <span className="text-sm text-muted-foreground line-through">€{currentBundlePricing.oneTime.toFixed(2)}</span>
-                        </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg font-bold">{locale.startsWith('de') ? 'ab' : 'from'} €{currentBundlePricing.monthly[6].toFixed(2)}</span>
+                        <span className="text-sm text-muted-foreground line-through">€{currentBundlePricing.oneTime.toFixed(2)}</span>
                       </div>
-                    </button>
-
-                    {/* 6 Monate */}
-                    <button
-                      onClick={() => setSelectedQuantity(6)}
-                      className={`w-full flex items-start gap-4 p-4 rounded-xl border-2 transition-all relative ${
-                        selectedQuantity === 6
-                          ? 'border-primary bg-primary/5'
-                          : 'border-border hover:border-primary/50'
-                      }`}
-                    >
-                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs px-3 py-1 rounded-full font-semibold whitespace-nowrap">
-                        {t('mostPopular')}
-                      </div>
-                      <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-1 ${
-                        selectedQuantity === 6 ? 'border-primary' : 'border-muted-foreground'
-                      }`}>
-                        {selectedQuantity === 6 && (
-                          <div className="w-2.5 h-2.5 rounded-full bg-primary" />
-                        )}
-                      </div>
-                      <div className="flex-1 text-left">
-                        <div className="flex items-center gap-2">
-                          <span className="font-semibold text-lg">6 Monate Versorgung</span>
-                          <span className="bg-primary text-white text-xs font-bold px-2 py-0.5 rounded-full">
-                            -{currentBundlePricing.discounts[6]}%
-                          </span>
-                        </div>
-                        <div className="text-sm text-muted-foreground">{locale.startsWith('de') ? 'eine 6-Monats-Komplettkur für beste Ergebnisse' : 'a 6-month complete treatment for best results'}</div>
-                        <div className="text-xs text-primary mt-1">{locale.startsWith('de') ? '6 Lieferungen • endet automatisch' : '6 deliveries • ends automatically'}</div>
-                        <div className="flex items-center gap-2 mt-2">
-                          <span className="text-lg font-bold">€{currentBundlePricing.monthly[6].toFixed(2)}</span>
-                          <span className="text-sm text-muted-foreground line-through">€{currentBundlePricing.oneTime.toFixed(2)}</span>
-                        </div>
-                      </div>
-                    </button>
-                  </div>
+                    </div>
+                  </button>
                 </div>
+
+                {/* Subscription Duration Selection for Bundles */}
+                {purchaseType === 'subscription' && (
+                  <div className="pl-9 space-y-3">
+                    <p className="text-sm font-medium text-muted-foreground">
+                      {locale.startsWith('de') ? 'Vorrat wählen:' : 'Choose supply:'}
+                    </p>
+                    <div className="space-y-3">
+                      {/* 2 Monate */}
+                      <button
+                        onClick={() => setSelectedQuantity(2)}
+                        className={`w-full flex items-start gap-3 p-3 rounded-lg border transition-all ${
+                          selectedQuantity === 2
+                            ? 'border-primary bg-primary/5'
+                            : 'border-border hover:border-primary/50'
+                        }`}
+                      >
+                        <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                          selectedQuantity === 2 ? 'border-primary' : 'border-muted-foreground'
+                        }`}>
+                          {selectedQuantity === 2 && (
+                            <div className="w-2 h-2 rounded-full bg-primary" />
+                          )}
+                        </div>
+                        <div className="flex-1 text-left">
+                          <div className="flex items-center gap-2">
+                            <span className="font-medium">{locale.startsWith('de') ? '2-Monate Vorrat' : '2 months supply'}</span>
+                            <span className="bg-primary text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                              -{currentBundlePricing.discounts[2]}%
+                            </span>
+                          </div>
+                          <div className="text-xs text-muted-foreground">{locale.startsWith('de') ? 'Zum Ausprobieren und Herantasten an eine neue Routine.' : 'To try out and ease into a new routine.'}</div>
+                          <div className="text-xs text-primary mt-1">{locale.startsWith('de') ? '2 Lieferungen • endet automatisch' : '2 deliveries • ends automatically'}</div>
+                          <div className="flex items-center gap-2 mt-1">
+                            <span className="font-bold">€{currentBundlePricing.monthly[2].toFixed(2)}</span>
+                            <span className="text-xs text-muted-foreground line-through">€{currentBundlePricing.oneTime.toFixed(2)}</span>
+                          </div>
+                        </div>
+                      </button>
+
+                      {/* 3 Monate */}
+                      <button
+                        onClick={() => setSelectedQuantity(3)}
+                        className={`w-full flex items-start gap-3 p-3 rounded-lg border transition-all ${
+                          selectedQuantity === 3
+                            ? 'border-primary bg-primary/5'
+                            : 'border-border hover:border-primary/50'
+                        }`}
+                      >
+                        <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                          selectedQuantity === 3 ? 'border-primary' : 'border-muted-foreground'
+                        }`}>
+                          {selectedQuantity === 3 && (
+                            <div className="w-2 h-2 rounded-full bg-primary" />
+                          )}
+                        </div>
+                        <div className="flex-1 text-left">
+                          <div className="flex items-center gap-2">
+                            <span className="font-medium">{locale.startsWith('de') ? '3-Monate Vorrat' : '3 months supply'}</span>
+                            <span className="bg-primary text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                              -{currentBundlePricing.discounts[3]}%
+                            </span>
+                          </div>
+                          <div className="text-xs text-muted-foreground">{locale.startsWith('de') ? 'Für eine regelmäßige, kontinuierliche Nutzung.' : 'For regular, continuous use.'}</div>
+                          <div className="text-xs text-primary mt-1">{locale.startsWith('de') ? '3 Lieferungen • endet automatisch' : '3 deliveries • ends automatically'}</div>
+                          <div className="flex items-center gap-2 mt-1">
+                            <span className="font-bold">€{currentBundlePricing.monthly[3].toFixed(2)}</span>
+                            <span className="text-xs text-muted-foreground line-through">€{currentBundlePricing.oneTime.toFixed(2)}</span>
+                          </div>
+                        </div>
+                      </button>
+
+                      {/* 6 Monate */}
+                      <button
+                        onClick={() => setSelectedQuantity(6)}
+                        className={`w-full flex items-start gap-3 p-3 rounded-lg border transition-all ${
+                          selectedQuantity === 6
+                            ? 'border-primary bg-primary/5'
+                            : 'border-border hover:border-primary/50'
+                        }`}
+                      >
+                        <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                          selectedQuantity === 6 ? 'border-primary' : 'border-muted-foreground'
+                        }`}>
+                          {selectedQuantity === 6 && (
+                            <div className="w-2 h-2 rounded-full bg-primary" />
+                          )}
+                        </div>
+                        <div className="flex-1 text-left">
+                          <div className="flex items-center gap-2">
+                            <span className="font-medium">{locale.startsWith('de') ? '6-Monate Vorrat' : '6 months supply'}</span>
+                            <span className="bg-primary text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                              -{currentBundlePricing.discounts[6]}%
+                            </span>
+                          </div>
+                          <div className="text-xs text-muted-foreground">{locale.startsWith('de') ? 'Für alle, die ihre tägliche Ergänzung langfristig planen möchten.' : 'For those who want to plan their daily supplement long-term.'}</div>
+                          <div className="text-xs text-primary mt-1">{locale.startsWith('de') ? '6 Lieferungen • endet automatisch' : '6 deliveries • ends automatically'}</div>
+                          <div className="flex items-center gap-2 mt-1">
+                            <span className="font-bold">€{currentBundlePricing.monthly[6].toFixed(2)}</span>
+                            <span className="text-xs text-muted-foreground line-through">€{currentBundlePricing.oneTime.toFixed(2)}</span>
+                          </div>
+                        </div>
+                      </button>
+                    </div>
+                    <p className="text-xs text-muted-foreground italic">
+                      {locale.startsWith('de') 
+                        ? 'Kostenloser Versand ab der 2. Lieferung • Jederzeit kündbar'
+                        : 'Free shipping from 2nd delivery • Cancel anytime'}
+                    </p>
+                  </div>
+                )}
+
+                {/* Bundle Quantity Selection for One-Time Purchase */}
+                {purchaseType === 'onetime' && (
+                  <div className="space-y-3">
+                    <h3 className="text-lg font-semibold">{t('selectQuantity')}</h3>
+                    <div className="grid grid-cols-3 gap-3">
+                      {/* 1 Stück */}
+                      <button
+                        onClick={() => setSelectedQuantity(1)}
+                        className={`relative border-2 rounded-2xl p-4 transition-all ${
+                          selectedQuantity === 1
+                            ? 'border-primary bg-primary/5'
+                            : 'border-border hover:border-primary/50'
+                        }`}
+                      >
+                        {selectedQuantity === 1 && (
+                          <div className="absolute -top-2 -right-2 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+                            <Check className="w-4 h-4 text-white" />
+                          </div>
+                        )}
+                        <div className="text-center">
+                          <div className="text-2xl font-bold mb-1">1 {t('pieces')}</div>
+                          <div className="text-sm text-muted-foreground">€{currentBundlePricing.oneTime.toFixed(2)}</div>
+                        </div>
+                      </button>
+
+                      {/* 3 Stück */}
+                      <button
+                        onClick={() => setSelectedQuantity(3)}
+                        className={`relative border-2 rounded-2xl p-4 transition-all ${
+                          selectedQuantity === 3
+                            ? 'border-primary bg-primary/5'
+                            : 'border-border hover:border-primary/50'
+                        }`}
+                      >
+                        {selectedQuantity === 3 && (
+                          <div className="absolute -top-2 -right-2 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+                            <Check className="w-4 h-4 text-white" />
+                          </div>
+                        )}
+                        <div className="text-center">
+                          <div className="text-2xl font-bold mb-1">3 {t('pieces')}</div>
+                          <div className="text-primary font-semibold text-sm mb-1">{t('save').replace('{discount}', '10')}</div>
+                          <div className="text-sm text-muted-foreground line-through">€{(currentBundlePricing.oneTime * 3).toFixed(2)}</div>
+                          <div className="text-sm font-semibold">€{(currentBundlePricing.oneTime * 3 * 0.9).toFixed(2)}</div>
+                        </div>
+                      </button>
+
+                      {/* 6 Stück */}
+                      <button
+                        onClick={() => setSelectedQuantity(6)}
+                        className={`relative border-2 rounded-2xl p-4 transition-all ${
+                          selectedQuantity === 6
+                            ? 'border-primary bg-primary/5'
+                            : 'border-border hover:border-primary/50'
+                        }`}
+                      >
+                        {selectedQuantity === 6 && (
+                          <div className="absolute -top-2 -right-2 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+                            <Check className="w-4 h-4 text-white" />
+                          </div>
+                        )}
+                        <div className="text-center">
+                          <div className="text-2xl font-bold mb-1">6 {t('pieces')}</div>
+                          <div className="text-primary font-semibold text-sm mb-1">{t('save').replace('{discount}', '15')}</div>
+                          <div className="text-sm text-muted-foreground line-through">€{(currentBundlePricing.oneTime * 6).toFixed(2)}</div>
+                          <div className="text-sm font-semibold">€{(currentBundlePricing.oneTime * 6 * 0.85).toFixed(2)}</div>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                )}
 
                 {/* Bundle Info */}
                 <div className="bg-secondary/20 rounded-xl p-4 space-y-2">
-                  <div className="flex justify-between items-center">
-                    <span className="text-lg font-semibold">{locale.startsWith('de') ? 'Monatlich' : 'Monthly'}:</span>
-                    <div className="text-right">
-                      <div className="text-sm text-muted-foreground line-through">
-                        €{currentBundlePricing.oneTime.toFixed(2)}
+                  {purchaseType === 'subscription' ? (
+                    <>
+                      <div className="flex justify-between items-center">
+                        <span className="text-lg font-semibold">{locale.startsWith('de') ? 'Monatlich' : 'Monthly'}:</span>
+                        <div className="text-right">
+                          <div className="text-sm text-muted-foreground line-through">
+                            €{currentBundlePricing.oneTime.toFixed(2)}
+                          </div>
+                          <div className="text-3xl font-bold text-foreground">
+                            €{selectedBundlePrice.monthly.toFixed(2)}
+                          </div>
+                        </div>
                       </div>
-                      <div className="text-3xl font-bold text-foreground">
-                        €{selectedBundlePrice.monthly.toFixed(2)}
+                      <div className="text-primary font-semibold">
+                        {t('wasSaved')} €{(currentBundlePricing.oneTime - selectedBundlePrice.monthly).toFixed(2)} ({selectedBundlePrice.discount}%)
                       </div>
-                    </div>
-                  </div>
-                  <div className="text-primary font-semibold">
-                    {t('wasSaved')} €{(currentBundlePricing.oneTime - selectedBundlePrice.monthly).toFixed(2)} ({selectedBundlePrice.discount}%)
-                  </div>
-                  <div className="text-sm text-muted-foreground flex items-center gap-2">
-                    <Check className="w-4 h-4" />
-                    {locale.startsWith('de') ? 'Endet automatisch nach Ablauf' : 'Ends automatically after completion'}
-                  </div>
-                  <div className="text-sm text-muted-foreground flex items-center gap-2">
-                    <Truck className="w-4 h-4" />
-                    {locale.startsWith('de') ? 'Kostenloser Versand ab der 2. Lieferung' : 'Free shipping from 2nd delivery'}
-                  </div>
+                      <div className="text-sm text-muted-foreground flex items-center gap-2">
+                        <Check className="w-4 h-4" />
+                        {locale.startsWith('de') ? 'Endet automatisch nach Ablauf' : 'Ends automatically after completion'}
+                      </div>
+                      <div className="text-sm text-muted-foreground flex items-center gap-2">
+                        <Truck className="w-4 h-4" />
+                        {locale.startsWith('de') ? 'Kostenloser Versand ab der 2. Lieferung' : 'Free shipping from 2nd delivery'}
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="flex justify-between items-center">
+                        <span className="text-lg font-semibold">{t('total')}:</span>
+                        <div className="text-right">
+                          {(selectedQuantity === 3 || selectedQuantity === 6) && (
+                            <div className="text-sm text-muted-foreground line-through">
+                              €{(currentBundlePricing.oneTime * (selectedQuantity as number)).toFixed(2)}
+                            </div>
+                          )}
+                          <div className="text-3xl font-bold text-foreground">
+                            €{(currentBundlePricing.oneTime * (selectedQuantity as number) * (selectedQuantity === 3 ? 0.9 : selectedQuantity === 6 ? 0.85 : 1)).toFixed(2)}
+                          </div>
+                        </div>
+                      </div>
+                      {(selectedQuantity === 3 || selectedQuantity === 6) && (
+                        <div className="text-primary font-semibold">
+                          {t('wasSaved')} €{(currentBundlePricing.oneTime * (selectedQuantity as number) * (selectedQuantity === 3 ? 0.1 : 0.15)).toFixed(2)} ({selectedQuantity === 3 ? '10' : '15'}%)
+                        </div>
+                      )}
+                    </>
+                  )}
                 </div>
               </div>
             ) : (

@@ -207,13 +207,42 @@ export const CartDrawer = () => {
                     return (
                       <div key={item.variantId} className="flex gap-4 p-2">
                         <div className="w-16 h-16 bg-secondary rounded-md overflow-hidden flex-shrink-0">
-                          {item.product.node.images?.edges?.[0]?.node && (
-                            <img
-                              src={item.product.node.images.edges[0].node.url}
-                              alt={translated.title}
-                              className="w-full h-full object-cover"
-                            />
-                          )}
+                          {(() => {
+                            const title = item.product.node.title.toLowerCase();
+                            const handle = item.product.node.handle;
+                            // Check if it's a bundle and get the right image
+                            if (title.includes('bundle') || title.includes('paket') || title.includes('komplettsystem') ||
+                                handle.includes('bundle') || handle.includes('paket') || handle.includes('komplettsystem')) {
+                              let bundleImg = '';
+                              if (handle.includes('schonheit-von-innen')) {
+                                bundleImg = '/src/assets/bundle-schoenheit.jpg';
+                              } else if (handle.includes('gelenk-beweglichkeit')) {
+                                bundleImg = '/src/assets/bundle-gelenk.jpg';
+                              } else if (handle.includes('ganzkorper') || handle.includes('vital')) {
+                                bundleImg = '/src/assets/bundle-ganzkoerper.jpg';
+                              }
+                              if (bundleImg) {
+                                return (
+                                  <img
+                                    src={bundleImg}
+                                    alt={translated.title}
+                                    className="w-full h-full object-cover"
+                                  />
+                                );
+                              }
+                            }
+                            // Default to Shopify image
+                            if (item.product.node.images?.edges?.[0]?.node) {
+                              return (
+                                <img
+                                  src={item.product.node.images.edges[0].node.url}
+                                  alt={translated.title}
+                                  className="w-full h-full object-cover"
+                                />
+                              );
+                            }
+                            return null;
+                          })()}
                         </div>
                         
                         <div className="flex-1 min-w-0">
