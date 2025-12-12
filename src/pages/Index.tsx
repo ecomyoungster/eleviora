@@ -2,9 +2,8 @@ import { Header } from "@/components/shop/Header";
 import { TrustBar } from "@/components/shop/TrustBar";
 import { Hero } from "@/components/shop/Hero";
 import { Benefits } from "@/components/shop/Benefits";
-import { BestSellers } from "@/components/shop/BestSellers";
-import { Bundles } from "@/components/shop/Bundles";
-import { Products } from "@/components/shop/Products";
+import { ProductShowcase } from "@/components/shop/ProductShowcase";
+import { Science } from "@/components/shop/Science";
 import { Testimonials } from "@/components/shop/Testimonials";
 import { FAQ } from "@/components/shop/FAQ";
 import { Footer } from "@/components/shop/Footer";
@@ -16,9 +15,8 @@ const Index = () => {
       <TrustBar />
       <Hero />
       <Benefits />
-      <BestSellers />
-      <Bundles />
-      <Products />
+      <ProductShowcase />
+      <Science />
       <Testimonials />
       <FAQ />
       <Footer />
