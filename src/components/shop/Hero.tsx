@@ -1,40 +1,77 @@
 import { Button } from "@/components/ui/button";
-import heroImage from "@/assets/hero-collagen.jpg";
-import { useTranslation } from "@/stores/localeStore";
+import { Link } from "react-router-dom";
+import heroImage from "@/assets/hero-collagen-new.png";
+import { useTranslation, useLocaleStore } from "@/stores/localeStore";
+import { ArrowRight, Shield, Leaf, Award } from "lucide-react";
 
 export const Hero = () => {
   const t = useTranslation();
-  
-  const scrollToProducts = () => {
-    document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const locale = useLocaleStore(state => state.locale);
+
+  const badges = locale === 'en-US' ? [
+    { icon: Shield, text: "Laboratory Tested" },
+    { icon: Leaf, text: "No Additives" },
+    { icon: Award, text: "Premium Quality" },
+  ] : [
+    { icon: Shield, text: "Laborgeprüft" },
+    { icon: Leaf, text: "Ohne Zusätze" },
+    { icon: Award, text: "Premium Qualität" },
+  ];
 
   return (
-    <section className="relative min-h-[80vh] flex items-center bg-gradient-to-b from-wellness-cream to-background">
+    <section className="relative min-h-[85vh] flex items-center bg-gradient-to-b from-wellness-cream to-background overflow-hidden">
       <div className="container mx-auto px-4 py-16">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <h1 
-              className="font-serif text-5xl lg:text-6xl font-bold text-foreground leading-tight"
-              dangerouslySetInnerHTML={{ __html: t('heroTitle') }}
-            />
-            <p className="text-xl text-muted-foreground">
-              {t('heroSubtitle')}
-            </p>
-            <Button 
-              size="lg" 
-              className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg px-8 py-6"
-              onClick={scrollToProducts}
-            >
-              {t('heroButton')}
-            </Button>
+          <div className="space-y-8">
+            <div className="space-y-6">
+              <h1 
+                className="font-serif text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-tight"
+                dangerouslySetInnerHTML={{ __html: t('heroTitle') }}
+              />
+              <p className="text-xl lg:text-2xl text-muted-foreground max-w-lg">
+                {t('heroSubtitle')}
+              </p>
+            </div>
+            
+            <div className="flex flex-wrap gap-4">
+              {badges.map((badge, index) => (
+                <div 
+                  key={index}
+                  className="flex items-center gap-2 px-4 py-2 bg-card rounded-full border shadow-sm"
+                >
+                  <badge.icon className="w-4 h-4 text-primary" />
+                  <span className="text-sm font-medium text-foreground">{badge.text}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link to="/product/kollagen-hydrolysat-pulver">
+                <Button 
+                  size="lg" 
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg px-8 py-6 gap-2"
+                >
+                  {t('heroButton')}
+                  <ArrowRight className="w-5 h-5" />
+                </Button>
+              </Link>
+              <Button 
+                size="lg" 
+                variant="outline"
+                className="text-lg px-8 py-6"
+                onClick={() => document.getElementById('science')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                {t('learnMore')}
+              </Button>
+            </div>
           </div>
+
           <div className="relative">
-            <div className="aspect-square rounded-2xl overflow-hidden shadow-lg">
+            <div className="aspect-square rounded-2xl overflow-hidden">
               <img 
                 src={heroImage} 
-                alt="Premium Kollagen Supplement" 
-                className="w-full h-full object-cover"
+                alt={locale === 'en-US' ? "Premium Collagen Supplement" : "Premium Kollagen Supplement"}
+                className="w-full h-full object-contain"
               />
             </div>
           </div>

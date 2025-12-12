@@ -10,44 +10,44 @@ export const Testimonials = () => {
     {
       name: "Maria K.",
       age: 58,
-      text: "My skin feels smoother, my joints are pain-free – finally feeling well again!",
+      text: "After 4 weeks with Eleviora Collagen, my skin feels smoother and firmer. My friends noticed it too!",
       rating: 5
     },
     {
       name: "Hans D.",
       age: 62,
-      text: "After only 3 weeks, I notice significantly more mobility. Highly recommended!",
+      text: "My morning stiffness in the joints has noticeably decreased. I feel more flexible and active again.",
       rating: 5
     },
     {
       name: "Petra M.",
       age: 55,
-      text: "The quality is convincing. I feel more vital and energetic than ever before.",
+      text: "The quality convinced me. The powder dissolves easily and has no taste. Finally a collagen that works!",
       rating: 5
     }
   ] : [
     {
       name: "Maria K.",
       age: 58,
-      text: "Meine Haut fühlt sich glatter an, meine Gelenke sind schmerzfrei – endlich wieder Wohlgefühl!",
+      text: "Nach 4 Wochen mit Eleviora Kollagen fühlt sich meine Haut glatter und straffer an. Auch meine Freundinnen haben es bemerkt!",
       rating: 5
     },
     {
       name: "Hans D.",
       age: 62,
-      text: "Nach nur 3 Wochen spüre ich deutlich mehr Beweglichkeit. Kann ich nur empfehlen!",
+      text: "Meine morgendliche Steifheit in den Gelenken hat merklich nachgelassen. Ich fühle mich wieder beweglicher und aktiver.",
       rating: 5
     },
     {
       name: "Petra M.",
       age: 55,
-      text: "Die Qualität überzeugt. Ich fühle mich vitaler und energiegeladener als je zuvor.",
+      text: "Die Qualität überzeugt mich. Das Pulver löst sich leicht auf und hat keinen Eigengeschmack. Endlich ein Kollagen, das wirkt!",
       rating: 5
     }
   ];
 
   return (
-    <section className="py-20 bg-wellness-beige/30">
+    <section id="reviews" className="py-20 bg-wellness-beige/30">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="font-serif text-4xl font-bold mb-4 text-foreground">
