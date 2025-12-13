@@ -51,7 +51,7 @@ export const Science = () => {
                 </div>
               </div>
               <div>
-                <h3 className="font-brand text-xl font-semibold mb-2 text-foreground">
+              <h3 className="font-brand text-xl font-bold mb-2 text-foreground">
                   {fact.title}
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">

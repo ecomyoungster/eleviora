@@ -46,7 +46,7 @@ export const FAQ = () => {
         <Accordion type="single" collapsible className="w-full">
           {faqs.map((faq, index) => (
             <AccordionItem key={index} value={`item-${index}`}>
-              <AccordionTrigger className="text-left font-brand text-lg">
+              <AccordionTrigger className="text-left font-brand text-lg font-semibold">
                 {faq.question}
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground">
