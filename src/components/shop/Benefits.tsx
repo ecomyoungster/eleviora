@@ -34,7 +34,7 @@ export const Benefits = () => {
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 text-primary">
                 <benefit.icon className="w-8 h-8" />
               </div>
-              <h3 className="font-serif text-2xl font-semibold text-foreground">
+              <h3 className="font-brand text-2xl font-semibold text-foreground">
                 {benefit.title}
               </h3>
               <p className="text-muted-foreground">

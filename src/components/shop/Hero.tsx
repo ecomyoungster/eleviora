@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import heroImage from "@/assets/hero-collagen-new.png";
+import heroImage from "@/assets/hero-kollagen.png";
 import { useTranslation, useLocaleStore } from "@/stores/localeStore";
 import { ArrowRight, Shield, Leaf, Award } from "lucide-react";
 
@@ -25,7 +25,7 @@ export const Hero = () => {
           <div className="space-y-8">
             <div className="space-y-6">
               <h1 
-                className="font-serif text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-tight"
+                className="font-brand text-5xl lg:text-6xl xl:text-7xl font-semibold text-foreground leading-tight"
                 dangerouslySetInnerHTML={{ __html: t('heroTitle') }}
               />
               <p className="text-xl lg:text-2xl text-muted-foreground max-w-lg">
@@ -66,12 +66,12 @@ export const Hero = () => {
             </div>
           </div>
 
-          <div className="relative">
-            <div className="aspect-square rounded-2xl overflow-hidden">
+          <div className="relative flex justify-center">
+            <div className="w-full max-w-lg">
               <img 
                 src={heroImage} 
                 alt={locale === 'en-US' ? "Premium Collagen Supplement" : "Premium Kollagen Supplement"}
-                className="w-full h-full object-contain"
+                className="w-full h-auto object-contain rounded-3xl shadow-2xl"
               />
             </div>
           </div>

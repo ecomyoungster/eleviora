@@ -31,7 +31,7 @@ export const Science = () => {
     <section id="science" className="py-20 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="font-serif text-4xl font-bold mb-4 text-foreground">
+          <h2 className="font-brand text-4xl font-semibold mb-4 text-foreground">
             {t('scienceTitle')}
           </h2>
           <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
@@ -51,7 +51,7 @@ export const Science = () => {
                 </div>
               </div>
               <div>
-                <h3 className="font-serif text-xl font-semibold mb-2 text-foreground">
+                <h3 className="font-brand text-xl font-semibold mb-2 text-foreground">
                   {fact.title}
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
