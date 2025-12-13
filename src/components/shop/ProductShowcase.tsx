@@ -27,11 +27,11 @@ export const ProductShowcase = () => {
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="relative order-2 lg:order-1">
-            <div className="aspect-square max-w-md mx-auto">
+            <div className="max-w-lg mx-auto">
               <img
                 src={kollagenImage}
                 alt={locale === 'en-US' ? "Collagen Hydrolysate Powder" : "Kollagen Hydrolysat Pulver"}
-                className="w-full h-full object-contain"
+                className="w-full h-auto object-contain rounded-2xl shadow-lg border border-border/30"
               />
             </div>
           </div>

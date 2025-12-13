@@ -19,6 +19,7 @@ import {
 import bundleSchoenheit from "@/assets/bundle-schoenheit.jpg";
 import bundleGelenk from "@/assets/bundle-gelenk.jpg";
 import bundleGanzkoerper from "@/assets/bundle-ganzkoerper.jpg";
+import kollagenProductImage from "@/assets/kollagen-product-updated.png";
 
 // Individual product pricing with subscription
 const productPricing: Record<string, { regular: number; subscription: number }> = {
@@ -186,9 +187,16 @@ const ProductDetail = () => {
     return null;
   };
   
+  // Get custom product image for kollagen
+  const getProductImage = () => {
+    if (node.handle.includes('kollagen-hydrolysat-pulver')) return kollagenProductImage;
+    return null;
+  };
+  
   const bundleImage = getBundleImage();
+  const productImage = getProductImage();
   const images = node.images.edges.map(edge => edge.node);
-  const currentImage = bundleImage || images[selectedImageIndex]?.url;
+  const currentImage = bundleImage || productImage || images[selectedImageIndex]?.url;
 
   // Check if product is a bundle
   const isBundle = node.title.toLowerCase().includes('bundle') || 
