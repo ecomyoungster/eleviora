@@ -50,7 +50,7 @@ export const Testimonials = () => {
     <section id="reviews" className="py-20 bg-wellness-beige/30">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="font-serif text-4xl font-bold mb-4 text-foreground">
+          <h2 className="font-brand text-4xl font-semibold mb-4 text-foreground">
             {t('testimonialsTitle')}
           </h2>
           <p className="text-muted-foreground text-lg">

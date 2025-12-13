@@ -36,7 +36,7 @@ export const FAQ = () => {
     <section id="faq" className="py-20">
       <div className="container mx-auto px-4 max-w-3xl">
         <div className="text-center mb-12">
-          <h2 className="font-serif text-4xl font-bold mb-4 text-foreground">
+          <h2 className="font-brand text-4xl font-semibold mb-4 text-foreground">
             {t('faqTitle')}
           </h2>
           <p className="text-muted-foreground text-lg">
@@ -46,7 +46,7 @@ export const FAQ = () => {
         <Accordion type="single" collapsible className="w-full">
           {faqs.map((faq, index) => (
             <AccordionItem key={index} value={`item-${index}`}>
-              <AccordionTrigger className="text-left font-serif text-lg">
+              <AccordionTrigger className="text-left font-brand text-lg">
                 {faq.question}
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground">

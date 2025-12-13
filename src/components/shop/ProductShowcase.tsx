@@ -1,9 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { Check, ArrowRight } from "lucide-react";
 import { useTranslation, useLocaleStore } from "@/stores/localeStore";
-import kollagenImage from "@/assets/kollagen-product-new.png";
+import kollagenImage from "@/assets/kollagen-new.jpg";
 
 export const ProductShowcase = () => {
   const t = useTranslation();
@@ -35,17 +34,11 @@ export const ProductShowcase = () => {
                 className="w-full h-full object-contain"
               />
             </div>
-            <Badge className="absolute top-4 right-4 lg:right-12 bg-primary text-primary-foreground text-sm px-4 py-2">
-              500g
-            </Badge>
           </div>
 
           <div className="space-y-8 order-1 lg:order-2">
             <div>
-              <Badge variant="outline" className="mb-4 text-primary border-primary">
-                {t('premiumQuality')}
-              </Badge>
-              <h2 className="font-serif text-4xl lg:text-5xl font-bold text-foreground mb-4">
+              <h2 className="font-brand text-4xl lg:text-5xl font-semibold text-foreground mb-4">
                 {locale === 'en-US' ? 'Collagen Hydrolysate Powder' : 'Kollagen Hydrolysat Pulver'}
               </h2>
               <p className="text-xl text-muted-foreground">

@@ -18,7 +18,7 @@ const About = () => {
         <div className="max-w-6xl mx-auto mb-20">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
-              <h1 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-6">
+              <h1 className="font-brand text-4xl md:text-5xl font-semibold text-foreground mb-6">
                 Über Eleviora
               </h1>
               <p className="text-xl text-primary font-semibold mb-4">
@@ -27,7 +27,7 @@ const About = () => {
               <p className="text-lg text-muted-foreground leading-relaxed">
                 Bei Eleviora haben wir uns einem Ziel verschrieben: Menschen dabei zu unterstützen, 
                 sich in ihrer Haut wohlzufühlen – in jedem Alter. Unser Kollagen-Hydrolysat wurde 
-                speziell für die Bedürfnisse ab 50 entwickelt.
+                speziell für Ihre Bedürfnisse entwickelt.
               </p>
             </div>
             <div className="order-1 md:order-2">
@@ -42,7 +42,7 @@ const About = () => {
 
         {/* Werte Section */}
         <section className="max-w-5xl mx-auto mb-20">
-          <h2 className="font-serif text-3xl font-bold text-foreground mb-10 text-center">
+          <h2 className="font-brand text-3xl font-semibold text-foreground mb-10 text-center">
             Unsere Werte
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -56,7 +56,7 @@ const About = () => {
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <value.icon className="w-6 h-6 text-primary" />
                 </div>
-                <h3 className="font-serif text-lg font-bold text-foreground mb-2">{value.title}</h3>
+                <h3 className="font-brand text-lg font-semibold text-foreground mb-2">{value.title}</h3>
                 <p className="text-sm text-muted-foreground">{value.desc}</p>
               </div>
             ))}
@@ -74,7 +74,7 @@ const About = () => {
               />
             </div>
             <div>
-              <h2 className="font-serif text-3xl font-bold text-foreground mb-6">
+              <h2 className="font-brand text-3xl font-semibold text-foreground mb-6">
                 Höchste Qualitätsstandards
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-6">
@@ -93,7 +93,7 @@ const About = () => {
         {/* CTA Section */}
         <section className="max-w-4xl mx-auto text-center">
           <div className="bg-primary/10 rounded-2xl p-8 md:p-12">
-            <h2 className="font-serif text-3xl font-bold text-foreground mb-4">
+            <h2 className="font-brand text-3xl font-semibold text-foreground mb-4">
               Entdecken Sie Eleviora Kollagen
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-8">

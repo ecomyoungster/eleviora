@@ -50,7 +50,7 @@ export const translations = {
     
     // Hero
     heroTitle: 'Strahlende Haut.<br />Flexible Gelenke.<br />Spürbar vitaler.',
-    heroSubtitle: 'Premium Kollagen-Hydrolysat – entwickelt für die Bedürfnisse ab 50.',
+    heroSubtitle: 'Premium Kollagen-Hydrolysat – entwickelt für Ihre Bedürfnisse.',
     heroButton: 'Jetzt entdecken',
     learnMore: 'Mehr erfahren',
     
@@ -100,7 +100,7 @@ export const translations = {
     years: 'Jahre',
     
     // Footer
-    footerTagline: 'Premium Kollagen für ein vitales Leben ab 50.',
+    footerTagline: 'Premium Kollagen für ein vitales Leben.',
     footerLegal: 'Rechtliches',
     footerImprint: 'Impressum',
     footerPrivacy: 'Datenschutz',
@@ -179,7 +179,7 @@ export const translations = {
     
     // Hero
     heroTitle: 'Strahlende Haut.<br />Flexible Gelenke.<br />Spürbar vitaler.',
-    heroSubtitle: 'Premium Kollagen-Hydrolysat – entwickelt für die Bedürfnisse ab 50.',
+    heroSubtitle: 'Premium Kollagen-Hydrolysat – entwickelt für Ihre Bedürfnisse.',
     heroButton: 'Jetzt entdecken',
     learnMore: 'Mehr erfahren',
     
@@ -229,7 +229,7 @@ export const translations = {
     years: 'Jahre',
     
     // Footer
-    footerTagline: 'Premium Kollagen für ein vitales Leben ab 50.',
+    footerTagline: 'Premium Kollagen für ein vitales Leben.',
     footerLegal: 'Rechtliches',
     footerImprint: 'Impressum',
     footerPrivacy: 'Datenschutz',
@@ -308,7 +308,7 @@ export const translations = {
     
     // Hero
     heroTitle: 'Radiant Skin.<br />Flexible Joints.<br />Noticeably Vital.',
-    heroSubtitle: 'Premium collagen hydrolysate – developed for needs over 50.',
+    heroSubtitle: 'Premium collagen hydrolysate – developed for your needs.',
     heroButton: 'Discover Now',
     learnMore: 'Learn More',
     
@@ -358,7 +358,7 @@ export const translations = {
     years: 'years',
     
     // Footer
-    footerTagline: 'Premium collagen for a vital life over 50.',
+    footerTagline: 'Premium collagen for a vital life.',
     footerLegal: 'Legal',
     footerImprint: 'Imprint',
     footerPrivacy: 'Privacy Policy',

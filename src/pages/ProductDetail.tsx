@@ -163,7 +163,7 @@ const ProductDetail = () => {
       <div className="min-h-screen bg-background">
         <Header />
         <div className="container mx-auto px-4 py-20 text-center">
-          <h1 className="font-serif text-4xl font-bold mb-4">{t('productNotFound')}</h1>
+          <h1 className="font-brand text-4xl font-semibold mb-4">{t('productNotFound')}</h1>
           <Button onClick={() => window.location.href = '/'}>
             {t('backToHome')}
           </Button>
@@ -484,7 +484,7 @@ const ProductDetail = () => {
             </div>
           </div>
           <div className="space-y-6">
-            <h1 className="font-serif text-4xl font-bold text-foreground">
+            <h1 className="font-brand text-4xl font-semibold text-foreground">
               {translated.title}
             </h1>
             
