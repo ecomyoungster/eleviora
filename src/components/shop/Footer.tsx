@@ -23,8 +23,9 @@ export const Footer = () => {
             <ul className="space-y-2 text-muted-foreground">
               <li><a href="#" className="hover:text-primary transition-colors">{t('footerImprint')}</a></li>
               <li><a href="#" className="hover:text-primary transition-colors">{t('footerPrivacy')}</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">{t('footerTerms')}</a></li>
               <li><a href="#" className="hover:text-primary transition-colors">{t('footerRevocation')}</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors">{t('footerShipping')}</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors">{t('footerTerms')}</a></li>
             </ul>
           </div>
           
