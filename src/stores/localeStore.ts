@@ -24,6 +24,7 @@ export const useLocaleStore = create<LocaleStore>()(
 export const translations = {
   'de-DE': {
     // Navigation
+    navAbout: 'Über uns',
     navProduct: 'Produkt',
     navBenefits: 'Vorteile',
     navScience: 'Wissenschaft',
@@ -154,6 +155,7 @@ export const translations = {
   },
   'de-AT': {
     // Navigation
+    navAbout: 'Über uns',
     navProduct: 'Produkt',
     navBenefits: 'Vorteile',
     navScience: 'Wissenschaft',
@@ -284,6 +286,7 @@ export const translations = {
   },
   'en-US': {
     // Navigation
+    navAbout: 'About Us',
     navProduct: 'Product',
     navBenefits: 'Benefits',
     navScience: 'Science',

@@ -68,11 +68,11 @@ export const Header = () => {
                     </Link>
 
                     <Link
-                      to="/product/kollagen-hydrolysat-pulver"
+                      to="/about"
                       onClick={() => setIsOpen(false)}
                       className="flex w-full items-center justify-between py-3 text-sm font-medium uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors"
                     >
-                      {t('navProduct')}
+                      {t('navAbout')}
                     </Link>
 
                     {navItems.slice(1).map((item, index) => (
@@ -143,10 +143,10 @@ export const Header = () => {
 
             <div className="hidden md:flex items-center gap-6">
               <Link
-                to="/product/kollagen-hydrolysat-pulver"
+                to="/about"
                 className="text-sm font-medium hover:text-primary transition-colors"
               >
-                {t('navProduct')}
+                {t('navAbout')}
               </Link>
               <button
                 onClick={() => scrollToSection('benefits')}
