@@ -21,14 +21,32 @@ import bundleGelenk from "@/assets/bundle-gelenk.jpg";
 import bundleGanzkoerper from "@/assets/bundle-ganzkoerper.jpg";
 import kollagenProductImage from "@/assets/kollagen-product-updated.png";
 
-// Individual product pricing with subscription
-const productPricing: Record<string, { regular: number; subscription: number }> = {
-  'kollagen-hydrolysat-pulver': { regular: 37.99, subscription: 32.29 },
-  'omega-3-softgels': { regular: 31.99, subscription: 27.19 },
-  'msm-pulver': { regular: 28.99, subscription: 24.64 },
-  'vitamin-c-gummies': { regular: 19.99, subscription: 16.99 },
-  'glucosamin-pulver': { regular: 29.99, subscription: 25.49 },
-  'chondroitin-pulver': { regular: 22.99, subscription: 19.54 },
+// Individual product pricing with subscription tiers
+const productPricing: Record<string, { regular: number; subscription: { 2: number; 3: number; 6: number } }> = {
+  'kollagen-hydrolysat-pulver': { 
+    regular: 37.99, 
+    subscription: { 2: 37.99 * 0.90, 3: 37.99 * 0.85, 6: 37.99 * 0.80 } 
+  },
+  'omega-3-softgels': { 
+    regular: 31.99, 
+    subscription: { 2: 31.99 * 0.90, 3: 31.99 * 0.85, 6: 31.99 * 0.80 } 
+  },
+  'msm-pulver': { 
+    regular: 28.99, 
+    subscription: { 2: 28.99 * 0.90, 3: 28.99 * 0.85, 6: 28.99 * 0.80 } 
+  },
+  'vitamin-c-gummies': { 
+    regular: 19.99, 
+    subscription: { 2: 19.99 * 0.90, 3: 19.99 * 0.85, 6: 19.99 * 0.80 } 
+  },
+  'glucosamin-pulver': { 
+    regular: 29.99, 
+    subscription: { 2: 29.99 * 0.90, 3: 29.99 * 0.85, 6: 29.99 * 0.80 } 
+  },
+  'chondroitin-pulver': { 
+    regular: 22.99, 
+    subscription: { 2: 22.99 * 0.90, 3: 22.99 * 0.85, 6: 22.99 * 0.80 } 
+  },
 };
 
 // Product benefits data
@@ -211,11 +229,23 @@ const ProductDetail = () => {
         return productPricing[key];
       }
     }
-    // Fallback: calculate 15% discount
-    return { regular: basePrice, subscription: basePrice * 0.85 };
+    // Fallback: calculate tiered discounts
+    return { 
+      regular: basePrice, 
+      subscription: { 2: basePrice * 0.90, 3: basePrice * 0.85, 6: basePrice * 0.80 } 
+    };
   };
 
   const currentProductPricing = getProductPricing();
+
+  // Get subscription price based on selected interval
+  const getSubscriptionPrice = (months: 2 | 3 | 6) => {
+    return currentProductPricing.subscription[months];
+  };
+
+  const getSubscriptionDiscount = (months: 2 | 3 | 6) => {
+    return months === 2 ? 10 : months === 3 ? 15 : 20;
+  };
 
   // Get benefits for product
   const getProductBenefits = () => {
@@ -387,8 +417,8 @@ const ProductDetail = () => {
     
     if (purchaseType === 'subscription') {
       // Individual product with subscription
-      const subscriptionPrice = currentProductPricing.subscription;
       const intervalMonths = subscriptionInterval === 60 ? 2 : subscriptionInterval === 90 ? 3 : 6;
+      const subscriptionPrice = getSubscriptionPrice(intervalMonths as 2 | 3 | 6);
       
       const cartItem = {
         product,
@@ -543,16 +573,16 @@ const ProductDetail = () => {
                         )}
                       </div>
                       <div className="flex-1 text-left">
-                        <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2">
                           <span className="font-semibold">
                             {locale.startsWith('de') ? 'Abonniere & spare' : 'Subscribe & save'}
                           </span>
                           <span className="bg-primary text-white text-xs font-bold px-2 py-0.5 rounded-full">
-                            -15%
+                            {locale.startsWith('de') ? 'bis zu 20% Rabatt' : 'up to 20% off'}
                           </span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <span className="text-lg font-bold">€{currentProductPricing.subscription.toFixed(2)}</span>
+                          <span className="text-lg font-bold">€{getSubscriptionPrice(subscriptionInterval === 60 ? 2 : subscriptionInterval === 90 ? 3 : 6).toFixed(2)}</span>
                           <span className="text-sm text-muted-foreground line-through">€{currentProductPricing.regular.toFixed(2)}</span>
                         </div>
                       </div>
@@ -566,38 +596,48 @@ const ProductDetail = () => {
                         {locale.startsWith('de') ? 'Kur-Dauer wählen:' : 'Choose treatment duration:'}
                       </p>
                       <div className="space-y-2">
-                        {([2, 3, 6] as const).map((months) => (
-                          <button
-                            key={months}
-                            onClick={() => setSubscriptionInterval(months === 2 ? 60 : months === 3 ? 90 : 180)}
-                            className={`w-full flex items-start gap-3 p-3 rounded-lg border transition-all ${
-                              (months === 2 && subscriptionInterval === 60) ||
-                              (months === 3 && subscriptionInterval === 90) ||
-                              (months === 6 && subscriptionInterval === 180)
-                                ? 'border-primary bg-primary/5'
-                                : 'border-border hover:border-primary/50'
-                            }`}
-                          >
-                            <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-0.5 ${
-                              (months === 2 && subscriptionInterval === 60) ||
-                              (months === 3 && subscriptionInterval === 90) ||
-                              (months === 6 && subscriptionInterval === 180) 
-                                ? 'border-primary' 
-                                : 'border-muted-foreground'
-                            }`}>
-                              {((months === 2 && subscriptionInterval === 60) ||
-                                (months === 3 && subscriptionInterval === 90) ||
-                                (months === 6 && subscriptionInterval === 180)) && (
-                                <div className="w-2 h-2 rounded-full bg-primary" />
+                        {([2, 3, 6] as const).map((months) => {
+                          const discountPercent = months === 2 ? 10 : months === 3 ? 15 : 20;
+                          const isSelected = (months === 2 && subscriptionInterval === 60) ||
+                                            (months === 3 && subscriptionInterval === 90) ||
+                                            (months === 6 && subscriptionInterval === 180);
+                          return (
+                            <button
+                              key={months}
+                              onClick={() => setSubscriptionInterval(months === 2 ? 60 : months === 3 ? 90 : 180)}
+                              className={`relative w-full flex items-start gap-3 p-3 rounded-lg border transition-all ${
+                                isSelected
+                                  ? 'border-primary bg-primary/5'
+                                  : 'border-border hover:border-primary/50'
+                              }`}
+                            >
+                              {months === 3 && (
+                                <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-primary text-white text-xs px-2 py-0.5 rounded-full font-semibold">
+                                  {locale.startsWith('de') ? 'Empfohlen' : 'Recommended'}
+                                </div>
                               )}
-                            </div>
-                            <div className="flex-1 text-left">
-                              <div className="font-medium">{getSubscriptionDurationText(months)}</div>
-                              <div className="text-xs text-muted-foreground">{getSubscriptionDescription(months)}</div>
-                              <div className="text-xs text-primary mt-1">{getDeliveryInfoText(months)}</div>
-                            </div>
-                          </button>
-                        ))}
+                              <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                                isSelected ? 'border-primary' : 'border-muted-foreground'
+                              }`}>
+                                {isSelected && (
+                                  <div className="w-2 h-2 rounded-full bg-primary" />
+                                )}
+                              </div>
+                              <div className="flex-1 text-left">
+                                <div className="flex items-center gap-2">
+                                  <span className="font-medium">{getSubscriptionDurationText(months)}</span>
+                                  <span className="text-xs text-primary font-semibold">-{discountPercent}%</span>
+                                </div>
+                                <div className="text-xs text-muted-foreground">{getSubscriptionDescription(months)}</div>
+                                <div className="flex items-center gap-2 mt-1">
+                                  <span className="text-sm font-semibold">€{getSubscriptionPrice(months).toFixed(2)}</span>
+                                  <span className="text-xs text-muted-foreground line-through">€{currentProductPricing.regular.toFixed(2)}</span>
+                                </div>
+                                <div className="text-xs text-primary mt-0.5">{getDeliveryInfoText(months)}</div>
+                              </div>
+                            </button>
+                          );
+                        })}
                       </div>
                       <p className="text-xs text-muted-foreground italic">
                         {locale.startsWith('de') 
@@ -686,26 +726,35 @@ const ProductDetail = () => {
                   <div className="bg-secondary/20 rounded-xl p-4 space-y-2">
                     {purchaseType === 'subscription' ? (
                       <>
-                        <div className="flex justify-between items-center">
-                          <span className="text-lg font-semibold">{locale.startsWith('de') ? 'Preis' : 'Price'}:</span>
-                          <div className="text-right">
-                            <div className="text-sm text-muted-foreground line-through">
-                              €{currentProductPricing.regular.toFixed(2)}
-                            </div>
-                            <div className="text-3xl font-bold text-foreground">
-                              €{currentProductPricing.subscription.toFixed(2)}
-                            </div>
-                          </div>
-                        </div>
-                        <div className="text-primary font-semibold">
-                          {t('wasSaved')} €{(currentProductPricing.regular - currentProductPricing.subscription).toFixed(2)} (15%)
-                        </div>
-                        <div className="text-sm text-muted-foreground flex items-center gap-2">
-                          <Truck className="w-4 h-4" />
-                          {locale.startsWith('de') 
-                            ? 'Kostenloser Versand ab der 2. Lieferung'
-                            : 'Free shipping from 2nd delivery'}
-                        </div>
+                        {(() => {
+                          const months = subscriptionInterval === 60 ? 2 : subscriptionInterval === 90 ? 3 : 6;
+                          const subPrice = getSubscriptionPrice(months as 2 | 3 | 6);
+                          const discount = getSubscriptionDiscount(months as 2 | 3 | 6);
+                          return (
+                            <>
+                              <div className="flex justify-between items-center">
+                                <span className="text-lg font-semibold">{locale.startsWith('de') ? 'Preis' : 'Price'}:</span>
+                                <div className="text-right">
+                                  <div className="text-sm text-muted-foreground line-through">
+                                    €{currentProductPricing.regular.toFixed(2)}
+                                  </div>
+                                  <div className="text-3xl font-bold text-foreground">
+                                    €{subPrice.toFixed(2)}
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="text-primary font-semibold">
+                                {t('wasSaved')} €{(currentProductPricing.regular - subPrice).toFixed(2)} ({discount}%)
+                              </div>
+                              <div className="text-sm text-muted-foreground flex items-center gap-2">
+                                <Truck className="w-4 h-4" />
+                                {locale.startsWith('de') 
+                                  ? 'Kostenloser Versand ab der 2. Lieferung'
+                                  : 'Free shipping from 2nd delivery'}
+                              </div>
+                            </>
+                          );
+                        })()}
                       </>
                     ) : (
                       <>
