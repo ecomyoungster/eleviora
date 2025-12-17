@@ -21,13 +21,11 @@ const About = () => {
               <h1 className="font-brand text-4xl md:text-5xl font-semibold text-foreground mb-6">
                 Über Eleviora
               </h1>
-              <p className="text-xl text-primary font-semibold mb-4">
-                Premium Kollagen für ein vitales Leben
+              <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+                Bei Eleviora legen wir größten Wert auf Qualität und Transparenz. Unser Kollagen-Hydrolysat wird nach strengen Herstellungsstandards produziert und jede Charge durchläuft unabhängige Laborkontrollen auf Reinheit, Schwermetalle und Mikroorganismen.
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Bei Eleviora haben wir uns einem Ziel verschrieben: Menschen dabei zu unterstützen, 
-                sich in ihrer Haut wohlzufühlen – in jedem Alter. Unser Kollagen-Hydrolysat wurde 
-                speziell für Ihre Bedürfnisse entwickelt.
+                Wir verzichten bewusst auf Konservierungsstoffe, Füllstoffe und künstliche Aromen – unser Produkt ist so rein wie möglich. Eleviora Kollagen ist ein Nahrungsergänzungsmittel, das eine ausgewogene Ernährung ergänzt.
               </p>
             </div>
             <div className="order-1 md:order-2">
