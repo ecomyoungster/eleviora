@@ -99,13 +99,18 @@ export const Science = () => {
             </div>
 
             <div className="mt-8 pt-6 border-t border-border/50">
-              <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                <ExternalLink className="w-4 h-4 mt-0.5 flex-shrink-0" />
+              <a 
+                href="https://efsa.onlinelibrary.wiley.com/doi/abs/10.2903/j.efsa.2013.3257"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-2 text-sm text-muted-foreground hover:text-primary transition-colors group"
+              >
+                <ExternalLink className="w-4 h-4 mt-0.5 flex-shrink-0 group-hover:text-primary" />
                 <p>
                   <span className="font-medium">{scientificContent.sourceLabel}:</span>{" "}
-                  <span className="italic">{scientificContent.source}</span>
+                  <span className="italic underline decoration-muted-foreground/30 group-hover:decoration-primary">{scientificContent.source}</span>
                 </p>
-              </div>
+              </a>
             </div>
           </div>
         </div>
