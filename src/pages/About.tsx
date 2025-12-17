@@ -22,10 +22,10 @@ const About = () => {
                 Über Eleviora
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-                Bei Eleviora legen wir größten Wert auf Qualität und Transparenz. Unser Kollagen-Hydrolysat wird nach strengen Herstellungsstandards produziert und jede Charge durchläuft unabhängige Laborkontrollen auf Reinheit, Schwermetalle und Mikroorganismen.
+                Bei Eleviora verbinden wir Transparenz, Reinheit und Sorgfalt. Unser Kollagen-Hydrolysat wird sorgfältig hergestellt und unabhängig geprüft, damit Sie genau wissen, was Sie einnehmen. Wir verzichten bewusst auf Zusatzstoffe, Füllstoffe und künstliche Aromen.
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Wir verzichten bewusst auf Konservierungsstoffe, Füllstoffe und künstliche Aromen – unser Produkt ist so rein wie möglich. Eleviora Kollagen ist ein Nahrungsergänzungsmittel, das eine ausgewogene Ernährung ergänzt.
+                Unser Ziel ist es, Ihnen ein Produkt anzubieten, das höchsten Ansprüchen an Qualität entspricht und Sie in Ihrer täglichen Ernährung unterstützt – zuverlässig, sicher und ohne leere Versprechen.
               </p>
             </div>
             <div className="order-1 md:order-2">
