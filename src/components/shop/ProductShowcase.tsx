@@ -6,7 +6,7 @@ import kollagenImage from "@/assets/kollagen-new.jpg";
 export const ProductShowcase = () => {
   const t = useTranslation();
   const locale = useLocaleStore(state => state.locale);
-  const benefits = locale === 'en-US' ? ["Supports skin elasticity & firmness", "Promotes joint flexibility", "High bioavailability", "Pure quality without additives", "30-day satisfaction guarantee"] : ["Unterstützt Hautelastizität & Festigkeit", "Fördert Gelenkflexibilität", "Hohe Bioverfügbarkeit", "Reine Qualität ohne Zusatzstoffe", "30 Tage Zufriedenheitsgarantie"];
+  const benefits = locale === 'en-US' ? ["Optimal molecule size (3000-5000 DA)", "With Hyaluron and 6 Vitamins", "Optimized bioavailability", "Without preservatives", "30-day satisfaction guarantee"] : ["Optimale Molekülgröße (3000-5000 DA)", "Mit Hyaluron und 6 Vitaminen", "Optimierte Bioverfügbarkeit", "Ohne Konservierungsstoffe", "30 Tage Zufriedenheitsgarantie"];
   return <section id="product" className="py-20 bg-secondary/20">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
