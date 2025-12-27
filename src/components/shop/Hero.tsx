@@ -33,7 +33,7 @@ export const Hero = () => {
               <h1 dangerouslySetInnerHTML={{
               __html: t('heroTitle').replace(/<br\s*\/?>/g, ' ')
             }} className="font-brand text-2xl sm:text-3xl font-semibold text-foreground leading-tight [&>br]:hidden [&>br]:sm:inline lg:text-7xl" />
-              <p className="text-xl lg:text-2xl text-muted-foreground max-w-lg">
+              <p className="text-xl text-muted-foreground max-w-lg lg:text-xl">
                 {t('heroSubtitle')}
               </p>
             </div>
