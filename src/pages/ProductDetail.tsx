@@ -58,7 +58,7 @@ const productBenefits: Record<string, string[]> = {
     'Praktische Kapselform',
     'Laborgeprüft',
     'Neutraler Geschmack',
-    'Keine Zusatzstoffe',
+    'Ohne Konservierungsstoffe',
   ],
   'omega-3-softgels': [
     'Ideal für Menschen, die Wert auf Ernährung und Wohlbefinden legen',
