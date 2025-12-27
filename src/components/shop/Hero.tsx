@@ -28,7 +28,15 @@ export const Hero = () => {
   return <section className="relative min-h-[85vh] flex items-center bg-gradient-to-b from-wellness-cream to-background overflow-hidden">
       <div className="container mx-auto px-4 py-16">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-8">
+          {/* Image - shows first on mobile/tablet */}
+          <div className="relative flex justify-center order-first lg:order-last">
+            <div className="w-full max-w-lg">
+              <img alt={locale === 'en-US' ? "Premium Collagen Supplement" : "Premium Kollagen Supplement"} className="w-full h-auto object-contain rounded-3xl shadow-2xl" src="/lovable-uploads/227355c6-b6f4-4379-b38c-68408e74901b.png" />
+            </div>
+          </div>
+
+          {/* Text content - shows second on mobile/tablet */}
+          <div className="space-y-8 order-last lg:order-first">
             <div className="space-y-6">
               <h1 dangerouslySetInnerHTML={{
               __html: t('heroTitle').replace(/<br\s*\/?>/g, ' ')
@@ -57,12 +65,6 @@ export const Hero = () => {
             })}>
                 {t('learnMore')}
               </Button>
-            </div>
-          </div>
-
-          <div className="relative flex justify-center">
-            <div className="w-full max-w-lg">
-              <img alt={locale === 'en-US' ? "Premium Collagen Supplement" : "Premium Kollagen Supplement"} className="w-full h-auto object-contain rounded-3xl shadow-2xl" src="/lovable-uploads/227355c6-b6f4-4379-b38c-68408e74901b.png" />
             </div>
           </div>
         </div>
