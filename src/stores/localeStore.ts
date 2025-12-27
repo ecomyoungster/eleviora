@@ -77,7 +77,7 @@ export const translations = {
     scienceFact2Title: 'Laborgeprüfte Qualität',
     scienceFact2Desc: 'Jede Charge wird von unabhängigen Laboren auf Reinheit, Schwermetalle und Mikroorganismen getestet.',
     scienceFact3Title: 'Sauber formuliert',
-    scienceFact3Desc: 'Reines Kollagen-Hydrolysat ohne Konservierungsstoffe, Füllstoffe oder künstliche Aromen.',
+    scienceFact3Desc: 'Ohne Konservierungsstoffe, Füllstoffe oder künstliche Aromen.',
     scienceFact4Title: 'HACCP Zertifiziert',
     scienceFact4Desc: 'Hergestellt nach höchsten Qualitätsstandards mit lückenloser Rückverfolgbarkeit.',
     
@@ -208,7 +208,7 @@ export const translations = {
     scienceFact2Title: 'Laborgeprüfte Qualität',
     scienceFact2Desc: 'Jede Charge wird von unabhängigen Laboren auf Reinheit, Schwermetalle und Mikroorganismen getestet.',
     scienceFact3Title: 'Sauber formuliert',
-    scienceFact3Desc: 'Reines Kollagen-Hydrolysat ohne Konservierungsstoffe, Füllstoffe oder künstliche Aromen.',
+    scienceFact3Desc: 'Ohne Konservierungsstoffe, Füllstoffe oder künstliche Aromen.',
     scienceFact4Title: 'HACCP Zertifiziert',
     scienceFact4Desc: 'Hergestellt nach höchsten Qualitätsstandards mit lückenloser Rückverfolgbarkeit.',
     
