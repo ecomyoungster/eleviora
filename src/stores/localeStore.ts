@@ -78,7 +78,7 @@ export const translations = {
     scienceFact2Desc: 'Jede Charge wird von unabhängigen Laboren auf Reinheit, Schwermetalle und Mikroorganismen getestet.',
     scienceFact3Title: 'Sauber formuliert',
     scienceFact3Desc: 'Ohne Konservierungsstoffe, Füllstoffe oder künstliche Aromen.',
-    scienceFact4Title: 'HACCP Zertifiziert',
+    scienceFact4Title: 'HACCP Konform',
     scienceFact4Desc: 'Hergestellt nach höchsten Qualitätsstandards mit lückenloser Rückverfolgbarkeit.',
     
     // FAQ
@@ -209,7 +209,7 @@ export const translations = {
     scienceFact2Desc: 'Jede Charge wird von unabhängigen Laboren auf Reinheit, Schwermetalle und Mikroorganismen getestet.',
     scienceFact3Title: 'Sauber formuliert',
     scienceFact3Desc: 'Ohne Konservierungsstoffe, Füllstoffe oder künstliche Aromen.',
-    scienceFact4Title: 'HACCP Zertifiziert',
+    scienceFact4Title: 'HACCP Konform',
     scienceFact4Desc: 'Hergestellt nach höchsten Qualitätsstandards mit lückenloser Rückverfolgbarkeit.',
     
     // FAQ
