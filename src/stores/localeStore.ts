@@ -50,7 +50,7 @@ export const translations = {
     checkoutWith: 'Zur Kasse',
     
     // Hero
-    heroTitle: 'Strahlende Haut.<br />Flexible Gelenke.<br />Spürbar vitaler.',
+    heroTitle: 'Verantwortungsvolle Herstellung.<br />Hochwertige Rezeptur.<br />Sorgfältig geprüft.',
     heroSubtitle: 'Premium Kollagen-Hydrolysat – entwickelt für Ihre Bedürfnisse.',
     heroButton: 'Jetzt entdecken',
     learnMore: 'Mehr erfahren',
@@ -181,7 +181,7 @@ export const translations = {
     checkoutWith: 'Zur Kassa',
     
     // Hero
-    heroTitle: 'Strahlende Haut.<br />Flexible Gelenke.<br />Spürbar vitaler.',
+    heroTitle: 'Verantwortungsvolle Herstellung.<br />Hochwertige Rezeptur.<br />Sorgfältig geprüft.',
     heroSubtitle: 'Premium Kollagen-Hydrolysat – entwickelt für Ihre Bedürfnisse.',
     heroButton: 'Jetzt entdecken',
     learnMore: 'Mehr erfahren',
@@ -312,7 +312,7 @@ export const translations = {
     checkoutWith: 'Checkout',
     
     // Hero
-    heroTitle: 'Radiant Skin.<br />Flexible Joints.<br />Noticeably Vital.',
+    heroTitle: 'Responsible Manufacturing.<br />Premium Formulation.<br />Carefully Tested.',
     heroSubtitle: 'Premium collagen hydrolysate – developed for your needs.',
     heroButton: 'Discover Now',
     learnMore: 'Learn More',
