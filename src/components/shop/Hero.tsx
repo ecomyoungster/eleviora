@@ -30,8 +30,8 @@ export const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <div className="space-y-6">
-              <h1 className="font-brand text-5xl lg:text-6xl xl:text-7xl font-semibold text-foreground leading-tight" dangerouslySetInnerHTML={{
-              __html: t('heroTitle')
+              <h1 className="font-brand text-2xl sm:text-3xl lg:text-4xl font-semibold text-foreground leading-tight [&>br]:hidden [&>br]:sm:inline" dangerouslySetInnerHTML={{
+              __html: t('heroTitle').replace(/<br\s*\/?>/g, ' ')
             }} />
               <p className="text-xl lg:text-2xl text-muted-foreground max-w-lg">
                 {t('heroSubtitle')}
