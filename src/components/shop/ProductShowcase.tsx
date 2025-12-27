@@ -18,8 +18,8 @@ export const ProductShowcase = () => {
 
           <div className="space-y-8 order-1 lg:order-2">
             <div>
-              <h2 className="font-brand text-4xl lg:text-5xl font-semibold text-foreground mb-4">
-                {locale === 'en-US' ? 'Collagen Hydrolysate Powder' : 'Kollagen Hydrolysat Pulver'}
+            <h2 className="font-brand text-4xl lg:text-5xl font-semibold text-foreground mb-4">
+                {locale === 'en-US' ? 'Collagen Hydrolysate Complex' : 'Kollagenhydrolysat Komplex'}
               </h2>
               <p className="text-xl text-muted-foreground">
                 {locale === 'en-US' ? 'Pure collagen hydrolysate for radiant skin, strong hair, and flexible joints. Dissolves instantly – no taste, no effort.' : 'Reines Kollagen-Hydrolysat für strahlende Haut, kräftiges Haar und flexible Gelenke. Löst sich sofort auf – geschmacksneutral, unkompliziert.'}
