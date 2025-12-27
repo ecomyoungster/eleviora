@@ -704,8 +704,8 @@ const ProductDetail = () => {
                           <div className="text-center pt-2">
                             <div className="text-2xl font-bold mb-1">3 {t('pieces')}</div>
                             <div className="text-primary font-semibold text-sm mb-2">{t('save').replace('{discount}', '10')}</div>
-                            <div className="text-sm text-muted-foreground line-through">€{(currentProductPricing.regular * 3).toFixed(2)}</div>
-                            <div className="text-base font-semibold">€{(currentProductPricing.regular * 3 * 0.9).toFixed(2)}</div>
+                            <div className="text-sm text-muted-foreground line-through">€{getQuantityPrice(3).total.toFixed(2)}</div>
+                            <div className="text-base font-semibold">€{getQuantityPrice(3).discounted.toFixed(2)}</div>
                           </div>
                         </button>
 
@@ -726,8 +726,8 @@ const ProductDetail = () => {
                           <div className="text-center">
                             <div className="text-2xl font-bold mb-1">6 {t('pieces')}</div>
                             <div className="text-primary font-semibold text-sm mb-2">{t('save').replace('{discount}', '15')}</div>
-                            <div className="text-sm text-muted-foreground line-through">€{(currentProductPricing.regular * 6).toFixed(2)}</div>
-                            <div className="text-base font-semibold">€{(currentProductPricing.regular * 6 * 0.85).toFixed(2)}</div>
+                            <div className="text-sm text-muted-foreground line-through">€{getQuantityPrice(6).total.toFixed(2)}</div>
+                            <div className="text-base font-semibold">€{getQuantityPrice(6).discounted.toFixed(2)}</div>
                           </div>
                         </button>
                       </div>
