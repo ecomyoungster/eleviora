@@ -20,7 +20,7 @@ export const Hero = () => {
     text: "Laborgeprüft"
   }, {
     icon: Leaf,
-    text: "Ohne Zusätze"
+    text: "Reine Formel"
   }, {
     icon: Award,
     text: "Premium Qualität"
