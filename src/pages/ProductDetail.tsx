@@ -55,7 +55,7 @@ const productPricing: Record<string, { regular: number; subscription: { 2: numbe
 // Product benefits data
 const productBenefits: Record<string, string[]> = {
   'kollagen-hydrolysat-pulver': [
-    'Reines Kollagenpulver',
+    'Praktische Kapselform',
     'Laborgeprüft',
     'Neutraler Geschmack',
     'Keine Zusatzstoffe',
