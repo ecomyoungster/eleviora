@@ -141,7 +141,7 @@ export const Header = () => {
               </SheetContent>
             </Sheet>
 
-            <div className="hidden md:flex items-center gap-6">
+            <div className="hidden lg:flex items-center gap-6">
               <Link
                 to="/about"
                 className="text-sm font-medium hover:text-primary transition-colors"
