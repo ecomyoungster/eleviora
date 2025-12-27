@@ -51,7 +51,7 @@ export const translations = {
     
     // Hero
     heroTitle: 'Reine Wirkstoffe.<br />Präzise&nbsp;Formulierung.<br />Geprüfte Qualität.',
-    heroSubtitle: 'Premium Kollagen-Hydrolysat – entwickelt für Ihre Bedürfnisse.',
+    heroSubtitle: 'Kollagen-Hydrolysat – mit Hyaluron & 6 Vitaminen.',
     heroButton: 'Jetzt entdecken',
     learnMore: 'Mehr erfahren',
     
@@ -182,7 +182,7 @@ export const translations = {
     
     // Hero
     heroTitle: 'Reine Wirkstoffe.<br />Präzise&nbsp;Formulierung.<br />Geprüfte Qualität.',
-    heroSubtitle: 'Premium Kollagen-Hydrolysat – entwickelt für Ihre Bedürfnisse.',
+    heroSubtitle: 'Kollagen-Hydrolysat – mit Hyaluron & 6 Vitaminen.',
     heroButton: 'Jetzt entdecken',
     learnMore: 'Mehr erfahren',
     
@@ -313,7 +313,7 @@ export const translations = {
     
     // Hero
     heroTitle: 'Pure Ingredients.<br />Precise Formulation.<br />Tested Quality.',
-    heroSubtitle: 'Premium collagen hydrolysate – developed for your needs.',
+    heroSubtitle: 'Collagen Hydrolysate – with Hyaluronan & 6 Vitamins.',
     heroButton: 'Discover Now',
     learnMore: 'Learn More',
     
