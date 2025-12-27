@@ -29,19 +29,21 @@ export const Science = () => {
   ];
 
   const scientificContent = locale.startsWith('de') ? {
-    intro: "Kollagen ist ein wichtiger Bestandteil des Bindegewebes und trägt unter anderem zur Erhaltung normaler Haut bei. Diese Wirkung ist von der European Food Safety Authority (EFSA) geprüft und als zugelassene gesundheitsbezogene Angabe bestätigt (Health Claim ID 4017). Studien zeigen, dass Kollagen-Hydrolysat die Versorgung mit spezifischen Aminosäuren unterstützt, die für die Struktur und Funktion des Hautgewebes notwendig sind.",
-    nutrition: "Unser Kollagen-Hydrolysat liefert diese Aminosäuren in leicht verwertbarer Form und ergänzt eine ausgewogene Ernährung, die entscheidend für die allgemeine Hautgesundheit ist. Dabei ist wichtig zu betonen, dass Nahrungsergänzungsmittel kein Ersatz für eine gesunde Ernährung und einen ausgewogenen Lebensstil darstellen.",
-    bioavailability: "Zahlreiche wissenschaftliche Untersuchungen haben die Bioverfügbarkeit von Kollagen-Hydrolysat belegt. Nach oraler Einnahme werden die Peptide im Körper aufgenommen und können die körpereigene Kollagenproduktion unterstützen. EFSA betont, dass solche zugelassenen Aussagen nur im Kontext einer ausgewogenen Ernährung und eines gesunden Lebensstils verwendet werden dürfen.",
-    conclusion: "Mit unserem Produkt bieten wir eine Möglichkeit, die tägliche Ernährung gezielt zu ergänzen. Dabei setzen wir auf geprüfte Qualität, Reinheit und Transparenz – unterstützt durch wissenschaftliche Erkenntnisse, ohne über das Zulässige hinauszugehen.",
-    source: "Scientific Opinion on the substantiation of a health claim related to VeriSol®P and a change in skin elasticity leading to an improvement in skin function pursuant to Article 13(5) of Regulation (EC) No 1924/2006 - EFSA Journal - Wiley Online Library",
-    sourceLabel: "Quelle"
+    title: "Die Wissenschaft hinter Kollagen – Warum Qualität entscheidend ist",
+    intro: "Kollagen ist das häufigste Protein im menschlichen Körper und macht etwa 30 Prozent der gesamten Proteinmasse aus. Es bildet das strukturelle Gerüst für Haut, Knochen, Knorpel, Sehnen und Bindegewebe. Ab dem 25. Lebensjahr reduziert sich die körpereigene Kollagenproduktion jährlich um etwa ein Prozent. Mit 45 Jahren hat der Körper bereits rund 20 Prozent seiner ursprünglichen Kollagenmenge verloren – ein natürlicher Prozess, der sich in der Hautstruktur, Gelenkfunktion und Bindegewebselastizität bemerkbar macht.",
+    nutrition: "Die entscheidende Frage bei Kollagenpräparaten lautet: Kann der Körper das zugeführte Kollagen überhaupt verwerten? Hier zeigt die Forschung eindeutige Ergebnisse. Während natives Kollagen aus der Nahrung zu große Moleküle aufweist, um effektiv aufgenommen zu werden, durchläuft hydrolysiertes Kollagen einen enzymatischen Spaltungsprozess. Dabei entstehen kleine Peptide mit einem Molekulargewicht zwischen 2000 und 5000 Dalton. Wissenschaftliche Studien belegen, dass Kollagenpeptide dieser Molekülgröße vom Körper aufgenommen und ins Blut transportiert werden können, wo sie bis zu 14 Tage nachweisbar bleiben.",
+    bioavailability: "Besonders wichtig ist die Kombination mit Mikronährstoffen. Vitamin C trägt nachweislich zu einer normalen Kollagenbildung für die normale Funktion der Haut bei. Auch Zink trägt zur Erhaltung normaler Haut bei. Diese synergistische Zusammensetzung unterscheidet hochwertige Präparate von reinen Kollagenpulvern und unterstützt die körpereigenen Prozesse optimal.",
+    source: 'Frontiers in Nutrition (2024): "Absorption of bioactive peptides following collagen hydrolysate intake"',
+    sourceUrl: "https://www.frontiersin.org/journals/nutrition/articles/10.3389/fnut.2024.1416643/full",
+    sourceLabel: "Wissenschaftliche Quelle"
   } : {
-    intro: "Collagen is an important component of connective tissue and contributes to the maintenance of normal skin. This effect has been reviewed by the European Food Safety Authority (EFSA) and confirmed as an authorized health claim (Health Claim ID 4017). Studies show that collagen hydrolysate supports the supply of specific amino acids necessary for the structure and function of skin tissue.",
-    nutrition: "Our collagen hydrolysate provides these amino acids in an easily absorbable form and complements a balanced diet, which is crucial for overall skin health. It is important to emphasize that dietary supplements are not a substitute for a healthy diet and balanced lifestyle.",
-    bioavailability: "Numerous scientific studies have demonstrated the bioavailability of collagen hydrolysate. After oral intake, the peptides are absorbed in the body and can support the body's own collagen production. EFSA emphasizes that such authorized claims may only be used in the context of a balanced diet and healthy lifestyle.",
-    conclusion: "With our product, we offer a way to specifically supplement your daily diet. We rely on tested quality, purity, and transparency – supported by scientific findings, without exceeding what is permissible.",
-    source: "Scientific Opinion on the substantiation of a health claim related to VeriSol®P and a change in skin elasticity leading to an improvement in skin function pursuant to Article 13(5) of Regulation (EC) No 1924/2006 - EFSA Journal - Wiley Online Library",
-    sourceLabel: "Source"
+    title: "The Science Behind Collagen – Why Quality Matters",
+    intro: "Collagen is the most abundant protein in the human body, making up about 30 percent of total protein mass. It forms the structural framework for skin, bones, cartilage, tendons, and connective tissue. From age 25, the body's own collagen production decreases by about one percent annually. By age 45, the body has already lost around 20 percent of its original collagen amount – a natural process that becomes noticeable in skin structure, joint function, and connective tissue elasticity.",
+    nutrition: "The crucial question with collagen supplements is: Can the body actually utilize the ingested collagen? Research shows clear results here. While native collagen from food has molecules too large to be effectively absorbed, hydrolyzed collagen undergoes an enzymatic splitting process. This creates small peptides with a molecular weight between 2000 and 5000 Daltons. Scientific studies demonstrate that collagen peptides of this molecular size can be absorbed by the body and transported into the bloodstream, where they remain detectable for up to 14 days.",
+    bioavailability: "Particularly important is the combination with micronutrients. Vitamin C demonstrably contributes to normal collagen formation for the normal function of the skin. Zinc also contributes to the maintenance of normal skin. This synergistic composition distinguishes high-quality preparations from pure collagen powders and optimally supports the body's own processes.",
+    source: 'Frontiers in Nutrition (2024): "Absorption of bioactive peptides following collagen hydrolysate intake"',
+    sourceUrl: "https://www.frontiersin.org/journals/nutrition/articles/10.3389/fnut.2024.1416643/full",
+    sourceLabel: "Scientific Source"
   };
 
   return (
@@ -87,7 +89,7 @@ export const Science = () => {
                 <FileCheck className="w-6 h-6 text-primary" />
               </div>
               <h3 className="font-brand text-2xl font-semibold text-foreground">
-                {locale.startsWith('de') ? 'Wissenschaftliche Grundlage' : 'Scientific Foundation'}
+                {scientificContent.title}
               </h3>
             </div>
             
@@ -95,12 +97,11 @@ export const Science = () => {
               <p>{scientificContent.intro}</p>
               <p>{scientificContent.nutrition}</p>
               <p>{scientificContent.bioavailability}</p>
-              <p className="text-foreground font-medium">{scientificContent.conclusion}</p>
             </div>
 
             <div className="mt-8 pt-6 border-t border-border/50">
               <a 
-                href="https://efsa.onlinelibrary.wiley.com/doi/abs/10.2903/j.efsa.2013.3257"
+                href={scientificContent.sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-start gap-2 text-sm text-muted-foreground hover:text-primary transition-colors group"
