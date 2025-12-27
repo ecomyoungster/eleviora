@@ -6,7 +6,7 @@ import { Footer } from "@/components/shop/Footer";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
-import { Loader2, Check, Truck, Shield, Leaf, Award, Heart, Sparkles } from "lucide-react";
+import { Loader2, Check, Truck, Shield, Leaf, Award, Heart, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslation, useLocaleStore } from "@/stores/localeStore";
 import { getTranslatedProduct } from "@/lib/translations";
 import { NutritionTable } from "@/components/shop/NutritionTable";
@@ -16,10 +16,13 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import useEmblaCarousel from 'embla-carousel-react';
 import bundleSchoenheit from "@/assets/bundle-schoenheit.jpg";
 import bundleGelenk from "@/assets/bundle-gelenk.jpg";
 import bundleGanzkoerper from "@/assets/bundle-ganzkoerper.jpg";
-import kollagenProductImage from "@/assets/kollagen-product-updated.png";
+import kollagenFront from "@/assets/kollagen-komplex-front.png";
+import kollagenNutrition from "@/assets/kollagen-komplex-nutrition.png";
+import kollagenBack from "@/assets/kollagen-komplex-back.png";
 
 // Individual product pricing with subscription tiers
 const productPricing: Record<string, { regular: number; subscription: { 2: number; 3: number; 6: number } }> = {
@@ -145,9 +148,31 @@ const ProductDetail = () => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [purchaseType, setPurchaseType] = useState<'onetime' | 'subscription'>('onetime');
   const [subscriptionInterval, setSubscriptionInterval] = useState<60 | 90 | 180>(60);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const addItem = useCartStore(state => state.addItem);
   const t = useTranslation();
   const locale = useLocaleStore(state => state.locale);
+  
+  // Update scroll buttons state
+  useEffect(() => {
+    if (!emblaApi) return;
+    
+    const onSelect = () => {
+      setCanScrollPrev(emblaApi.canScrollPrev());
+      setCanScrollNext(emblaApi.canScrollNext());
+      setCurrentSlide(emblaApi.selectedScrollSnap());
+    };
+    
+    emblaApi.on('select', onSelect);
+    onSelect();
+    
+    return () => {
+      emblaApi.off('select', onSelect);
+    };
+  }, [emblaApi]);
 
   useEffect(() => {
     const loadProduct = async () => {
@@ -205,16 +230,18 @@ const ProductDetail = () => {
     return null;
   };
   
-  // Get custom product image for kollagen
-  const getProductImage = () => {
-    if (node.handle.includes('kollagen-hydrolysat-pulver')) return kollagenProductImage;
+  // Get custom product images for kollagen (array for carousel)
+  const getKollagenImages = () => {
+    if (node.handle.includes('kollagen-hydrolysat-pulver')) {
+      return [kollagenFront, kollagenNutrition, kollagenBack];
+    }
     return null;
   };
   
   const bundleImage = getBundleImage();
-  const productImage = getProductImage();
+  const kollagenImages = getKollagenImages();
   const images = node.images.edges.map(edge => edge.node);
-  const currentImage = bundleImage || productImage || images[selectedImageIndex]?.url;
+  const currentImage = bundleImage || images[selectedImageIndex]?.url;
 
   // Check if product is a bundle
   const isBundle = node.title.toLowerCase().includes('bundle') || 
@@ -494,42 +521,96 @@ const ProductDetail = () => {
         <div className="grid lg:grid-cols-2 gap-12">
           <div className="flex justify-center lg:justify-end">
             <div className="max-w-md w-full space-y-4">
-              {/* Main Image */}
-              <div className="aspect-[3/4] bg-secondary/20 rounded-xl overflow-hidden">
-                {currentImage ? (
-                  <img 
-                    src={currentImage} 
-                    alt={translated.title}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-                    {t('noImage')}
+              {/* Kollagen Product Carousel */}
+              {kollagenImages ? (
+                <div className="relative">
+                  <div className="overflow-hidden rounded-xl" ref={emblaRef}>
+                    <div className="flex">
+                      {kollagenImages.map((img, index) => (
+                        <div key={index} className="flex-[0_0_100%] min-w-0">
+                          <div className="aspect-[3/4] bg-secondary/20">
+                            <img 
+                              src={img} 
+                              alt={`${translated.title} - Bild ${index + 1}`}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                )}
-              </div>
-              
-              {/* Image Thumbnails - hide for bundles with custom images */}
-              {!bundleImage && images.length > 1 && (
-                <div className="grid grid-cols-3 gap-3">
-                  {images.map((image, index) => (
+                  
+                  {/* Navigation Arrows */}
+                  {canScrollPrev && (
                     <button
-                      key={index}
-                      onClick={() => setSelectedImageIndex(index)}
-                      className={`aspect-[3/4] rounded-lg overflow-hidden border-2 transition-all ${
-                        selectedImageIndex === index
-                          ? 'border-primary ring-2 ring-primary/20'
-                          : 'border-border hover:border-primary/50'
-                      }`}
+                      onClick={() => emblaApi?.scrollPrev()}
+                      className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-background/80 hover:bg-background rounded-full flex items-center justify-center shadow-lg transition-all"
                     >
-                      <img
-                        src={image.url}
-                        alt={`${translated.title} - Bild ${index + 1}`}
+                      <ChevronLeft className="w-6 h-6" />
+                    </button>
+                  )}
+                  {canScrollNext && (
+                    <button
+                      onClick={() => emblaApi?.scrollNext()}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-background/80 hover:bg-background rounded-full flex items-center justify-center shadow-lg transition-all"
+                    >
+                      <ChevronRight className="w-6 h-6" />
+                    </button>
+                  )}
+                  
+                  {/* Dots Indicator */}
+                  <div className="flex justify-center gap-2 mt-4">
+                    {kollagenImages.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => emblaApi?.scrollTo(index)}
+                        className={`w-2.5 h-2.5 rounded-full transition-all ${
+                          currentSlide === index ? 'bg-primary w-6' : 'bg-muted-foreground/30'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <>
+                  {/* Main Image for other products */}
+                  <div className="aspect-[3/4] bg-secondary/20 rounded-xl overflow-hidden">
+                    {currentImage ? (
+                      <img 
+                        src={currentImage} 
+                        alt={translated.title}
                         className="w-full h-full object-cover"
                       />
-                    </button>
-                  ))}
-                </div>
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-muted-foreground">
+                        {t('noImage')}
+                      </div>
+                    )}
+                  </div>
+                  
+                  {/* Image Thumbnails - hide for bundles with custom images */}
+                  {!bundleImage && images.length > 1 && (
+                    <div className="grid grid-cols-3 gap-3">
+                      {images.map((image, index) => (
+                        <button
+                          key={index}
+                          onClick={() => setSelectedImageIndex(index)}
+                          className={`aspect-[3/4] rounded-lg overflow-hidden border-2 transition-all ${
+                            selectedImageIndex === index
+                              ? 'border-primary ring-2 ring-primary/20'
+                              : 'border-border hover:border-primary/50'
+                          }`}
+                        >
+                          <img
+                            src={image.url}
+                            alt={`${translated.title} - Bild ${index + 1}`}
+                            className="w-full h-full object-cover"
+                          />
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </>
               )}
             </div>
           </div>
