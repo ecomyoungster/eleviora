@@ -96,8 +96,8 @@ const productBenefits: Record<string, string[]> = {
 const productFAQ = {
   de: [
     {
-      q: 'Wie nehme ich das Produkt ein?',
-      a: 'Nehmen Sie täglich die empfohlene Menge mit ausreichend Wasser ein. Bei Pulverprodukten: In Wasser oder Saft auflösen. Am besten morgens auf nüchternen Magen.',
+      q: 'Was bedeutet 3000-5000 DA?',
+      a: 'Das ist die optimale Molekülgröße der Kollagenpeptide für eine bestmögliche Aufnahme durch den Körper.',
     },
     {
       q: 'Wann sehe ich erste Ergebnisse?',
@@ -118,8 +118,8 @@ const productFAQ = {
   ],
   en: [
     {
-      q: 'How do I take this product?',
-      a: 'Take the recommended daily amount with plenty of water. For powder products: dissolve in water or juice. Best taken in the morning on an empty stomach.',
+      q: 'What does 3000-5000 DA mean?',
+      a: 'This is the optimal molecular size of the collagen peptides for best possible absorption by the body.',
     },
     {
       q: 'When will I see first results?',
