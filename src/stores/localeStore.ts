@@ -56,12 +56,12 @@ export const translations = {
     learnMore: 'Mehr erfahren',
     
     // Benefits
-    benefit1Title: 'Straffere Haut',
-    benefit1Desc: 'Unterstützt die natürliche Elastizität und Festigkeit Ihrer Haut',
-    benefit2Title: 'Flexible Gelenke',
-    benefit2Desc: 'Fördert Beweglichkeit und mindert Gelenkbeschwerden',
-    benefit3Title: 'Mehr Vitalität',
-    benefit3Desc: 'Für ein aktives Leben voller Energie und Wohlbefinden',
+    benefit1Title: 'Kollagen-Versorgung',
+    benefit1Desc: 'Ergänzt Ihre tägliche Proteinzufuhr sinnvoll',
+    benefit2Title: 'Komplette Formel',
+    benefit2Desc: 'Alle wichtigen Begleitstoffe in einer Kapsel',
+    benefit3Title: 'Einfach integrierbar',
+    benefit3Desc: 'Passt perfekt in Ihre Morgenroutine',
     
     // Product Showcase
     premiumQuality: 'Premium Qualität',
@@ -187,12 +187,12 @@ export const translations = {
     learnMore: 'Mehr erfahren',
     
     // Benefits
-    benefit1Title: 'Straffere Haut',
-    benefit1Desc: 'Unterstützt die natürliche Elastizität und Festigkeit Ihrer Haut',
-    benefit2Title: 'Flexible Gelenke',
-    benefit2Desc: 'Fördert Beweglichkeit und mindert Gelenkbeschwerden',
-    benefit3Title: 'Mehr Vitalität',
-    benefit3Desc: 'Für ein aktives Leben voller Energie und Wohlbefinden',
+    benefit1Title: 'Kollagen-Versorgung',
+    benefit1Desc: 'Ergänzt Ihre tägliche Proteinzufuhr sinnvoll',
+    benefit2Title: 'Komplette Formel',
+    benefit2Desc: 'Alle wichtigen Begleitstoffe in einer Kapsel',
+    benefit3Title: 'Einfach integrierbar',
+    benefit3Desc: 'Passt perfekt in Ihre Morgenroutine',
     
     // Product Showcase
     premiumQuality: 'Premium Qualität',
@@ -318,12 +318,12 @@ export const translations = {
     learnMore: 'Learn More',
     
     // Benefits
-    benefit1Title: 'Firmer Skin',
-    benefit1Desc: 'Supports the natural elasticity and firmness of your skin',
-    benefit2Title: 'Flexible Joints',
-    benefit2Desc: 'Promotes mobility and reduces joint discomfort',
-    benefit3Title: 'More Vitality',
-    benefit3Desc: 'For an active life full of energy and well-being',
+    benefit1Title: 'Collagen Supply',
+    benefit1Desc: 'Meaningfully supplements your daily protein intake',
+    benefit2Title: 'Complete Formula',
+    benefit2Desc: 'All important companion substances in one capsule',
+    benefit3Title: 'Easy to Integrate',
+    benefit3Desc: 'Fits perfectly into your morning routine',
     
     // Product Showcase
     premiumQuality: 'Premium Quality',
