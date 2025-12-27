@@ -304,6 +304,14 @@ const ProductDetail = () => {
   const getQuantityPrice = (qty: 1 | 2 | 3 | 6) => {
     const price = currentProductPricing.regular;
     const total = price * qty;
+    
+    // Use exact prices for kollagen product
+    if (node.handle.includes('kollagen-hydrolysat-pulver')) {
+      if (qty === 3) return { total: 113.70, discounted: 102.30, discount: 10, savings: 11.40 };
+      if (qty === 6) return { total: 227.40, discounted: 193.30, discount: 15, savings: 34.10 };
+      return { total: price, discounted: price, discount: 0, savings: 0 };
+    }
+    
     if (qty === 3) return { total, discounted: total * 0.9, discount: 10, savings: total * 0.1 };
     if (qty === 6) return { total, discounted: total * 0.85, discount: 15, savings: total * 0.15 };
     return { total, discounted: total, discount: 0, savings: 0 };
