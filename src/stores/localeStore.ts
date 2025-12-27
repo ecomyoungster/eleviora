@@ -50,7 +50,7 @@ export const translations = {
     checkoutWith: 'Zur Kasse',
     
     // Hero
-    heroTitle: 'Reine Wirkstoffe.<br />Präzise Formulierung.<br />Geprüfte Qualität.',
+    heroTitle: 'Reine Wirkstoffe.<br />Präzise&nbsp;Formulierung.<br />Geprüfte Qualität.',
     heroSubtitle: 'Premium Kollagen-Hydrolysat – entwickelt für Ihre Bedürfnisse.',
     heroButton: 'Jetzt entdecken',
     learnMore: 'Mehr erfahren',
@@ -181,7 +181,7 @@ export const translations = {
     checkoutWith: 'Zur Kassa',
     
     // Hero
-    heroTitle: 'Reine Wirkstoffe.<br />Präzise Formulierung.<br />Geprüfte Qualität.',
+    heroTitle: 'Reine Wirkstoffe.<br />Präzise&nbsp;Formulierung.<br />Geprüfte Qualität.',
     heroSubtitle: 'Premium Kollagen-Hydrolysat – entwickelt für Ihre Bedürfnisse.',
     heroButton: 'Jetzt entdecken',
     learnMore: 'Mehr erfahren',
