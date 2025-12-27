@@ -20,20 +20,27 @@ interface NutritionData {
 
 const nutritionData: Record<string, NutritionData> = {
   'kollagen-hydrolysat-pulver': {
-    type: 'naehrwerte',
-    introText: {
-      de: '100% Kollagen-Hydrolysat-Pulver (Rind) / HACCP Konform',
-      en: '100% Collagen Hydrolysate Powder (Bovine) / HACCP Certified'
+    type: 'inhaltsstoffe',
+    title: {
+      de: 'Inhaltsstoffe pro Tagesdosis (2 Kapseln)',
+      en: 'Ingredients per daily dose (2 capsules)'
     },
     rows: [
-      { name: { de: 'Energie', en: 'Energy' }, per100g: '1530 kJ / 360 kcal', perPortion: '' },
-      { name: { de: 'Fett', en: 'Fat' }, per100g: '0g', perPortion: '' },
-      { name: { de: 'davon gesättigte Fettsäuren', en: 'of which saturated fatty acids' }, per100g: '0g', perPortion: '', isSubItem: true },
-      { name: { de: 'Kohlenhydrate', en: 'Carbohydrates' }, per100g: '0g', perPortion: '' },
-      { name: { de: 'davon Zucker', en: 'of which sugars' }, per100g: '0g', perPortion: '', isSubItem: true },
-      { name: { de: 'Eiweiß', en: 'Protein' }, per100g: '90g', perPortion: '' },
-      { name: { de: 'Salz', en: 'Salt' }, per100g: '1.05g', perPortion: '' },
+      { name: { de: 'Kollagenhydrolysat', en: 'Collagen Hydrolysate' }, menge: '450mg', nrv: '/' },
+      { name: { de: 'Hyaluronsäure', en: 'Hyaluronic Acid' }, menge: '50mg', nrv: '/' },
+      { name: { de: 'Granatapfel Extrakt', en: 'Pomegranate Extract' }, menge: '10mg', nrv: '/' },
+      { name: { de: 'davon Ellagsäure', en: 'of which Ellagic Acid' }, menge: '4mg', nrv: '/', isSubItem: true },
+      { name: { de: 'Vitamin C', en: 'Vitamin C' }, menge: '12mg', nrv: '15%' },
+      { name: { de: 'Vitamin B3', en: 'Vitamin B3' }, menge: '8mg', nrv: '50%' },
+      { name: { de: 'Zink', en: 'Zinc' }, menge: '2,5mg', nrv: '25%' },
+      { name: { de: 'Vitamin A', en: 'Vitamin A' }, menge: '400µg', nrv: '50%' },
+      { name: { de: 'Selen', en: 'Selenium' }, menge: '27,5µg', nrv: '50%' },
+      { name: { de: 'Vitamin D3', en: 'Vitamin D3' }, menge: '2,5µg', nrv: '50%' },
     ],
+    footnote: {
+      de: 'Zutaten: Kollagenhydrolysat (Rind) (65,22%), Überzugsmittel: Hydroxypropylmethylcellulose, Natriumhyaluronat (8,05%), L-Ascorbinsäure (2,03%), Zinkbisglycinat (1,55%), Granatapfelfrucht-Trockenextrakt (1,45%), Trennmittel: L-Leucin, Nicotinamid (1,39%), Reisstärke, Retinylacetat (0,47%), Cholecalciferol (0,17%), Natriumselenit (0,01%)',
+      en: 'Ingredients: Collagen Hydrolysate (Bovine) (65.22%), Coating: Hydroxypropyl methylcellulose, Sodium hyaluronate (8.05%), L-Ascorbic acid (2.03%), Zinc bisglycinate (1.55%), Pomegranate fruit dry extract (1.45%), Anti-caking agent: L-Leucine, Nicotinamide (1.39%), Rice starch, Retinyl acetate (0.47%), Cholecalciferol (0.17%), Sodium selenite (0.01%)'
+    }
   },
   'glucosamin-pulver': {
     type: 'inhaltsstoffe',
@@ -203,13 +210,18 @@ export const NutritionTable = ({ handle }: NutritionTableProps) => {
       </div>
       <p className="text-xs text-muted-foreground mt-4">
         {isEnglish 
-          ? '*Percent of Nutrient Reference Values (NRV) according to Regulation (EU) No 1169/2011' 
-          : '*Prozent der Nährstoffbezugswerte (NRV) laut Verordnung (EU) Nr. 1169/2011'}
+          ? '*Percent of Nutrient Reference Values (NRV) according to Regulation (EU) No 1169/2011 (LMIV)' 
+          : '*% NRV = Prozent des Nährstoffbezugswertes gemäß Anhang XIII der Verordnung (EU) Nr. 1169/2011 (LMIV)'}
       </p>
-      <p className="text-xs text-muted-foreground">
+      {data.footnote && (
+        <p className="text-xs text-muted-foreground mt-3">
+          {isEnglish ? data.footnote.en : data.footnote.de}
+        </p>
+      )}
+      <p className="text-xs text-muted-foreground mt-2">
         {isEnglish 
-          ? 'Manufactured according to the highest quality standards (HACCP certified).' 
-          : 'Hergestellt nach höchsten Qualitätsstandards (HACCP-zertifiziert).'}
+          ? 'Manufactured according to the highest quality standards (HACCP compliant).' 
+          : 'Hergestellt nach höchsten Qualitätsstandards (HACCP-konform).'}
       </p>
     </div>
   );
