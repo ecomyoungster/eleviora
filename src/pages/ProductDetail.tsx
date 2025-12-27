@@ -24,8 +24,8 @@ import kollagenProductImage from "@/assets/kollagen-product-updated.png";
 // Individual product pricing with subscription tiers
 const productPricing: Record<string, { regular: number; subscription: { 2: number; 3: number; 6: number } }> = {
   'kollagen-hydrolysat-pulver': { 
-    regular: 37.99, 
-    subscription: { 2: 37.99 * 0.90, 3: 37.99 * 0.85, 6: 37.99 * 0.80 } 
+    regular: 37.90, 
+    subscription: { 2: 34.10, 3: 33.35, 6: 32.20 } 
   },
   'omega-3-softgels': { 
     regular: 31.99, 
@@ -244,6 +244,10 @@ const ProductDetail = () => {
   };
 
   const getSubscriptionDiscount = (months: 2 | 3 | 6) => {
+    // For kollagen product, use exact discount percentages
+    if (node.handle.includes('kollagen-hydrolysat-pulver')) {
+      return months === 2 ? 10 : months === 3 ? 12 : 15;
+    }
     return months === 2 ? 10 : months === 3 ? 15 : 20;
   };
 
@@ -578,7 +582,7 @@ const ProductDetail = () => {
                             {locale.startsWith('de') ? 'Abonniere & spare' : 'Subscribe & save'}
                           </span>
                           <span className="bg-primary text-white text-xs font-bold px-2 py-0.5 rounded-full">
-                            {locale.startsWith('de') ? 'bis zu 20% Rabatt' : 'up to 20% off'}
+                            {locale.startsWith('de') ? 'bis zu 15% Rabatt' : 'up to 15% off'}
                           </span>
                         </div>
                         <div className="flex items-center gap-2">
@@ -597,7 +601,7 @@ const ProductDetail = () => {
                       </p>
                       <div className="space-y-2">
                         {([2, 3, 6] as const).map((months) => {
-                          const discountPercent = months === 2 ? 10 : months === 3 ? 15 : 20;
+                          const discountPercent = months === 2 ? 10 : months === 3 ? 12 : 15;
                           const isSelected = (months === 2 && subscriptionInterval === 60) ||
                                             (months === 3 && subscriptionInterval === 90) ||
                                             (months === 6 && subscriptionInterval === 180);

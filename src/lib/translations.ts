@@ -3,15 +3,15 @@ import { Locale } from "@/stores/localeStore";
 export const productTranslations: Record<string, Record<Locale, { title: string; description: string }>> = {
   'kollagen-hydrolysat-pulver': {
     'de-DE': {
-      title: 'Kollagen Hydrolysat Pulver',
+      title: 'Kollagenhydrolysat Komplex',
       description: 'Mit Eleviora Kollagen wird Ihre tägliche Routine einfacher und angenehmer. Das feine Pulver lässt sich mühelos in warme oder kalte Getränke einrühren und überzeugt durch seine neutrale Geschmacksnote – ohne Klumpen, ohne Aufwand.\n\nWarum Eleviora überzeugt:\n\nHochwertige Qualität – ohne Konservierungsstoffe und unnötige Füllstoffe.\n\nEinfache Zubereitung – ideal für unterwegs oder zuhause, rührt sich schnell auf.\n\nNeutral im Geschmack – passt unauffällig in Kaffee, Smoothies oder Wasser.\n\nGeprüfte Sicherheit – jede Charge wird unabhängig auf Reinheit und Qualität kontrolliert.\n\n30 Tage testen – unkomplizierte Rückgabe, wenn Sie nicht zufrieden sind.\n\nEleviora – praktisch, geschmacksneutral und verlässlich.'
     },
     'de-AT': {
-      title: 'Kollagen Hydrolysat Pulver',
+      title: 'Kollagenhydrolysat Komplex',
       description: 'Mit Eleviora Kollagen wird Ihre tägliche Routine einfacher und angenehmer. Das feine Pulver lässt sich mühelos in warme oder kalte Getränke einrühren und überzeugt durch seine neutrale Geschmacksnote – ohne Klumpen, ohne Aufwand.\n\nWarum Eleviora überzeugt:\n\nHochwertige Qualität – ohne Konservierungsstoffe und unnötige Füllstoffe.\n\nEinfache Zubereitung – ideal für unterwegs oder zuhause, rührt sich schnell auf.\n\nNeutral im Geschmack – passt unauffällig in Kaffee, Smoothies oder Wasser.\n\nGeprüfte Sicherheit – jede Charge wird unabhängig auf Reinheit und Qualität kontrolliert.\n\n30 Tage testen – unkomplizierte Rückgabe, wenn Sie nicht zufrieden sind.\n\nEleviora – praktisch, geschmacksneutral und verlässlich.'
     },
     'en-US': {
-      title: 'Collagen Hydrolysate Powder',
+      title: 'Collagen Hydrolysate Complex',
       description: 'With Eleviora Collagen, your daily routine becomes easier and more enjoyable. The fine powder dissolves effortlessly in hot or cold drinks and impresses with its neutral taste – no clumps, no hassle.\n\nWhy Eleviora convinces:\n\nHigh-quality – free from preservatives and unnecessary fillers.\n\nEasy preparation – perfect for on-the-go or at home, dissolves quickly.\n\nNeutral taste – blends seamlessly into coffee, smoothies, or water.\n\nTested safety – every batch is independently tested for purity and quality.\n\n30-day trial – easy returns if you are not satisfied.\n\nEleviora – practical, tasteless, and reliable.'
     }
   },
