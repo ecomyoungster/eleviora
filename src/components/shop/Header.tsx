@@ -1,5 +1,5 @@
 import { CartDrawer } from "./CartDrawer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { Menu, ChevronRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -22,6 +22,8 @@ export const Header = () => {
   const [languageOpen, setLanguageOpen] = useState(false);
   const { locale, setLocale } = useLocaleStore();
   const t = useTranslation();
+  const navigate = useNavigate();
+  const location = useLocation();
   
   const languages = [
     { code: 'de-DE' as Locale, country: 'DE' as const, name: t('germany'), currency: 'EUR €' },
@@ -32,9 +34,18 @@ export const Header = () => {
   const currentLanguage = languages.find(lang => lang.code === locale);
 
   const scrollToSection = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    section?.scrollIntoView({ behavior: 'smooth' });
     setIsOpen(false);
+    
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const section = document.getElementById(sectionId);
+        section?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      const section = document.getElementById(sectionId);
+      section?.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   const navItems = [
