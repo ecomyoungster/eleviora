@@ -4,7 +4,7 @@ import { TrustBar } from "@/components/shop/TrustBar";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, Shield, Leaf, Award, Users } from "lucide-react";
-import heroImage from "@/assets/about-hero-new.png";
+import heroImage from "@/assets/about-woman-collagen.png";
 import qualityImage from "@/assets/about-product-lifestyle.png";
 const About = () => {
   return <div className="min-h-screen bg-background">
@@ -28,7 +28,7 @@ const About = () => {
               
             </div>
             <div className="order-1 md:order-2">
-              <img src={heroImage} alt="Eleviora - Premium Kollagen" className="rounded-2xl shadow-2xl w-full h-auto object-cover" />
+              <img alt="Eleviora - Premium Kollagen" className="rounded-2xl shadow-2xl w-full h-auto object-cover" src="/lovable-uploads/d7340cbd-2561-46f9-8ae6-85e64d7f1a08.png" />
             </div>
           </div>
         </div>
