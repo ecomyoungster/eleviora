@@ -10,7 +10,7 @@ export const Testimonials = () => {
     {
       name: "Maria K.",
       age: 58,
-      text: "After 4 weeks with Eleviora Collagen, my skin feels smoother and firmer. My friends noticed it too!",
+      text: "I've been using the product regularly for 10 weeks now. Taking it is uncomplicated, fits well into my daily routine.",
       rating: 5
     },
     {
@@ -29,7 +29,7 @@ export const Testimonials = () => {
     {
       name: "Maria K.",
       age: 58,
-      text: "Nach 4 Wochen mit Eleviora Kollagen fühlt sich meine Haut glatter und straffer an. Auch meine Freundinnen haben es bemerkt!",
+      text: "Verwende das Produkt jetzt seit 10 Wochen regelmäßig. Die Einnahme ist unkompliziert, passt gut in meinen Alltag.",
       rating: 5
     },
     {
