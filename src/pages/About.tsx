@@ -21,8 +21,9 @@ const About = () => {
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed mb-4">
                 Wir glauben an Transparenz statt Marketing-Versprechen. Unser Kollagen-Hydrolysat wird nach höchsten Standards produziert und unabhängig laborgeprüft. Ohne Konservierungsstoffe, ohne Füllstoffe, ohne künstliche Aromen.
-
-Was Sie bei uns bekommen: Premium-Qualität mit klaren Inhaltsstoffen und transparenter Zusammensetzung. Für Ihre tägliche Routine – zuverlässig formuliert.
+              </p>
+              <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+                Was Sie bei uns bekommen: Premium-Qualität mit klaren Inhaltsstoffen und transparenter Zusammensetzung. Für Ihre tägliche Routine – zuverlässig formuliert.
               </p>
               
             </div>
