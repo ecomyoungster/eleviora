@@ -4,7 +4,7 @@ import { TrustBar } from "@/components/shop/TrustBar";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, Shield, Leaf, Award, Users } from "lucide-react";
-import heroImage from "@/assets/about-woman-collagen.png";
+import heroImage from "@/assets/about-hero-new.png";
 import qualityImage from "@/assets/about-product-lifestyle.png";
 const About = () => {
   return <div className="min-h-screen bg-background">
