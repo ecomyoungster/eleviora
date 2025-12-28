@@ -6,10 +6,8 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Shield, Leaf, Award, Users } from "lucide-react";
 import heroImage from "@/assets/about-woman-collagen.png";
 import qualityImage from "@/assets/about-product-lifestyle.png";
-
 const About = () => {
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <Header />
       <TrustBar />
       
@@ -22,18 +20,14 @@ const About = () => {
                 Über Eleviora
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-                Bei Eleviora verbinden wir Transparenz, Reinheit und Sorgfalt. Unser Kollagen-Hydrolysat wird sorgfältig hergestellt und unabhängig geprüft, damit Sie genau wissen, was Sie einnehmen. Wir verzichten bewusst auf Zusatzstoffe, Füllstoffe und künstliche Aromen.
+                Wir glauben an Transparenz statt Marketing-Versprechen. Unser Kollagen-Hydrolysat wird nach höchsten Standards produziert und unabhängig laborgeprüft. Ohne Konservierungsstoffe, ohne Füllstoffe, ohne künstliche Aromen.
+
+Was Sie bei uns bekommen: Premium-Qualität mit klaren Inhaltsstoffen und transparenter Zusammensetzung. Für Ihre tägliche Routine – zuverlässig formuliert.
               </p>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Unser Ziel ist es, Ihnen ein Produkt anzubieten, das höchsten Ansprüchen an Qualität entspricht und Sie in Ihrer täglichen Ernährung unterstützt – zuverlässig, sicher und ohne leere Versprechen.
-              </p>
+              
             </div>
             <div className="order-1 md:order-2">
-              <img 
-                src={heroImage} 
-                alt="Eleviora - Premium Kollagen" 
-                className="rounded-2xl shadow-2xl w-full h-auto object-cover"
-              />
+              <img src={heroImage} alt="Eleviora - Premium Kollagen" className="rounded-2xl shadow-2xl w-full h-auto object-cover" />
             </div>
           </div>
         </div>
@@ -44,20 +38,29 @@ const About = () => {
             Unsere Werte
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { icon: Shield, title: "Qualität", desc: "Laborgeprüft und HACCP-zertifiziert" },
-              { icon: Leaf, title: "Reinheit", desc: "Ohne Zusatzstoffe oder Füllstoffe" },
-              { icon: Award, title: "Transparenz", desc: "Offene Kommunikation über Inhaltsstoffe" },
-              { icon: Users, title: "Kundenfokus", desc: "30 Tage Zufriedenheitsgarantie" },
-            ].map((value, index) => (
-              <div key={index} className="bg-card border rounded-xl p-6 text-center">
+            {[{
+            icon: Shield,
+            title: "Qualität",
+            desc: "Laborgeprüft und HACCP-zertifiziert"
+          }, {
+            icon: Leaf,
+            title: "Reinheit",
+            desc: "Ohne Zusatzstoffe oder Füllstoffe"
+          }, {
+            icon: Award,
+            title: "Transparenz",
+            desc: "Offene Kommunikation über Inhaltsstoffe"
+          }, {
+            icon: Users,
+            title: "Kundenfokus",
+            desc: "30 Tage Zufriedenheitsgarantie"
+          }].map((value, index) => <div key={index} className="bg-card border rounded-xl p-6 text-center">
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <value.icon className="w-6 h-6 text-primary" />
                 </div>
                 <h3 className="font-brand text-lg font-semibold text-foreground mb-2">{value.title}</h3>
                 <p className="text-sm text-muted-foreground">{value.desc}</p>
-              </div>
-            ))}
+              </div>)}
           </div>
         </section>
 
@@ -65,11 +68,7 @@ const About = () => {
         <section className="max-w-6xl mx-auto mb-20">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <img 
-                src={qualityImage} 
-                alt="Höchste Qualitätsstandards" 
-                className="rounded-2xl shadow-xl w-full h-auto object-cover"
-              />
+              <img src={qualityImage} alt="Höchste Qualitätsstandards" className="rounded-2xl shadow-xl w-full h-auto object-cover" />
             </div>
             <div>
               <h2 className="font-brand text-3xl font-semibold text-foreground mb-6">
@@ -108,8 +107,6 @@ const About = () => {
       </main>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default About;
