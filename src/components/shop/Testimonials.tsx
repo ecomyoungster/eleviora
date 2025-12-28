@@ -16,7 +16,7 @@ export const Testimonials = () => {
     {
       name: "Hans D.",
       age: 62,
-      text: "My morning stiffness in the joints has noticeably decreased. I feel more flexible and active again.",
+      text: "Positively surprised by the quality. Capsules are pleasant to take, no problems swallowing. Delivery arrived on time. Price is fair, I'm satisfied. Clear recommendation.",
       rating: 5
     },
     {
@@ -35,7 +35,7 @@ export const Testimonials = () => {
     {
       name: "Hans D.",
       age: 62,
-      text: "Meine morgendliche Steifheit in den Gelenken hat merklich nachgelassen. Ich fühle mich wieder beweglicher und aktiver.",
+      text: "Bin positiv überrascht von der Qualität. Kapseln sind angenehm zu nehmen, keine Probleme beim Schlucken. Lieferung kam pünktlich. Preis fair, bin zufrieden. Klare Empfehlung.",
       rating: 5
     },
     {
