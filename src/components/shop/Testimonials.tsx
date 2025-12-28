@@ -22,7 +22,7 @@ export const Testimonials = () => {
     {
       name: "Petra M.",
       age: 55,
-      text: "The quality convinced me. The powder dissolves easily and has no taste. Finally a collagen that works!",
+      text: "I've been taking the capsules daily for 8 weeks. Easy to swallow, no aftertaste. Delivery was fast, packaging high-quality. Value for money is right. Will reorder!",
       rating: 5
     }
   ] : [
@@ -41,7 +41,7 @@ export const Testimonials = () => {
     {
       name: "Petra M.",
       age: 55,
-      text: "Die Qualität überzeugt mich. Das Pulver löst sich leicht auf und hat keinen Eigengeschmack. Endlich ein Kollagen, das wirkt!",
+      text: "Nehme die Kapseln seit 8 Wochen täglich. Lassen sich gut schlucken, kein Nachgeschmack. Lieferung war schnell, Verpackung hochwertig. Preis-Leistung stimmt. Werde nachbestellen!",
       rating: 5
     }
   ];
