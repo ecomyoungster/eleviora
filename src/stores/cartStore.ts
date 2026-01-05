@@ -3,6 +3,21 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 import { CartItem, createStorefrontCheckout } from '@/lib/shopify';
 import { useLocaleStore } from './localeStore';
 
+const normalizeCartItem = (item: CartItem): CartItem => {
+  // Migration: product was changed from "500g" powder to "180 Kapseln".
+  if (item?.product?.node?.handle !== 'kollagen-hydrolysat-pulver') return item;
+
+  return {
+    ...item,
+    variantTitle: item.variantTitle?.includes('500g')
+      ? item.variantTitle.replace('500g', '180 Kapseln')
+      : item.variantTitle,
+    selectedOptions: (item.selectedOptions || []).map((opt) =>
+      opt.value === '500g' ? { ...opt, value: '180 Kapseln' } : opt
+    ),
+  };
+};
+
 interface CartStore {
   items: CartItem[];
   cartId: string | null;
@@ -89,7 +104,17 @@ export const useCartStore = create<CartStore>()(
     }),
     {
       name: 'shopify-cart',
+      version: 1,
       storage: createJSONStorage(() => localStorage),
+      migrate: (persistedState) => {
+        if (!persistedState || typeof persistedState !== 'object') return persistedState;
+        const state = persistedState as { items?: CartItem[] };
+        if (!Array.isArray(state.items) || state.items.length === 0) return persistedState;
+        return {
+          ...state,
+          items: state.items.map(normalizeCartItem),
+        };
+      },
     }
   )
 );

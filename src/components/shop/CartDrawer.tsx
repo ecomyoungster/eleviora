@@ -193,7 +193,13 @@ export const CartDrawer = () => {
                         <div className="flex-1 min-w-0">
                           <h4 className="font-medium truncate">{translated.title}</h4>
                           <p className="text-sm text-muted-foreground">
-                            {item.selectedOptions.map(option => option.value).join(' • ')}
+                            {item.selectedOptions
+                              .map((option) =>
+                                item.product.node.handle === 'kollagen-hydrolysat-pulver' && option.value === '500g'
+                                  ? '180 Kapseln'
+                                  : option.value
+                              )
+                              .join(' • ')}
                           </p>
                           <div className="space-y-0.5">
                             {hasDiscount && (
