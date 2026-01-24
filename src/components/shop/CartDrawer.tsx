@@ -88,7 +88,9 @@ export const CartDrawer = () => {
         setIsOpen(false);
       }
     } catch (error) {
-      console.error('Checkout failed:', error);
+      if (import.meta.env.DEV) {
+        console.error('Checkout failed:', error);
+      }
     }
   };
 

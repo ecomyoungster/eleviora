@@ -181,7 +181,9 @@ const ProductDetail = () => {
         const found = products.find(p => p.node.handle === handle);
         setProduct(found || null);
       } catch (error) {
-        console.error("Error loading product:", error);
+        if (import.meta.env.DEV) {
+          console.error("Error loading product:", error);
+        }
       } finally {
         setLoading(false);
       }

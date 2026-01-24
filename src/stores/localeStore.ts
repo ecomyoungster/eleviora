@@ -50,7 +50,9 @@ export const translations = {
     checkoutWith: 'Zur Kasse',
     
     // Hero
-    heroTitle: 'Reine Wirkstoffe.<br />Präzise&nbsp;Formulierung.<br />Geprüfte Qualität.',
+    heroTitleLine1: 'Reine Wirkstoffe.',
+    heroTitleLine2: 'Präzise Formulierung.',
+    heroTitleLine3: 'Geprüfte Qualität.',
     heroSubtitle: 'Kollagen-Hydrolysat – mit Hyaluron & 6 Vitaminen.',
     heroButton: 'Jetzt entdecken',
     learnMore: 'Mehr erfahren',
@@ -181,7 +183,9 @@ export const translations = {
     checkoutWith: 'Zur Kassa',
     
     // Hero
-    heroTitle: 'Reine Wirkstoffe.<br />Präzise&nbsp;Formulierung.<br />Geprüfte Qualität.',
+    heroTitleLine1: 'Reine Wirkstoffe.',
+    heroTitleLine2: 'Präzise Formulierung.',
+    heroTitleLine3: 'Geprüfte Qualität.',
     heroSubtitle: 'Kollagen-Hydrolysat – mit Hyaluron & 6 Vitaminen.',
     heroButton: 'Jetzt entdecken',
     learnMore: 'Mehr erfahren',
@@ -312,7 +316,9 @@ export const translations = {
     checkoutWith: 'Checkout',
     
     // Hero
-    heroTitle: 'Pure Ingredients.<br />Precise Formulation.<br />Tested Quality.',
+    heroTitleLine1: 'Pure Ingredients.',
+    heroTitleLine2: 'Precise Formulation.',
+    heroTitleLine3: 'Tested Quality.',
     heroSubtitle: 'Collagen Hydrolysate – with Hyaluronan & 6 Vitamins.',
     heroButton: 'Discover Now',
     learnMore: 'Learn More',
