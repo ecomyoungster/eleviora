@@ -28,13 +28,13 @@ export const TrustBar = () => {
 
           {/* PayPal */}
           <div className="flex items-center gap-1 whitespace-nowrap">
-            <img src={paypalLogo} alt="PayPal" className="h-8" />
+            <img src={paypalLogo} alt="PayPal" className="h-8" width={43} height={32} />
             <span className="text-sm text-foreground">{t('trustPayLater')}</span>
           </div>
 
           {/* Klarna */}
           <div className="flex items-center gap-1 whitespace-nowrap">
-            <img src={klarnaLogo} alt="Klarna" className="h-8" />
+            <img src={klarnaLogo} alt="Klarna" className="h-8" width={55} height={32} />
             <span className="text-sm text-foreground">{t('trustPayLater')}</span>
           </div>
         </div>

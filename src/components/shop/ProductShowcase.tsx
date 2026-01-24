@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Check, ArrowRight } from "lucide-react";
 import { useTranslation, useLocaleStore } from "@/stores/localeStore";
-import kollagenImage from "@/assets/kollagen-new.jpg";
+import productShowcaseImage from "@/assets/product-showcase-optimized.webp";
 export const ProductShowcase = () => {
   const t = useTranslation();
   const locale = useLocaleStore(state => state.locale);
@@ -12,7 +12,14 @@ export const ProductShowcase = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="relative order-2 lg:order-1">
             <div className="max-w-lg mx-auto">
-              <img alt={locale === 'en-US' ? "Collagen Hydrolysate Powder" : "Kollagen Hydrolysat Pulver"} className="w-full h-auto object-contain rounded-2xl shadow-lg border border-border/30" src="/lovable-uploads/246b9e8a-1e3c-424d-b033-3d70039d86e2.png" />
+              <img 
+                alt={locale === 'en-US' ? "Collagen Hydrolysate Powder" : "Kollagen Hydrolysat Pulver"} 
+                className="w-full h-auto object-contain rounded-2xl shadow-lg border border-border/30" 
+                src={productShowcaseImage}
+                width={510}
+                height={705}
+                loading="lazy"
+              />
             </div>
           </div>
 

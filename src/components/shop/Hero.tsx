@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import heroImage from "@/assets/hero-kollagen.png";
+import heroImage from "@/assets/hero-optimized.webp";
 import { useTranslation, useLocaleStore } from "@/stores/localeStore";
 import { ArrowRight, Shield, Leaf, Award } from "lucide-react";
 export const Hero = () => {
@@ -31,7 +31,14 @@ export const Hero = () => {
           {/* Image - shows first on mobile/tablet */}
           <div className="relative flex justify-center order-first lg:order-last">
             <div className="w-full max-w-lg">
-              <img alt={locale === 'en-US' ? "Premium Collagen Supplement" : "Premium Kollagen Supplement"} className="w-full h-auto object-contain rounded-3xl shadow-2xl" src="/lovable-uploads/227355c6-b6f4-4379-b38c-68408e74901b.png" />
+              <img 
+                alt={locale === 'en-US' ? "Premium Collagen Supplement" : "Premium Kollagen Supplement"} 
+                className="w-full h-auto object-contain rounded-3xl shadow-2xl" 
+                src={heroImage}
+                width={512}
+                height={708}
+                fetchPriority="high"
+              />
             </div>
           </div>
 
