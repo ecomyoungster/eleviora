@@ -96,7 +96,9 @@ export const useCartStore = create<CartStore>()(
           const checkoutUrl = await createStorefrontCheckout(items, locale);
           setCheckoutUrl(checkoutUrl);
         } catch (error) {
-          console.error('Failed to create checkout:', error);
+          if (import.meta.env.DEV) {
+            console.error('Failed to create checkout:', error);
+          }
         } finally {
           setLoading(false);
         }

@@ -250,7 +250,9 @@ export async function createStorefrontCheckout(items: CartItem[], locale: string
     const checkoutUrl = url.toString();
     return checkoutUrl;
   } catch (error) {
-    console.error('Error creating storefront checkout:', error);
+    if (import.meta.env.DEV) {
+      console.error('Error creating storefront checkout:', error);
+    }
     throw error;
   }
 }

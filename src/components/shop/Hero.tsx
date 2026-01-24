@@ -45,9 +45,11 @@ export const Hero = () => {
           {/* Text content - shows second on mobile/tablet */}
           <div className="space-y-8 order-last lg:order-first">
             <div className="space-y-6">
-              <h1 dangerouslySetInnerHTML={{
-              __html: t('heroTitle').replace(/<br\s*\/?>/g, ' ')
-            }} className="font-brand text-2xl sm:text-3xl font-semibold text-foreground leading-tight [&>br]:hidden [&>br]:sm:inline lg:text-7xl" />
+              <h1 className="font-brand text-2xl sm:text-3xl font-semibold text-foreground leading-tight lg:text-7xl">
+                {t('heroTitleLine1')}<br className="hidden sm:inline" />
+                {t('heroTitleLine2')}<br className="hidden sm:inline" />
+                {t('heroTitleLine3')}
+              </h1>
               <p className="text-xl text-muted-foreground max-w-lg lg:text-xl">
                 {t('heroSubtitle')}
               </p>
