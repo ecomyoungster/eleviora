@@ -20,7 +20,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import bundleSchoenheit from "@/assets/bundle-schoenheit.jpg";
 import bundleGelenk from "@/assets/bundle-gelenk.jpg";
 import bundleGanzkoerper from "@/assets/bundle-ganzkoerper.jpg";
-import kollagenFront from "@/assets/kollagen-komplex-front.png";
+import kollagenProduct from "@/assets/kollagen-komplex-product.png";
 import kollagenNutrition from "@/assets/kollagen-komplex-nutrition.png";
 import kollagenBack from "@/assets/kollagen-komplex-back.png";
 
@@ -233,7 +233,7 @@ const ProductDetail = () => {
   // Get custom product images for kollagen (array for carousel)
   const getKollagenImages = () => {
     if (node.handle.includes('kollagen-hydrolysat-pulver')) {
-      return [kollagenFront, kollagenNutrition, kollagenBack];
+      return [kollagenProduct, kollagenNutrition, kollagenBack];
     }
     return null;
   };
