@@ -61,13 +61,13 @@ export const Testimonials = () => {
   }, [emblaApi, onSelect]);
 
   return (
-    <section id="reviews" className="py-20 bg-wellness-beige/30">
+    <section id="reviews" className="py-20 bg-wellness-dark">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="font-brand text-3xl md:text-4xl font-bold mb-4 text-foreground">
+          <h2 className="font-brand text-3xl md:text-4xl font-bold mb-4 text-white italic">
             Wahre Geschichten, Spürbare Veränderungen
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-white/70 text-lg max-w-2xl mx-auto">
             Entdecke, wie Eleviøra das Selbstvertrauen von Frauen nachhaltig gestärkt hat.
           </p>
         </div>
@@ -80,18 +80,18 @@ export const Testimonials = () => {
                   key={index}
                   className="flex-[0_0_100%] min-w-0 md:flex-[0_0_calc(33.333%-16px)]"
                 >
-                  <div className="bg-wellness-dark text-white rounded-xl p-6 h-full flex flex-col justify-between">
+                  <div className="bg-wellness-dark/80 border border-white/10 text-white rounded-xl p-6 h-full flex flex-col justify-between">
                     <div>
                       <div className="flex gap-1 mb-4">
                         {[...Array(5)].map((_, i) => (
                           <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
                         ))}
                       </div>
-                      <p className="text-white/90 text-sm leading-relaxed mb-6">
+                      <p className="text-white/85 text-sm leading-relaxed mb-6">
                         {t.text}
                       </p>
                     </div>
-                    <div className="flex items-center gap-2 pt-4 border-t border-white/20">
+                    <div className="flex items-center gap-2 pt-4 border-t border-white/15">
                       <CheckCircle className="w-4 h-4 text-amber-400 flex-shrink-0" />
                       <span className="text-sm font-semibold text-white">
                         {t.name} | {t.badge}
@@ -107,9 +107,9 @@ export const Testimonials = () => {
           <div className="flex items-center justify-center gap-4 mt-8">
             <button
               onClick={scrollPrev}
-              className="w-8 h-8 rounded-full border border-muted-foreground/30 flex items-center justify-center hover:bg-muted transition-colors"
+              className="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center hover:bg-white/10 transition-colors"
             >
-              <ChevronLeft className="w-4 h-4 text-muted-foreground" />
+              <ChevronLeft className="w-4 h-4 text-white/70" />
             </button>
             <div className="flex gap-2">
               {scrollSnaps.map((_, i) => (
@@ -117,16 +117,16 @@ export const Testimonials = () => {
                   key={i}
                   onClick={() => scrollTo(i)}
                   className={`w-2.5 h-2.5 rounded-full transition-colors ${
-                    i === selectedIndex ? "bg-foreground" : "bg-muted-foreground/30"
+                    i === selectedIndex ? "bg-white" : "bg-white/30"
                   }`}
                 />
               ))}
             </div>
             <button
               onClick={scrollNext}
-              className="w-8 h-8 rounded-full border border-muted-foreground/30 flex items-center justify-center hover:bg-muted transition-colors"
+              className="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center hover:bg-white/10 transition-colors"
             >
-              <ChevronRight className="w-4 h-4 text-muted-foreground" />
+              <ChevronRight className="w-4 h-4 text-white/70" />
             </button>
           </div>
         </div>
