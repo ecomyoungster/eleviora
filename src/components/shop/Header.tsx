@@ -1,7 +1,7 @@
 import { CartDrawer } from "./CartDrawer";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useState } from "react";
-import { Menu, ChevronRight, Check } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { Menu, ChevronRight, Check, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -20,10 +20,22 @@ import { Logo } from "@/components/Logo";
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
+  const [desktopLangOpen, setDesktopLangOpen] = useState(false);
+  const desktopLangRef = useRef<HTMLDivElement>(null);
   const { locale, setLocale } = useLocaleStore();
   const t = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (desktopLangRef.current && !desktopLangRef.current.contains(e.target as Node)) {
+        setDesktopLangOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
   
   const languages = [
     { code: 'de-DE' as Locale, country: 'DE' as const, name: t('germany'), currency: 'EUR €' },
@@ -181,6 +193,39 @@ export const Header = () => {
           </div>
 
           <div className="flex items-center gap-2">
+            <div className="hidden lg:block relative" ref={desktopLangRef}>
+              <button
+                onClick={() => setDesktopLangOpen(!desktopLangOpen)}
+                className="flex items-center gap-1.5 text-sm font-medium hover:text-primary transition-colors py-1"
+              >
+                {currentLanguage && (
+                  <FlagIcon country={currentLanguage.country} className="w-5 h-5" />
+                )}
+                <span className="text-xs">{currentLanguage?.name} ({currentLanguage?.currency})</span>
+                <ChevronDown className={`h-3 w-3 transition-transform ${desktopLangOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {desktopLangOpen && (
+                <div className="absolute right-0 top-full mt-2 w-52 rounded-md border bg-popover text-popover-foreground shadow-md z-50 py-1">
+                  {languages.map((lang) => (
+                    <button
+                      key={lang.code}
+                      onClick={() => {
+                        setLocale(lang.code);
+                        setDesktopLangOpen(false);
+                      }}
+                      className="flex w-full items-center justify-between px-3 py-2 text-sm hover:bg-muted/50 transition-colors"
+                    >
+                      <div className="flex items-center gap-2">
+                        <FlagIcon country={lang.country} className="w-5 h-5" />
+                        <span>{lang.name}</span>
+                        <span className="text-xs text-muted-foreground">• {lang.currency}</span>
+                      </div>
+                      {locale === lang.code && <Check className="h-4 w-4 text-primary" />}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
             <CartDrawer />
           </div>
         </div>
