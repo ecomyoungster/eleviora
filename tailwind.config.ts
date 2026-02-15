@@ -52,7 +52,6 @@ export default {
           beige: "hsl(var(--wellness-beige))",
           rose: "hsl(var(--wellness-rose))",
           cream: "hsl(var(--wellness-cream))",
-          dark: "hsl(var(--wellness-dark))",
         },
       },
       fontFamily: {
